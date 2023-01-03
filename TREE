@@ -1,4 +1,5 @@
 #include<iostream>
+#include<stack>
 using namespace std;
 class treeNode{
 public:
@@ -85,7 +86,64 @@ public:
     void postorder(){postorder(root);}
     void createTree();
     void display();
+    void iterative_preorder(){iterative_preorder(root);};
+    void iterative_preorder(treeNode* t);
+    void iterative_inorder(){iterative_inorder(root);}
+    void iterative_inorder(treeNode* t);
+    void iterative_postorder(){iterative_postorder(root);}
+    void iterative_postorder(treeNode* t);
+    void iterative_levelorder(){iterative_levelorder(root);};
+    void iterative_levelorder(treeNode* t);
 };
+//Iterative LevelOrder
+void tree::iterative_levelorder(treeNode* t){
+    queue<treeNode*> q(100);
+    //treeNode* p;
+    if(!t) cout<<"Tree is Empty"<<endl;
+    else q.enqueue(t);
+    while(!q.isEmpty()){
+        t = q.dequeue();
+        cout<<t->data<<" ";
+        if(t->lchild) q.enqueue(t->lchild);
+        if(t->rchild) q.enqueue(t->rchild);
+    }
+}
+//Iterative Postorder
+
+//Iterative Inorder
+void tree::iterative_inorder(treeNode* t){
+    stack<treeNode*> st;
+    while(t || !st.empty()){
+        if(t){
+            st.push(t);
+            t = t->lchild;
+        }
+        else{
+            t = st.top();
+            st.pop();
+            cout<<t->data<<" ";
+            t = t->rchild;
+        }
+    }
+}
+//Iterative Preorder
+void tree::iterative_preorder(treeNode* t){
+    stack<treeNode*> st;
+    cout<<"Iterative Preorder: ";
+    while(t || !st.empty()){
+        if(t){
+            cout<<t->data<<" ";
+            st.push(t);
+            t = t->lchild;
+        }
+        else{
+            t = st.top();
+            st.pop();
+            t = t->rchild;
+        }
+    }
+    cout<<endl;
+}
 //Preorder Tree Traversal
 void tree::preorder(treeNode* p){
     if(p){
@@ -165,12 +223,7 @@ int main()
 {
     tree t;
     t.createTree();
-    t.display();
-    cout<<endl<<"Preorder is: ";
-    t.preorder();
-    cout<<endl<<"Inorder is: ";
-    t.inorder();
-    cout<<endl<<"Postorder is: ";
-    t.postorder();
+    t.iterative_levelorder();
+    cout<<endl;
     return 0;
 }
