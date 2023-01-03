@@ -15,6 +15,12 @@ class queue{
     int size,front,rear;
     T* Q;
 public:
+    queue(){
+        this-size = 10;
+        front = 10;
+        rear = 10;
+        Q = new T[size];
+    }
     queue(int size){
         this->size = size;
         front = 0;
@@ -71,10 +77,39 @@ T queue<T>::dequeue(){
 class tree{
     treeNode* root;
 public:
+    void preorder(treeNode* p);
+    void preorder(){preorder(root);}
+    void inorder(treeNode* p);
+    void inorder(){inorder(root);}
+    void postorder(treeNode* p);
+    void postorder(){postorder(root);}
     void createTree();
     void display();
 };
-//Creating Tree
+//Preorder Tree Traversal
+void tree::preorder(treeNode* p){
+    if(p){
+        cout<<p->data<<" ";
+        preorder(p->lchild);
+        preorder(p->rchild);
+    }
+}
+//Inorder Tree Traversal
+void tree::inorder(treeNode* p){
+    if(p){
+        inorder(p->lchild);
+        cout<<p->data<<" ";
+        inorder(p->rchild);
+    }
+}
+//Postorder Tree Traversal
+void tree::postorder(treeNode* p){
+    if(p){
+        postorder(p->lchild);
+        postorder(p->rchild);
+        cout<<p->data<<" ";
+    }
+}
 void tree::createTree(){
     treeNode* p,* t;
     queue<treeNode*> q(100);
@@ -105,7 +140,6 @@ void tree::createTree(){
         else p->rchild = NULL;
     }
 }
-//Tree Display
 void tree::display(){
     treeNode* p;
     queue<treeNode*> q(100);
@@ -132,5 +166,11 @@ int main()
     tree t;
     t.createTree();
     t.display();
+    cout<<endl<<"Preorder is: ";
+    t.preorder();
+    cout<<endl<<"Inorder is: ";
+    t.inorder();
+    cout<<endl<<"Postorder is: ";
+    t.postorder();
     return 0;
 }
