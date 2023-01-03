@@ -1,1 +1,136 @@
+#include<iostream>
+using namespace std;
+class treeNode{
+public:
+    int data;
+    treeNode* lchild, *rchild;
+    treeNode(int data){
+        this->data = data;
+        lchild = NULL;
+        rchild = NULL;
+    }
+};
+template<class T>
+class queue{
+    int size,front,rear;
+    T* Q;
+public:
+    queue(int size){
+        this->size = size;
+        front = 0;
+        rear = 0;
+        Q = new T[size];
+    } 
+    void enqueue(T data);
+    T dequeue();
+    void display();
+    bool isEmpty();
+    bool isFull();
+};
+//Display for Queue
+template<class T>
+void queue<T>::display(){
+    if(isEmpty()) cout<<"Queue is Empty";
+    else{
+        for(int i=front+1;i<=rear;i++) cout<<Q[i]<<" ";
+        cout<<endl;
+    }
+}
+//Full condition for Queue
+template<class T>
+bool queue<T>::isFull(){
+    return ((rear+1)%size)==front;
+}
+//Empty Condition for Queue
+template<class T>
+bool queue<T>::isEmpty(){
+    return rear==front;
+}
+//Enqueue Operation for Queue
+template<class T>
+void queue<T>::enqueue(T data){
+    if(isFull()) cout<<"Queue OverFlow";
+    else{
+        rear = (rear+1)%size;
+        Q[rear] = data; 
+    }
+}
+//Dequeue operation for Queue
+template<class T>
+T queue<T>::dequeue(){
+    T x = NULL;
+    if(isEmpty()) cout<<"Queue UnderFlow";
+    else{
+        front = (front+1)%size;
+        x = Q[front];
+    }
+    return x;
+}
 
+//Tree Code
+class tree{
+    treeNode* root;
+public:
+    void createTree();
+    void display();
+};
+//Creating Tree
+void tree::createTree(){
+    treeNode* p,* t;
+    queue<treeNode*> q(100);
+    int data;
+    cout<<"Enter Root child: ";
+    cin>>data;
+    if(data!=-1){
+        t = new treeNode(data);
+        root = t;
+        q.enqueue(t);
+    }
+    else root = NULL;
+    while(!q.isEmpty()){
+        p = q.dequeue();
+        cout<<"Enter left child of "<< p->data << " :";
+        cin>>data;
+        if(data!=-1){
+            p->lchild = new treeNode(data);
+            q.enqueue(p->lchild);
+        }
+        else p->lchild = NULL;
+        cout<<"Enter right child of "<< p->data << " :";
+        cin>>data;
+        if(data!=-1){
+            p->rchild = new treeNode(data);
+            q.enqueue(p->rchild);
+        }
+        else p->rchild = NULL;
+    }
+}
+//Tree Display
+void tree::display(){
+    treeNode* p;
+    queue<treeNode*> q(100);
+    if(root) q.enqueue(root);
+    while(!q.isEmpty()){
+        p = q.dequeue();
+        cout<<"Node "<<p->data<<": "<<endl;
+        if(p->lchild){
+            cout<<"Left Child is "<<p->lchild->data<<endl;
+            q.enqueue(p->lchild);
+        }
+        else cout<<"No left child"<<endl;
+        if(p->rchild){
+            cout<<"Right Child is "<<p->rchild->data<<endl;
+            q.enqueue(p->rchild);
+        }
+        else cout<<"No right child"<<endl;
+        cout<<endl;
+    }
+}
+//Main Function
+int main()
+{
+    tree t;
+    t.createTree();
+    t.display();
+    return 0;
+}
