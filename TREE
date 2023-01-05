@@ -78,23 +78,187 @@ T queue<T>::dequeue(){
 class tree{
     treeNode* root;
 public:
+    //Preorder - Recursive code
     void preorder(treeNode* p);
     void preorder(){preorder(root);}
+    //Inorder - Recursive code
     void inorder(treeNode* p);
     void inorder(){inorder(root);}
+    //Postorder - Recursive code
     void postorder(treeNode* p);
     void postorder(){postorder(root);}
+    //Create tree
     void createTree();
+    //Display tree
     void display();
+    //Iterative preorder
     void iterative_preorder(){iterative_preorder(root);};
     void iterative_preorder(treeNode* t);
+    //Iterative inorder
     void iterative_inorder(){iterative_inorder(root);}
     void iterative_inorder(treeNode* t);
+    //Iterative postorder
     void iterative_postorder(){iterative_postorder(root);}
     void iterative_postorder(treeNode* t);
+    //Iterative levelorder
     void iterative_levelorder(){iterative_levelorder(root);};
     void iterative_levelorder(treeNode* t);
+    //Count number of nodes - Iterative code 
+    int count_node_iterative(treeNode* p);
+    int count_node_iterative(){return count_node_iterative(root);} 
+    //Count number of nodes - recursive code 
+    int count_node_recursive(treeNode* p);
+    int count_node_recursive(){return count_node_recursive(root);};
+    //Count number of nodes with degree 2 - Recursive code 
+    int count_node_degree2_recursive(treeNode*p);
+    int count_node_degree2_recursive(){return count_node_degree2_recursive(root);};
+    //Count number of nodes with degree 2 - Iterative code 
+    int count_node_degree2_iterative(treeNode*p);
+    int count_node_degree2_iterative(){return count_node_degree2_iterative(root);};
+    //Counting leaf nodes - Recursive code
+    int count_leaf_node_recursive(treeNode* p);
+    int count_leaf_node_recursive(){return count_leaf_node_recursive(root);};
+    //Counting leaf nodes - Iterative code
+    int count_leaf_node_iterative(treeNode* p);
+    int count_leaf_node_iterative(){return count_leaf_node_iterative(root);};
+    //Sum of all nodes - Recursive code
+    int sum_all_nodes_recursive(treeNode* p);
+    int sum_all_nodes_recursive(){return sum_all_nodes_recursive(root);};
+    //Sum of all nodes - Iterative code
+    int sum_all_nodes_iterative(treeNode* p);
+    int sum_all_nodes_iterative(){return sum_all_nodes_recursive(root);};
+    //Height of tree - Recursive code
+    int height_recursive(treeNode* p);
+    int height_recursive(){return height_recursive(root);}
+    //
 };
+//Iterative Postorder
+
+//Count leaf node iterative
+int tree::count_leaf_node_iterative(treeNode* p){
+    int x = 0;
+    stack<treeNode*> st;
+    while(p || !st.empty()){
+        if(p){
+            st.push(p);
+            p = p->lchild;
+        }
+        else{
+            p = st.top();
+            st.pop();
+            if(!p->lchild && !p->rchild) x++;
+            p = p->rchild;
+        }
+    }
+    return x;
+}
+//Count Leaf node Recursive
+int tree::count_leaf_node_recursive(treeNode* p){
+    int x = 0,y = 0;
+    if(p){
+        x = count_leaf_node_recursive(p->lchild); 
+        y = count_leaf_node_recursive(p->rchild);
+        if(!p->lchild && !p->rchild) return x+y+1;
+        return x+y; 
+    }
+    return 0;
+}
+//Height of a tree recursive
+int tree::height_recursive(treeNode* p){
+    int x=0,y=0;
+    if(p){
+        x = height_recursive(p->lchild);
+        y = height_recursive(p->rchild);
+        if(x>y) return x+1;
+        return y+1;
+    }
+    return 0;
+}
+//Sum of all nodes iterative
+int tree::sum_all_nodes_iterative(treeNode* p){
+    int x = 0;
+    stack<treeNode*> st;
+    while(p || !st.empty()){
+        if(p){
+            st.push(p);
+            x+=p->data;
+            p = p->lchild;
+        }
+        else{
+            p = st.top();
+            st.pop();
+            p = p->rchild;
+        }
+    }
+    return x;
+}
+//Sum of all nodes recursive
+int tree::sum_all_nodes_recursive(treeNode* p){
+    int x = 0, y = 0;
+    if(p){
+        x = sum_all_nodes_recursive(p->lchild);
+        y = sum_all_nodes_recursive(p->rchild);
+        return x+y+p->data;
+    }
+    return 0;
+}
+//Count node of Degree 2 Iterative
+int tree::count_node_degree2_iterative(treeNode* p){
+    int x = 0;
+    stack<treeNode*> st;
+    while(p || !st.empty()){
+        if(p){
+            st.push(p);
+            if(p->lchild && p->rchild) x++;
+            p = p->lchild;
+        }
+        else{
+            p = st.top();
+            st.pop();
+            p = p->rchild;
+        }
+    }
+    return x;
+}
+//Count node of Degree 2 Recursive
+int tree::count_node_degree2_recursive(treeNode* p){
+    int x=0,y=0;
+    if(p){
+        x = count_node_degree2_recursive(p->lchild);
+        y = count_node_degree2_recursive(p->rchild);
+        if(p->lchild && p->rchild) return x+y+1;
+        else return x+y;
+    }
+    return 0;
+}
+//Recursive count node
+int tree::count_node_recursive(treeNode*p){
+    int x = 0,y = 0;
+    while(p){
+        x = count_node_recursive(p->lchild);
+        y = count_node_recursive(p->rchild);
+        return x+y+1;
+    }
+    return 0;
+}
+//Iterative count node
+int tree::count_node_iterative(treeNode* p){
+    int x = 0;
+    stack<treeNode*> st;
+    while(p || !st.empty()){
+        if(p){
+            st.push(p);
+            p = p->lchild;
+        }
+        else{
+            p = st.top();
+            st.pop();
+            x++;
+            p = p->rchild;
+        }
+    }
+    return x;
+}
 //Iterative LevelOrder
 void tree::iterative_levelorder(treeNode* t){
     queue<treeNode*> q(100);
@@ -108,7 +272,6 @@ void tree::iterative_levelorder(treeNode* t){
         if(t->rchild) q.enqueue(t->rchild);
     }
 }
-//Iterative Postorder
 
 //Iterative Inorder
 void tree::iterative_inorder(treeNode* t){
@@ -223,7 +386,7 @@ int main()
 {
     tree t;
     t.createTree();
-    t.iterative_levelorder();
-    cout<<endl;
+    cout<<"Recursive: "<<t.count_leaf_node_recursive()<<endl;
+    cout<<"Iterative: "<<t.count_leaf_node_iterative();
     return 0;
 }
