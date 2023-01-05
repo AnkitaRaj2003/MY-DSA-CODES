@@ -1,1 +1,22 @@
-Q-1
+//Level order traversal - GFG code 
+//Link: https://practice.geeksforgeeks.org/problems/level-order-traversal/1
+class Solution
+{
+    public:
+    //Function to return the level order traversal of a tree.
+    vector<int> levelOrder(Node* node)
+    {
+      //Your code here
+      vector<int> v;
+      vector<Node*> vnode;
+      vnode.push_back(node);
+      while(!vnode.empty()){
+          node = vnode.front();
+          vnode.erase(vnode.begin());
+          v.push_back(node->data);
+          if(node->left) vnode.push_back(node->left);
+          if(node->right) vnode.push_back(node->right);
+      }
+      return v;
+    }
+    };
