@@ -6,17 +6,26 @@ class Solution
     //Function to return the level order traversal of a tree.
     vector<int> levelOrder(Node* node)
     {
-      //Your code here
-      vector<int> v;
-      vector<Node*> vnode;
-      vnode.push_back(node);
-      while(!vnode.empty()){
-          node = vnode.front();
-          vnode.erase(vnode.begin());
-          v.push_back(node->data);
-          if(node->left) vnode.push_back(node->left);
-          if(node->right) vnode.push_back(node->right);
-      }
-      return v;
+      vector<int> reverseLevelOrder(Node *root)
+{
+    // code here
+    vector<int> v;
+    queue<Node*> q;
+    q.push(root);
+    int i=0;
+    while(!q.empty())
+    {
+        Node *temp=q.front();
+        q.pop();
+        v.push_back(temp->data);
+        
+        if(temp->right)
+        q.push(temp->right);
+        if(temp->left)
+        q.push(temp->left);     
+        
     }
-    };
+    return v;   
+}
+}
+};
