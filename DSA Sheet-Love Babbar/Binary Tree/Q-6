@@ -1,0 +1,50 @@
+//Inorder Traversal using Recursion and iteration
+//GFG: https://practice.geeksforgeeks.org/problems/inorder-traversal/1
+struct Node {
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+}; */
+//Using Recursion
+class Solution {
+  public:
+    // Function to return a list containing the inorder traversal of the tree.
+    vector<int> v;
+    vector<int> inOrder(Node* root) {
+        // Your code here
+        if(root){
+            inOrder(root->left);
+            v.push_back(root->data);
+            inOrder(root->right);
+        }
+        return v;
+    }
+};
+//Uisng iteration
+class Solution {
+  public:
+    // Function to return a list containing the inorder traversal of the tree.
+    vector<int> inOrder(Node* p) {
+        // Your code here
+        vector<int> v;
+        stack<Node*> st;
+        while(p || !st.empty()){
+            if(p){
+                st.push(p);
+                p = p->left;
+            }
+            else{
+                p = st.top();
+                st.pop();
+                v.push_back(p->data);
+                p = p->right;
+            }
+        }
+        return v;
+    }
+};
