@@ -1,1 +1,129 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+class treeNode{
+    public:
+    int data;
+    treeNode* rchild,*lchild;
+    treeNode(int data){
+        this->data = data;
+        rchild = NULL;
+        lchild = NULL;
+    }
+};
+class BST{
+public:
+    treeNode* root;
+    BST(){root = NULL;}
+    BST(int data){
+        treeNode* p = new treeNode(data);
+        root = p;
+    }
+    //Search in BST - Recursive
+    treeNode* search_recursive(treeNode* t,int key);
+    treeNode* search_recursive(int key){return search_recursive(root,key);}
+    //Search in BST - Iterative
+    treeNode* search_iterative(treeNode* t,int key);
+    treeNode* search_iterative(int key){return search_iterative(root,key);}
+    //Inserting in BST - Iterative
+    treeNode* insert_iterative(treeNode* t,int key);
+    treeNode* insert_iterative(int key){return insert_iterative(root,key);}
+    //Inserting in BST - Recursive
+    treeNode* insert_recursive(treeNode* t,int key);
+    treeNode* insert_recursive(int key){return insert_recursive(root,key);}
+    //Display inorder - Recursive
+    void inorder_recursive(treeNode* t);
+    void inorder_recursive(){inorder_recursive(root);};
+    //Display inorder - iterative
+    void inorder_iterative(treeNode* t);
+    void inorder_iterative(){inorder_iterative(root);};
+};
 
+//BST Display inorder - Recursive
+void BST::inorder_recursive(treeNode* t){
+    if(t){
+        inorder_recursive(t->lchild);
+        cout<<t->data<<" ";
+        inorder_recursive(t->rchild);
+    }
+}
+//BST Display inorder - Iterative
+void BST::inorder_iterative(treeNode* t){
+    stack<treeNode*> st;
+    while(t || !st.empty()){
+        if(t){
+            st.push(t);
+            t = t->lchild;
+        }
+        else{
+            t = st.top();
+            st.pop();
+            cout<<t->data<<" ";
+            t = t->rchild;
+        }
+    }
+    cout<<endl;
+}
+//Inserting in BST - Recursive
+treeNode* BST::insert_recursive(treeNode* p,int key){
+    if(!p){ 
+        p = new treeNode(key);
+        return p;
+    }
+    if(p->data<key) p->rchild = insert_recursive(p->rchild,key);
+    else if(p->data>key) p->lchild = insert_recursive(p->lchild,key);
+    return p;
+}
+//Insertion in BST - Iterative
+treeNode* BST::insert_iterative(treeNode* t,int key){
+    treeNode* p = NULL;
+        if(!root){
+            p = new treeNode(key);
+            root = p;
+        }
+        else{
+            while(t){
+                if(t->data == key) cout<<"Element already exists"<<endl;
+                else if(t->data > key){
+                    p = t;
+                    t = t->lchild;
+                }
+                else{
+                    p = t;
+                    t = t->rchild;
+                }
+            }
+            t = new treeNode(key);
+            if(p->data > key) p->lchild = t;
+            else p->rchild = t;
+        }
+        return root;
+}
+//BST - Recursive search in BST
+treeNode* BST::search_recursive(treeNode* t,int key){
+    if(t == NULL) return NULL;
+    else if(t->data == key) return t;
+    else if(t->data<key) return search_recursive(t->rchild,key);
+    return search_recursive(t->lchild,key);
+}
+//BST - Iterative search in BST
+treeNode* BST::search_iterative(treeNode* t,int key){
+    while(t){
+        if(t->data == key) return t;
+        else if(t->data<key) t = t->rchild;
+        t = t->lchild;
+    }
+    return NULL;
+}
+int main()
+{
+    BST b;
+    b.root = b.insert_recursive(3);
+    b.insert_recursive(4);
+    b.insert_recursive(10);
+    b.insert_recursive(1);
+    b.insert_recursive(5);
+    b.insert_recursive(2);
+    b.inorder_recursive();
+    return 0;
+}
