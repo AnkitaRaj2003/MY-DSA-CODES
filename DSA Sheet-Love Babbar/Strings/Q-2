@@ -1,0 +1,13 @@
+//Check if a string is palindrome
+//GFG: https://practice.geeksforgeeks.org/problems/palindrome-string0817/1
+
+int isPalindrome(string S)
+	{
+	    // Your code goes here
+	    int i,j;
+	    for(i=0;S[i]!='\0';i++);
+	    for(i=i-1,j=0;i>j;i--,j++)
+	        if(S[i]!=S[j]) return 0;
+	    return 1;
+	}
+  //We can also do it by using one extra array
