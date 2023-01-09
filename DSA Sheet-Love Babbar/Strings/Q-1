@@ -1,1 +1,13 @@
+//Reverse a string
+//GFG: https://practice.geeksforgeeks.org/problems/reverse-a-string/1
 
+string reverseWord(string str){
+  int i,j,t;
+  for(i=0;str[i]!='\0';i++);
+  for(i=i-1,j=0;i>j;i--,j++){ 
+      t = str[i];
+      str[i] = str[j];
+      str[j] = t;
+  }
+  return str;
+}
