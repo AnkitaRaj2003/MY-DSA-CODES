@@ -1,0 +1,74 @@
+// Diagonal Matrix C++ code
+
+#include <iostream>
+using namespace std;
+class diagonal_matrix
+{
+    int n, *A;
+
+public:
+    diagonal_matrix()
+    {
+        this->n = 10;
+        A = new int[n];
+    }
+    diagonal_matrix(int n)
+    {
+        this->n = n;
+        A = new int[n];
+        // A = {0};
+    }
+    void set(int i, int j, int x)
+    {
+        if (i == j)
+            A[i - 1] = x;
+    }
+    int get(int i, int j)
+    {
+        if (i == j)
+            return A[i - 1];
+        return 0;
+    }
+    void display()
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j <= n; j++)
+            {
+                if (i == j)
+                    cout << A[i-1] << " ";
+                else
+                    cout << 0 << " ";
+            }
+            cout << endl;
+        }
+    }
+    ~diagonal_matrix()
+    {
+        delete[] A;
+    }
+};
+
+int main()
+{
+    int d;
+    cout << "Enter Dimensions: ";
+    cin >> d;
+
+    diagonal_matrix dm(d);
+
+    int x;
+    cout << "Enter All Elements: "<<endl;;
+    for (int i = 1; i <= d; i++)
+    {
+        for (int j = 1; j <= d; j++)
+        {
+            cout<<"Element at index ["<<i<<","<<j<<"]: ";
+            cin >> x;
+            dm.set(i, j, x);
+        }
+    }
+
+    dm.display();
+    return 0;
+}
