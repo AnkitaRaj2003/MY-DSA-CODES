@@ -1,0 +1,74 @@
+//Lower triangular matrix
+
+#include <iostream>
+using namespace std;
+class lowertri_matrix
+{
+    int n, *A;
+
+public:
+    lowertri_matrix()
+    {
+        this->n = 10;
+        A = new int[n*(n+1)/2];
+    }
+    lowertri_matrix(int n)
+    {
+        this->n = n;
+        A = new int[n*(n+1)/2];
+        // A = {0};
+    }
+    void set(int i, int j, int x)
+    {
+        if (i >= j)
+            A[i*(i-1)/2+j-1] = x;
+    }
+    int get(int i, int j)
+    {
+        if (i >= j)
+            return A[i*(i-1)/2+j-1];
+        return 0;
+    }
+    void display()
+    {
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j <= n; j++)
+            {
+                if (i >= j)
+                    cout << A[i*(i-1)/2+j-1] << " ";
+                else
+                    cout << 0 << " ";
+            }
+            cout << endl;
+        }
+    }
+    ~lowertri_matrix()
+    {
+        delete[] A;
+    }
+};
+
+int main()
+{
+    int d;
+    cout << "Enter Dimensions: ";
+    cin >> d;
+
+    lowertri_matrix dm(d);
+
+    int x;
+    cout << "Enter All Elements: "<<endl;;
+    for (int i = 1; i <= d; i++)
+    {
+        for (int j = 1; j <= d; j++)
+        {
+            cout<<"Element at index ["<<i<<","<<j<<"]: ";
+            cin >> x;
+            dm.set(i, j, x);
+        }
+    }
+
+    dm.display();
+    return 0;
+}
