@@ -1,6 +1,6 @@
 //Tridiagonal matrix code
 
-//MY PERSONAL CODE:
+//MY PERSONAL CODE: ROW MAJOR FORM
 #include <iostream>
 using namespace std;
 class triDiagonal_matrix
