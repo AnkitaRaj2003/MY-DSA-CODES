@@ -1,6 +1,6 @@
 //Tridiagonal matrix code
 
-//MY PERSONAL CODE: ROW MAJOR FORM
+//ROW MAJOR FORM
 #include <iostream>
 using namespace std;
 class triDiagonal_matrix
@@ -103,3 +103,9 @@ int main()
     dm.display();
     return 0;
 }
+
+
+//FIRST STORE LOWER DIAGONAL -> MAIN DIAGONAL -> UPPER DIAGONAL
+//if i-j = 1, index = j-1
+//i-j = 0, index = n-1-i-1
+//i-j = -1, index = 2*n-1+i-1
