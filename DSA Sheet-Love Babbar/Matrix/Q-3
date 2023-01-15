@@ -1,0 +1,39 @@
+//Row with max 1's
+//GFG: https://practice.geeksforgeeks.org/problems/row-with-max-1s0023/1
+
+//My Approach
+int rowWithMax1s(vector<vector<int> > v, int n, int m) {
+	    // code here
+	    int max=0,l=0,i,j;
+	    for(i=0;i<n;i++){
+	        int count = 0;
+	        for(j=0;j<m;j++){
+	            //if(v[i][j]==1) count++;
+	            if(v[i][j]==1){
+	                count=m-j;
+	                break;
+	            }
+	        }
+	       if(count>max){
+	           l=i;
+	           max = count;
+	       }
+	    }
+	    if(max == 0) return -1;
+	    return l;
+	}
+  
+  //Other Approach
+  int rowWithMax1s(vector<vector<int> > mat, int n, int m) {
+	    int i=0,j=m-1,ans=-1;
+	    while(i<n and j>=0){
+	        if(mat[i][j]==1){
+			   ans=i;
+	            j--;
+	        }
+	        if(mat[i][j]==0){
+	        i++;
+	        }
+	   }
+	    return ans;
+	}
