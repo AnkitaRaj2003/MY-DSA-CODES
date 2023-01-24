@@ -1,0 +1,80 @@
+// Sparse matrix using linked list - IMCOMPLETE
+
+#include<iostream>
+using namespace std;
+class node{
+  public:
+  int x,c;
+  node*next;
+  node(int c,int x){
+    this->c = c;
+    this->x = x;
+    this->next = NULL;
+  }
+};
+class sparse{
+  node**A;
+  int r,c,n;
+  public:
+  sparse(int r,int c,int n){
+    this->r = r;
+    this->c = c;
+    this->n = n;
+    A = new node*[r];
+  }
+  sparse operator+(sparse&s);
+  friend ostream &operator<<(ostream&os,sparse&s);
+  friend istream &operator>>(istream&is,sparse&s);
+};
+sparse sparse::operator+(sparse &s){
+  if(r == s.r && c == s.c) return sparse(0,0,0);
+  sparse demo(r,c,n+s.n);
+  int i,j,k;
+  i = j = k = 0;
+  node*a = A[0], *b = s.A[0],*c = demo.A[0];
+  
+}
+istream &operator>>(istream&is,sparse&s){
+  int r,c,x;
+  node*p,*q;
+  for(int i=0;i<s.r;i++) s.A[i] = NULL;
+  cout<<"Enter non zero elements: "<<endl;
+  for(int i=0;i<s.n;i++){
+    cin>>r>>c>>x;
+    q = new node(c,x);;
+    if(s.A[r] == NULL){
+      cout<<"if start"<<endl;
+      s.A[r] = q;
+      p = q;
+      cout<<"if end"<<endl;
+    }
+    else{
+      cout<<"else start"<<endl;
+      p->next = q;
+      p = q;
+      cout<<"else end"<<endl;
+    }
+  }
+  return is;
+}
+ostream &operator<<(ostream&os,sparse&s){
+  node* p;
+  for(int i=0;i<s.r;i++){
+    p = s.A[i];
+    for(int j=0;j<s.c;j++){
+      if(p!=NULL && p->c == j){
+        cout<<p->x<<" ";
+        p = p->next;
+      }
+      else cout<<"0 ";
+    }
+    cout<<endl;
+  }
+  return os;
+}
+int main(){
+  sparse s(4,5,6);
+  cin>>s;
+  cout<<s;
+  return 0;
+}
