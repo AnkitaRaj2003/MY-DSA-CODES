@@ -1,0 +1,17 @@
+//Middle of given three numbers
+//Gfg: https://practice.geeksforgeeks.org/problems/middle-of-three2926/1
+
+int middle(int A, int B, int C){
+        //code here
+        //Position this line where user code will be pasted.
+        if(A>B){
+            if(A<C) return A;
+            else if(B>C) return B;
+            else return C;
+        }
+        else{
+            if(C>B) return B;
+            else if(C<A) return A;
+            return C;
+        }
+    }
