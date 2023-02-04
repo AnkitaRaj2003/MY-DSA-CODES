@@ -1,0 +1,11 @@
+//Give elements whose value is equals to the index value - index starting from 1
+//Gfg: https://github.com/AnkitaRaj2003/MY-DSA-CODES/blob/main/DSA%20Sheet-Love%20Babbar/Sorting%20and%20searching
+
+vector<int> valueEqualToIndex(int arr[], int n) {
+	    // code here
+	    vector<int> v;
+	    for(int i=1;i<=n;i++){
+	        if(arr[i-1] == i) v.push_back(arr[i-1]);
+	    }
+	    return v;
+	}
