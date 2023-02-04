@@ -1,0 +1,12 @@
+//Count Squares
+//Gfg: https://practice.geeksforgeeks.org/problems/count-squares3649/1
+
+int countSquares(int N) {
+        // code here
+        float x = sqrt(N);
+        int count=0;
+        for(int i=1;i<sqrt(N);i++){
+            count++;
+        }
+        return count;
+    }
