@@ -1,0 +1,25 @@
+//Search for the first and last of any given repeating number x.
+//Gfg: https://practice.geeksforgeeks.org/problems/first-and-last-occurrences-of-x3116/1
+
+vector<int> find(int arr[], int n , int x )
+{
+    vector<int> vec;
+   int low = 0, high = n - 1;
+   
+   while(low <= high)
+   {
+       if(arr[low] != x) low++;
+       if(arr[high] != x) high--;
+       if(arr[low] == x && arr[high] == x) 
+       {
+           vec.push_back(low);
+           vec.push_back(high);
+           break;
+       }
+   }
+   if(low > high)
+       vec.push_back(-1),
+       vec.push_back(-1);
+       
+   return vec;
+}
