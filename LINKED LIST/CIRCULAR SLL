@@ -1,1 +1,220 @@
+#include <iostream>
+using namespace std;
 
+template <class T>
+class node
+{
+public:
+    T data;
+    node<T> *next;
+    node(T data)
+    {
+        this->data = data;
+        next = this;
+    }
+};
+template <class T>
+class CSLL
+{
+    node<T> *front;
+
+public:
+    // Constructor
+    CSLL()
+    {
+        front = NULL;
+    }
+    // Inserting elements in CSLL
+    void insert(T data);
+    // Insert element at a position
+    void insert_at_position(int pos, T data);
+    // Deleting elements in CSLL
+    T delete_element();
+    // Delete element at a position
+    T delete_element_at_position(int pos);
+    // Display elements in CSLL
+    void display();
+    // Count function
+    int count();
+    //Destructor 
+    ~CSLL();
+};
+//Destructor
+template<class T>
+CSLL<T>::~CSLL(){
+    node<T>*p = front;
+    while(p && p->next != front){
+        front = front->next;
+        delete p;
+        p = front;
+    }
+    delete p;
+    front = NULL;
+    cout<<"Destructor Finished"<<endl;
+}
+//Deleting elements at a position
+template<class T>
+T CSLL<T>::delete_element_at_position(int pos){
+    int element = -1;
+    node<T>* p = front;
+    if(pos<=0 || pos>count()){
+        cout<<"Invalid Index!!\nPlease Enter valid index"<<endl;
+        return element;
+    }
+    else if(!p){
+        cout<<"Can't delete, List is Empty!!"<<endl;
+        return element;
+    }
+    else if(p->next == p){
+        element = p->data;
+        delete p;
+        front = NULL;
+    }
+    else if(pos==1){
+        do{
+            p = p->next;
+        }while(p->next!=front);
+        node<T>* q = p->next;
+        p->next = q->next;
+        element = q->data;
+        delete q;
+        front = p->next;
+    }
+    else{
+        for(int i=1;i<pos-1;i++) p = p->next;
+        node<T>* q = p->next;
+        p->next = q->next;
+        element = q->data;
+        delete q;
+    }
+    return element;
+}
+// Deleting element in CSLL
+template <class T>
+T CSLL<T>::delete_element()
+{
+    node<T> *p = front;
+    int element = -1;
+    if (!p){
+        cout<<"Can't Delete, List is empty!!"<<endl;
+        return element;
+    }
+    else if(p->next==front){
+        delete p;
+        front = NULL;
+    }
+    else
+    {
+        do
+        {
+            p = p->next;
+        } while (p->next->next != front);
+        node<T>*q = p->next;
+        element = q->data;
+        p->next = q->next;
+        delete q;
+    }
+    return element;
+}
+// Count function
+template <class T>
+int CSLL<T>::count()
+{
+    node<T> *p = front;
+    int c = 0;
+    if (!p)
+        return c;
+    do
+    {
+        c++;
+        p = p->next;
+    } while (p != front);
+    return c;
+}
+// Display elements in CSLL
+template <class T>
+void CSLL<T>::display()
+{
+    node<T> *p = front;
+    if (!p)
+        cout << "List is Empty!!" << endl;
+    else
+    {
+        do
+        {
+            cout << p->data << " ";
+            p = p->next;
+        } while (p != front);
+        cout << endl;
+    }
+}
+// Inserting elements in CSLL
+template <class T>
+void CSLL<T>::insert(T data)
+{
+    node<T> *p = front;
+    node<T> *t = new node<T>(data);
+    if (!p)
+        front = t;
+    else
+    {
+        do
+        {
+            p = p->next;
+        } while (p->next != front);
+        t->next = p->next;
+        p->next = t;
+    }
+}
+// Insert element at a position in CSLL
+template <class T>
+void CSLL<T>::insert_at_position(int pos, T data)
+{
+    node<T> *p = front;
+    node<T> *t = new node<T>(data);
+    if (pos <= 0 || pos > count() + 1)
+        cout << "Invalid Index!\nPlease Enter valid index" << endl;
+    else if(!p) front = t;
+    else if (pos == 1)
+    {
+        do
+        {
+            p = p->next;
+        } while (p->next != front);
+        t->next = p->next;
+        p->next = t;
+    }
+    else
+    {
+        for (int i = 1; i < pos - 1; i++)
+            p = p->next;
+        t->next = p->next;
+        p->next = t;
+    }
+}
+
+int main()
+{
+    CSLL<int> list1;
+    list1.insert(4);
+    list1.insert(3);
+    list1.insert(1);
+    list1.insert(9);
+    list1.display();
+    list1.insert_at_position(2, 5);
+    list1.display();
+    list1.insert_at_position(6, 7);
+    list1.display();
+    cout<<"Start"<<endl;
+    list1.delete_element();
+    cout<<"Start"<<endl;
+    list1.display();
+    cout<<"Start"<<endl;
+    list1.delete_element_at_position(1);
+    list1.delete_element_at_position(1);
+    list1.delete_element_at_position(1);
+    list1.delete_element_at_position(1);
+    list1.delete_element_at_position(1);
+    list1.display();
+    return 0;
+}
