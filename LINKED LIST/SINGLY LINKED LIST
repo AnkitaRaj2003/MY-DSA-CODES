@@ -23,23 +23,23 @@ public:
     // Count number of nodes in the SLL
     int count();
     // Insert a node in SLL
-    void insert(int data);
+    void insert(T data);
     // Insert node at any position in SLL
-    void insert_at_position(int pos, int data);
+    void insert_at_position(int pos, T data);
     // Iterative Display all elements of SLL
     void display();
     // Sum of all elements in SLL
     int sum_of_elements();
     // Finding maximum element in SLL
-    int max_element();
+    T max_element();
     // Linear Search
-    int linear_search(int data);
+    T linear_search(T data);
     // Insert in a sorted SLL
-    void insert_in_sorted_list(int data);
+    void insert_in_sorted_list(T data);
     // Delete node - by default last node in SLL
-    int delete_node();
+    T delete_node();
     // Delete node at a given position in SLL
-    int delete_at_position(int pos);
+    T delete_at_position(int pos);
     // Checking if list is sorted
     bool isSorted();
     // Remove duplicated from sorted linked list
@@ -119,7 +119,7 @@ bool SLL<T>::isSorted()
 }
 // Delete node - by default last node
 template <class T>
-int SLL<T>::delete_node()
+T SLL<T>::delete_node()
 {
     int x;
     node<T> *p = front;
@@ -144,7 +144,7 @@ int SLL<T>::delete_node()
 }
 // Insert in a sorted SLL
 template <class T>
-void SLL<T>::insert_in_sorted_list(int data)
+void SLL<T>::insert_in_sorted_list(T data)
 {
     node<T> *t = new node<T>(data);
     node<T> *p = front;
@@ -169,7 +169,7 @@ void SLL<T>::insert_in_sorted_list(int data)
 }
 // Insert a node in SLL
 template <class T>
-void SLL<T>::insert(int data)
+void SLL<T>::insert(T data)
 {
     node<T> *p = front;
     node<T> *q = NULL;
@@ -188,7 +188,7 @@ void SLL<T>::insert(int data)
 }
 // Linear Search
 template <class T>
-int SLL<T>::linear_search(int data)
+T SLL<T>::linear_search(T data)
 {
     int pos = -1;
     node<T> *p = front;
@@ -202,7 +202,7 @@ int SLL<T>::linear_search(int data)
 }
 // Finding maximum element in SLL
 template <class T>
-int SLL<T>::max_element()
+T SLL<T>::max_element()
 {
     int max = -1;
     node<T> *p = front;
@@ -260,7 +260,7 @@ void SLL<T>::display()
 }
 // Insert node at any position in SLL
 template <class T>
-void SLL<T>::insert_at_position(int pos, int data)
+void SLL<T>::insert_at_position(int pos, T data)
 {
     node<T> *t = new node<T>(data);
     if (pos <= 0 || pos > count() + 1)
