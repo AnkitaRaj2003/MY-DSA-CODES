@@ -1,1 +1,208 @@
+#include <iostream>
+using namespace std;
+template <class T>
+class node
+{
+public:
+    int data;
+    node<T> *next, *prev;
+    node(int data)
+    {
+        this->data = data;
+        next = prev = NULL;
+    }
+};
+template <class T>
+class DLL
+{
+    node<T> *first;
 
+public:
+    DLL() { first = NULL; }
+    // Insert element at last
+    void insert(int data);
+    // Insert element at a position
+    void insert(int pos, int data);
+    // Display elements of DLL
+    void display();
+    // Counting number of nodes
+    int count();
+    // Deleting node at last
+    T delete_node();
+    // Delete a node at any position
+    T delete_node(int pos);
+    // Reverse a DDL
+    void reverse();
+};
+// Reverse a DLL
+template<class T>
+void DLL<T>::reverse(){
+    node<T>*p = first,*temp;
+    while(p){
+        temp = p->next;
+        p->next = p->prev;
+        p->prev = temp;
+        if(!temp) first = p;
+        p = temp;
+    }
+}
+// Delete a node at any position
+template <class T>
+T DLL<T>::delete_node(int pos)
+{
+    node<T> *p = first;
+    T x = -1;
+    if (pos <= 0 || pos > count())
+    {
+        cout << "Invalid index!!\nPlease Enter valid index" << endl;
+        return x;
+    }
+    else if (pos == 1)
+    {
+        if (!p)
+        {
+            cout << "List is Empty!!" << endl;
+            return x;
+        }
+        x = p->data;
+        first = first->next;
+        delete p;
+        first->prev = NULL;
+    }
+    else
+    {
+        for (int i = 1; i < pos - 1; i++)
+            p = p->next;
+        node<T> *t = p->next;
+        x = t->data;
+        p->next = t->next;
+        if (t->next)
+            t->next->prev = p;
+        delete t;
+    }
+    return x;
+}
+// Deleting node at last
+template <class T>
+T DLL<T>::delete_node()
+{
+    node<T> *p = first;
+    T x = -1;
+    if (!p)
+        cout << "List is Empty!!" << endl;
+    else
+    {
+        if (!p->next)
+        {
+            x = p->data;
+            delete p;
+            first = NULL;
+        }
+        else
+        {
+            while (p->next)
+                p = p->next;
+            x = p->data;
+            node<T> *q = p->prev;
+            delete p;
+            q->next = NULL;
+        }
+    }
+    return x;
+}
+// Counting number of nodes
+template <class T>
+int DLL<T>::count()
+{
+    int c = 0;
+    node<T> *p = first;
+    while (p)
+    {
+        c++;
+        p = p->next;
+    }
+    return c;
+}
+// Insert element at a position
+template <class T>
+void DLL<T>::insert(int pos, int data)
+{
+    node<T> *t = new node<T>(data);
+    node<T> *p = first;
+    if (pos <= 0 || pos > count() + 1)
+    {
+        cout << "Invalid index!!\nPlease Enter valid index" << endl;
+        return;
+    }
+    else if (pos == 1)
+    {
+        if (!p)
+        {
+            first = t;
+            return;
+        }
+        t->next = p;
+        p->prev = t;
+        first = t;
+    }
+    else
+    {
+        for (int i = 1; i < pos - 1; i++)
+            p = p->next;
+        t->next = p->next;
+        t->prev = p;
+        if (p->next)
+            p->next->prev = t;
+        p->next = t;
+    }
+}
+// Insert element at last
+template <class T>
+void DLL<T>::insert(int data)
+{
+    node<T> *t = new node<T>(data);
+    node<T> *p = first;
+    if (!p)
+        first = t;
+    else
+    {
+        while (p->next != NULL)
+            p = p->next;
+        p->next = t;
+        t->prev = p;
+    }
+}
+template <class T>
+void DLL<T>::display()
+{
+    node<T> *p = first;
+    if (!p)
+    {
+        cout << "List is Empty!!" << endl;
+        return;
+    }
+    else
+    {
+        while (p)
+        {
+            cout << p->data << " ";
+            p = p->next;
+        }
+        cout << endl;
+    }
+}
+
+int main()
+{
+    DLL<int> d;
+    d.insert(3);
+    d.insert(2);
+    d.insert(6);
+    d.insert(2, 7);
+    d.insert(7, 10);
+    d.insert(1, 5);
+    d.display();
+    d.reverse();
+    d.display();
+    return 0;
+}
