@@ -1,1 +1,179 @@
+#include <iostream>
+using namespace std;
+template <class T>
+class node
+{
+public:
+    int data;
+    node<T> *next, *prev;
+    node(int data)
+    {
+        this->data = data;
+        next = prev = this;
+    }
+};
 
+template<class T>
+class CDLL{
+    node<T>*first;
+    public:
+    CDLL(){first = NULL;}
+    //Insert element at last
+    void insert(T data);
+    // Insert element at a position
+    void insert(int pos, T data);
+    // Display elements of DLL
+    void display();
+    // Counting number of nodes
+    int count();
+    // Deleting node at last
+    T delete_node();
+    // Delete a node at any position
+    T delete_node(int pos);
+};
+//Delete a node at any position
+template<class T>
+T CDLL<T>::delete_node(int pos){
+    node<T>*p = first;
+    T x = -1;
+    if(pos<=0 || pos>count()){
+        if(!p) cout<<"List is Empty!!"<<endl;
+        else cout<<"Invalid Index!!\nPlease Enter valid index"<<endl;
+    }
+    else if(pos == 1){
+        if(p->next == p){
+            x = first->data;
+            delete first;
+            first = NULL;
+        }
+        else{
+        p->next->prev = p->prev;
+        p->prev->next = p->next;
+        first = p->next;
+        x = p->data;
+        delete p;
+        }
+    }
+    else{
+        for(int i=1;i<pos;i++) p = p->next;
+        p->next->prev = p->prev;
+        p->prev->next = p->next;
+        x = p->data;
+        delete p;
+    }
+    return x;
+}
+//Delete node at last
+template<class T>
+T CDLL<T>::delete_node(){
+    node<T>*p = first;
+    T x = -1;
+    if(!p) cout<<"List is Empty!!"<<endl;
+    else if(p->next == p){
+        x = first->data;
+        delete first;
+        first = NULL;
+    }
+    else{
+        p = first->prev;
+        // p->prev->next = p->next;
+        // p->next->prev = p->prev;
+        first->prev = p->prev;
+        p->prev->next = first;
+        x = p->data;
+        delete p;
+    }
+    return x;
+}
+// Counting number of nodes
+template<class T>
+int CDLL<T>::count(){
+    int c = 1;
+    node<T>* p = first;
+    if(!p) return 0;
+    while(p->next!=first){
+        c++;
+        p = p->next;
+    }
+    return c;
+}
+// Display elements of DLL
+template<class T>
+void CDLL<T>::display(){
+    node<T>*p = first;
+    if(!p){
+        cout<<"List is Empty!!"<<endl;
+        return;
+    }
+    do{
+        cout<<p->data<<" ";
+        p = p->next;
+    }while(p!=first);
+    cout<<endl;
+}
+// Insert element at a position
+template<class T>
+void CDLL<T>::insert(int pos, T data){
+    node<T>*p = first;
+    node<T>*t = new node<T>(data);
+    if(pos<=0 || pos>(count()+1)) cout<<"Index is Invalid!!\nPlease Enter valid index"<<endl;
+    else if(pos == 1){
+        if(!p) first = t;
+        else{
+            t->next = first;
+            t->prev = first->prev;
+            first->prev = t;
+            t->prev->next = t;
+            first = t;
+        }
+    }
+    else{
+        for(int i=1;i<pos-1;i++) p = p->next;
+        t->next = p->next;
+        t->prev = p;
+        p->next = t;
+        t->next->prev = t;
+    }
+}
+//Insert element at last
+template<class T>
+void CDLL<T>::insert(T data){
+    node<T>*p = first;
+    node<T>*t = new node<T>(data);
+    if(!p) first = t;
+    else{
+        // if(p->next == p)
+        do{
+            p = p->next;
+        }while(p->next != first);
+        t->next = p->next;
+        t->prev = p;
+        p->next = t;
+        first->prev = t;
+    }
+}
+
+int main()
+{
+    CDLL<int> c;
+    cout<<c.count()<<endl;
+    c.insert(1,5);
+    c.insert(2,9);
+    c.insert(1,2);
+    c.insert(1,1);
+    c.insert(1,8);
+    c.display();
+    c.delete_node(1);
+    c.display();
+    c.delete_node(4);
+    c.display();
+    c.delete_node(2);
+    c.display();
+    c.delete_node(1);
+    c.display();
+    c.delete_node(2);
+    c.display();
+    c.delete_node(1);
+    c.display();
+    return 0;
+}
