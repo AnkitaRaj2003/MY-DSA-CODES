@@ -1,0 +1,15 @@
+// GFG: Check If Circular Linked List
+//https://practice.geeksforgeeks.org/problems/circular-linked-list/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+bool isCircular(Node *head)
+{
+   // Your code here
+   if(!head) return true;
+   Node* p = head;
+   while(p){
+       if(p->next == head) return true;
+       p = p->next;
+   }
+   return false;
+   
+}
