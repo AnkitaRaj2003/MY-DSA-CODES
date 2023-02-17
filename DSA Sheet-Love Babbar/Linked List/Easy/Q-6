@@ -1,0 +1,21 @@
+//GFG: Detect Loop in linked list
+//https://practice.geeksforgeeks.org/problems/detect-loop-in-linked-list/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+
+bool detectLoop(Node* head)
+    {
+        // your code here
+        Node* slow = head, *fast = head;
+        
+        while(fast != NULL && fast->next != NULL)
+        {
+            slow = slow->next;
+            fast = fast->next->next;
+            
+            if(fast == slow)
+                return true;
+            
+        }
+        
+        return false;
+    }
