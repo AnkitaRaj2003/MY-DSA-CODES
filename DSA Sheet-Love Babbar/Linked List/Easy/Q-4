@@ -1,0 +1,11 @@
+//GFG: Node at a given index in linked list
+// https://practice.geeksforgeeks.org/problems/node-at-a-given-index-in-linked-list/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+int GetNth(struct node* head, int index){
+  // Code here
+    node*t = head;
+    int x = 0;
+    for(int i=1;i<index && t;i++) t = t->next;
+    if(t) x = t->data;
+    return x;
+}
