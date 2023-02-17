@@ -1,0 +1,20 @@
+//GFG: Find n/k th node in Linked list
+//https://practice.geeksforgeeks.org/problems/find-nk-th-node-in-linked-list/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+int fractional_node(struct Node *head, int k)
+{
+    // your code here
+    Node* t = head;
+    int count = 0,x;
+    while(t){
+        count++;
+        t = t->next;
+    }
+    if(count%k==0) x = count/k;
+    else x = count/k+1;
+    int data = 0;
+    t = head;
+    for(int i = 1;i<x && t;i++) t = t->next;
+    if(t) data = t->data;
+    return data;
+}
