@@ -1,0 +1,20 @@
+//GFG: Nth node from end of linked list
+//https://practice.geeksforgeeks.org/problems/nth-node-from-end-of-linked-list/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+
+
+//Function to find the data of nth node from the end of a linked list.
+int getNthFromLast(Node *head, int n)
+{
+       // Your code here
+       int count = 0;
+       Node* t = head;
+       while(t){
+         t = t->next;
+         count++;
+       }
+       t = head;
+       if(count<n) return -1;
+       for(int i = 1;i<=count-n;i++) t = t->next;
+       return t->data;
+}
