@@ -1,0 +1,13 @@
+//GFG: Delete without head pointer
+//https://practice.geeksforgeeks.org/problems/delete-without-head-pointer/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+
+//Function to delete a node without any reference to head pointer.
+    void deleteNode(Node *del)
+    {
+       // Your code here
+       del->data = del->next->data;
+       Node* temp = del->next;
+       del->next = temp->next;
+       delete temp;
+    }
