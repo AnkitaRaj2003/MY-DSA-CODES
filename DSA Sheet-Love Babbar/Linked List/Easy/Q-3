@@ -1,0 +1,28 @@
+//GFG: Implement Stack using Linked List
+//https://practice.geeksforgeeks.org/problems/circular-linked-list/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+//Function to push an integer into the stack.
+void MyStack ::push(int x) 
+{
+    // Your Code
+    StackNode* t = new StackNode(x);
+    if(!top) top = t;
+    else{
+        t->next = top;
+        top = t;
+    }
+}
+
+//Function to remove an item from top of the stack.
+int MyStack ::pop() 
+{
+    // Your Code
+    StackNode* t = top;
+    int x = -1;
+    if(top){
+        x = top->data;
+        top = top->next;
+        delete t;
+    }
+    return x;
+}
