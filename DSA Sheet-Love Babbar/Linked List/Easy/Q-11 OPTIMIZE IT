@@ -1,0 +1,28 @@
+//GFG: Remove duplicates from an unsorted linked list
+//https://practice.geeksforgeeks.org/problems/remove-duplicates-from-an-unsorted-linked-list/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+//Function to remove duplicates from unsorted linked list.
+    Node * removeDuplicates( Node *head) 
+    {
+     // your code goes here
+     Node*t = head;
+     int max = 0;
+     while(t)
+         if(max<t->data) max = t->data;
+     int arr[max+1] = {0};
+     t = head;
+     Node*p = NULL;
+     while(t){
+         if(arr[t->data]>0){
+             p->next = t->next;
+             delete t;
+             t = p->next;
+         }
+         else{
+             arr[t->data]++;
+             p = t;
+             t = t->next;
+         }
+     }
+     return head;
+    }
