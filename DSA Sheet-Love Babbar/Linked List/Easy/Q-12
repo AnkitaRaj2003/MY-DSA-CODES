@@ -1,0 +1,22 @@
+//GFG: Delete a Node in Single Linked List
+//https://practice.geeksforgeeks.org/problems/delete-a-node-in-single-linked-list/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+/*You are required to complete below method*/
+Node* deleteNode(Node *head,int x)
+{
+    //Your code here
+    Node*t = head;
+    if(x==1){
+        head = head->next;
+        delete t;
+    }
+    else{
+        for(int i=1;i<x-1 && t;i++) t = t->next;
+        if(t){
+            Node*p = t->next;
+            t->next = p->next;
+            delete p;
+        }
+    }
+    return head;
+}
