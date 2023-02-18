@@ -1,0 +1,24 @@
+//GFG: Given a linked list of 0s, 1s and 2s, sort it.
+//https://practice.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+Node* segregate(Node *head) {
+        
+        // Add code here
+        int arr[3] = {0};
+        Node*t = head;
+        while(t){
+            arr[t->data]++;
+            t = t->next;
+        }
+        t = head;
+        int i = 0;
+        while(t){
+            if(arr[i]>0){
+                t->data = i;
+                arr[i]--;
+                t = t->next;
+            }
+            else i++;
+        }
+        return head;
+    }
