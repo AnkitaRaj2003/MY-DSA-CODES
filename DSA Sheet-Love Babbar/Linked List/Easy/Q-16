@@ -1,0 +1,16 @@
+//GFG: Move Last Element to Front of a Linked List
+//https://practice.geeksforgeeks.org/problems/move-last-element-to-front-of-a-linked-list/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+ListNode *moveToFront(ListNode *head){
+        ListNode*t = head;
+        ListNode*p;
+        if(!t || !t->next) return head;
+        while(t->next){
+            p = t;
+            t = t->next;
+        }
+        p->next = NULL;
+        t->next = head;
+        head = t;
+        return head;
+    }
