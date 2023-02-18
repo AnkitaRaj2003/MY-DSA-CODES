@@ -1,0 +1,78 @@
+//GFG: Insert in Sorted way in a Sorted DLL
+//https://practice.geeksforgeeks.org/problems/insert-in-sorted-way-in-a-sorted-dll/1?page=2&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+/*structure of the node of the DLL is as
+struct Node {
+	int data;
+	struct Node* prev, *next;
+};
+*/
+// function should insert a new node in sorted way in
+// a sorted doubly linked list
+//Return the head after insertion
+Node* sortedInsert(Node * head, int x)
+{
+	// Code here
+	Node*t = head;
+	Node*p;
+	Node*temp = new Node;
+	temp->data = x;
+	temp->prev = NULL;
+	temp->next = NULL;
+	if(t->data>=x){
+	    temp->next = t;
+	    t->prev = temp;
+	    head = temp;
+	}
+	else{
+	    while(t && t->data<=x){
+	        p = t;
+	        t = t->next;
+	    }
+	    temp->next = p->next;
+	    temp->prev = p;
+	    p->next = temp;
+	    if(temp->next) temp->next->prev = temp;
+	}
+	return head;
+}
+
+---------- OR -----------
+
+Node* sortedInsert(Node* head, int x)
+{
+	// Code here
+	Node* newnode = new Node; // Because Node is not a class 
+	newnode->data = x;
+	
+	Node* temp = head;
+	
+	if(head->data > x){
+	    newnode->next = head;
+	    head->prev = newnode;
+	    head = newnode;
+	    
+	    return head;
+	}
+	
+	while(temp != NULL && temp->next != NULL){
+	    int val = temp->next->data;
+	    if(val > x){
+	        break;
+	    }
+	    temp = temp->next;
+	}
+	
+	newnode->next = temp->next;
+    newnode->prev = temp;
+    temp->next = newnode;
+    
+    if(newnode->next != NULL){
+	    newnode->next->prev = newnode;
+    }
+    else{
+        newnode->next = NULL;
+    }
+	
+	return head;
+}
