@@ -1,0 +1,24 @@
+//GFG: Split a Circular Linked List into two halves
+//https://practice.geeksforgeeks.org/problems/split-a-circular-linked-list-into-two-halves/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+//  function which splits the circular linked list.  head is pointer
+// to head Node of given lined list. head1_ref1 and *head_ref2
+// are pointers to head pointers of resultant two halves.
+
+void splitList(Node *head, Node **head1_ref, Node **head2_ref)
+{
+    // your code goes here
+    Node* slow=head;
+   Node* fast=head;
+   while(fast->next!=head && fast->next->next!=head)
+   {
+       slow=slow->next;
+       fast=fast->next->next;
+   }
+   Node*temp = slow->next;
+   while(fast->next!=head) fast = fast->next;
+   fast->next = temp;
+   *head2_ref = temp;
+    slow->next = head;
+    *head1_ref = head;
+}
