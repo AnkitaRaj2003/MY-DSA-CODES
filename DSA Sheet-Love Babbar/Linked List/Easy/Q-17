@@ -1,0 +1,25 @@
+//GFG: Multiply two linked lists
+//https://practice.geeksforgeeks.org/problems/multiply-two-linked-lists/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+/*The method multiplies
+two  linked lists l1 and l2
+and returns their product*/
+
+/*You are required to complete this method*/
+long long  multiplyTwoLists (Node* l1, Node* l2)
+{
+  //Your code here
+  int x=10;
+  long long mod = pow(10,9)+7,finalSum,t=0,r=0;;
+  Node*p=l1,*q=l2;
+  while(p){
+      t = p->data +(t*x)%mod;
+      p = p->next;
+  }
+  while(q){
+      r = q->data+(r*x)%mod;
+      q = q->next;
+  }
+  finalSum = (t*r)%mod;
+  return finalSum;
+}
