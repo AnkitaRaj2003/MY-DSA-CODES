@@ -1,0 +1,52 @@
+//GFG: Add 1 to a number represented as linked list
+//https://practice.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+//Recursive solution - Less Time comsuming
+Node *addOne(Node* head){
+        if(!head) return NULL;
+        else if(!head->next){
+            head->data+=1;
+            return head;
+        }
+        Node* temp = addOne(head->next);
+        if(temp->data>=10){
+            temp->data%=10;
+            head->data+=1;
+        }
+        return head;
+    }
+    
+    //Non-Recursive solution - More time comsuming hence not accepted
+    Node* reverse(Node* head){
+        if(!head || !head->next) return head;
+        Node*p = NULL;
+        Node*q = head;
+        Node*r = head->next;
+        while(q){
+            q->next = p;
+            p = q;
+            r = r;
+            if(r) r = r->next;
+        }
+        head = p;
+        return head;
+    }
+    Node* addOne(Node *head) 
+    {
+        // Your Code here
+        // return head of list after adding one
+        head = reverse(head);
+        Node* t = head;
+        int carry = 0;
+        while(t){
+            t->data = t->data + 1;
+            if(t->data>9 && t->next){
+                carry = 1;
+                t->data = t->data%10;
+                t = t->next;
+            }
+            else break;
+        }
+        head = reverse(head);
+        return head;
+    }
