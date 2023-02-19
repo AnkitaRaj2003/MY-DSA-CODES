@@ -1,0 +1,24 @@
+//GFG: 
+//https://practice.geeksforgeeks.org/problems/pairwise-swap-elements-of-a-linked-list-by-swapping-data/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+Node* pairWiseSwap(struct Node* head) 
+    {
+        // The task is to complete this method
+        if(!head || !head->next) return head;
+        Node*p = NULL;
+        Node*q = head;
+        Node*r = head->next;
+        head = r;
+        while(r){
+            if(p) p->next = r;
+            q->next = r->next;
+            r->next = q;
+            if(!q->next) r = NULL;
+            else{
+                p = q;
+                q = p->next;
+                r = q->next;
+            }
+        }
+        return head;
+    }
