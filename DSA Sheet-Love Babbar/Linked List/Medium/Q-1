@@ -1,1 +1,33 @@
+//GFG: Remove loop in Linked List
+//https://practice.geeksforgeeks.org/problems/remove-loop-in-linked-list/1?page=1&difficulty[]=1&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
 
+
+void removeLoop(Node* head)
+    {
+        //code here
+        //just remove the loop without losing any nodes
+        if(!head || !head->next) return;
+        Node* fast = head;
+        Node* slow = head;
+        Node* prev = NULL;
+        int flag = 0;
+        while(fast && fast->next){
+            prev = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow == fast){
+                fast = head;
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 1){
+            while(slow!=fast){
+                prev = slow;
+                slow = slow->next;
+                fast = fast->next;
+            }
+            prev->next = NULL;
+        }
+       
+    }
