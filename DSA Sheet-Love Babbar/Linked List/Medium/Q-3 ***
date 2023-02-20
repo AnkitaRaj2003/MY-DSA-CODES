@@ -1,0 +1,61 @@
+//GFG: 
+//
+
+//Function to find intersection point in Y shaped Linked Lists.
+int intersectPoint(Node* head1, Node* head2)
+{
+    // Your Code Here
+    int l1 = 0,l2 = 0;
+    Node* temp1 = head1;
+    Node* temp2 = head2;
+    while(temp1){
+        l1++;
+        temp1 = temp1->next;
+    }
+    while(temp2){
+        l2++;
+        temp2 = temp2->next;
+    }
+    int diff;
+    if(l1<l2) diff = l2-l1;
+    else diff = l1-l2;
+    if(l1<l2){
+        temp2 = head2;
+        for(int i=1;i<=diff;i++) temp2 = temp2->next;
+        temp1 = head1;
+    }
+    else{
+        temp1 = head1;
+        for(int i=1;i<=diff;i++) temp1 = temp1->next;
+        temp2 = head2;
+    }
+    while(temp1!=temp2 && temp1 && temp2){
+        temp1 = temp1->next;
+        temp2 = temp2->next;
+    }
+    if(!temp1 || !temp2) return -1;
+    return temp1->data;
+}
+
+------------OR----------------
+
+int intersectPoint(Node* head1, Node* head2)
+{
+   // Your Code Here
+   while(head1)
+   {
+   // making all nodes greater than 1000
+       head1->data=(head1->data)+10000;
+       head1=head1->next;
+   }
+   while(head2)
+   {
+   // if any node is greater than 1000 , then this node is already visited , therefore it is the common node
+       if(head2->data>1000)
+       {
+           return (head2->data)-(10000);
+       }
+       head2=head2->next;
+   }
+   return -1;
+}
