@@ -16,3 +16,5 @@
         if(lnum==rnum) return true;
         return false;
     }
+    
+//OR we can make a array and insert linked list element in it.
