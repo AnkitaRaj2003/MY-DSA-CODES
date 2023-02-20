@@ -1,0 +1,36 @@
+//GFG: Merge two sorted linked lists
+//https://practice.geeksforgeeks.org/problems/merge-two-sorted-linked-lists/1?page=1&difficulty[]=1&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+//Function to merge two sorted linked list.
+Node* sortedMerge(Node* head1, Node* head2)  
+{  
+    // code here
+    if(!head1) return head2;
+    else if(!head2) return head1;
+    if(head1->data > head2->data){
+        Node* temp = head2;
+        head2 = head2->next;
+        temp->next = head1;
+        head1 = temp;
+    }
+    Node* temp1 = head1;
+    Node* temp2 = head2;
+    while(temp1->next && temp2){
+        if(temp1->next->data < temp2->data) temp1 = temp1->next;
+        else{
+            head2 = head2->next;
+            temp2->next = temp1->next;
+            temp1->next = temp2;
+            temp2 = head2;
+            temp1 = temp1->next;
+        }
+    }
+    while(head2){
+        head2 = head2->next;
+        temp2->next = temp1->next;
+        temp1->next = temp2;
+        temp2 = head2;
+        temp1 = temp1->next; 
+    }
+    return head1;
+}  
