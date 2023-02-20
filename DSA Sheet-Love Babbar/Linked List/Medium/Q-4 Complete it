@@ -1,72 +1,69 @@
 //GFG: Add two numbers represented by linked lists
 //https://practice.geeksforgeeks.org/problems/add-two-numbers-represented-by-linked-lists/1?page=1&difficulty[]=1&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
 
-//Function to add two numbers represented by linked list.
-    Node* reverse(Node* head){
-        Node *t=head,*p=NULL;
-        while(t){
-            Node *n=t->next;
-            t->next=p;
-            p=t;
-            t=n;
+// solution
+
+class Solution
+{
+    public:
+    //Function to reverse the linked list.
+    Node* reverse(Node *head) 
+    {
+        Node * prev = NULL;
+        Node * current = head;
+        Node * next;
+        
+        while (current != NULL) 
+        { 
+            next = current->next;     
+            current->next = prev;     
+            prev = current;          
+            current = next;
         }
-        return p;
+        
+        return prev; 
     }
+    public:
+    //Function to add two numbers represented by linked list.
     struct Node* addTwoLists(struct Node* first, struct Node* second)
     {
-        // code here
-        // long long int numFirst = 0,numSecond = 0;
-        // Node* tempFirst = first;
-        // Node* tempSecond = second;
-        // while(tempFirst){
-        //     numFirst = numFirst*10+tempFirst->data;
-        //     tempFirst = tempFirst->next;
-        // }
-        // while(tempSecond){
-        //     numSecond = numSecond*10+tempSecond->data;
-        //     tempSecond = tempSecond->next;
-        // }
-        // long long int sum = numFirst+numSecond;
-        // Node* head = NULL;
-        // while(sum>0){
-        //     Node*temp = new Node(sum%10);
-        //     sum = sum/10;
-        //     if(!head) head = temp;
-        //     else{
-        //         temp->next = head;
-        //         head = temp;
-        //     }
-        // }
-        // return head;
-        if(!first) return second;
-        else if(!second) return first;
-        Node* tempFirst = reverse(first);
-        Node* tempSecond = reverse(second);
-        Node*t,*head=NULL;
-        int carry = 0;
-        while(tempFirst && tempSecond){
-            int sum = tempFirst->data+tempSecond->data+carry;
-            t = new Node(sum%10);
-            carry = sum/10;
-            if(!head) head = t;
-            else{
-                t->next = head;
-                head = t;
-            }
-            tempFirst = tempFirst->next;
-            tempSecond = tempSecond->next;
+        //reversing both lists to simplify addition.
+        first = reverse(first);             
+        second = reverse(second);            
+        
+        Node *sum=NULL;
+        int carry=0;
+        
+        //using a loop till both lists and carry gets exhausted.
+        while( first!=NULL || second!=NULL || carry!=0 )
+        {
+            //using a variable to store sum of two digits along with carry.
+            int newVal = carry;
+            
+            //if nodes are left in any list, we add their data in newVal.
+            if(first) newVal += first->data;
+            if(second) newVal += second->data;
+        
+            //updating carry.
+            carry = newVal/10;
+            
+            //using modulus to store only a single digit at that place.
+            newVal = newVal%10;             
+            
+            //creating new node which gets connected with other nodes that 
+            //we get after calculating sum of respective digits.
+            Node* newNode = new Node(newVal);
+            
+            //storing the previously made nodes in the link part of new node.
+            newNode->next = sum;
+            
+            //making the new node as the first node of all previously made node.
+            sum = newNode;
+            
+            //moving ahead in both lists.
+            if(first) first = first->next; 
+            if(second) second = second->next;
         }
-        while(tempFirst){
-            t = new Node(tempFirst->data);
-            t->next = head;
-            head = t;
-            tempFirst = tempFirst->next;
-        }
-        while(tempSecond){
-            t = new Node(tempSecond->data);
-            t->next = head;
-            head = t;
-            tempSecond = tempSecond->next;
-        }
-        return head;
+        return sum;
     }
+};
