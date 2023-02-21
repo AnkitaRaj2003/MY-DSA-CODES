@@ -1,0 +1,22 @@
+//GFG: Delete nodes having greater value on right
+//https://practice.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1?page=1&difficulty[]=1&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+Node *compute(Node *head)
+    {
+        // your code goes here
+        if(!head || !head->next) return head;
+        Node* temp = head;
+        while(temp->next){
+            if(temp->data<temp->next->data){
+                temp->data = temp->next->data;
+                Node*t = temp->next;
+                temp->next = t->next;
+                delete t;
+                temp = head;
+            }
+            else{
+                temp = temp->next;
+            }
+        }
+        return head;
+    }
