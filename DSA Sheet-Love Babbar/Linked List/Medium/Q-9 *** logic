@@ -1,0 +1,99 @@
+//GFG: Segregate even and odd nodes in a Link List
+//https://practice.geeksforgeeks.org/problems/segregate-even-and-odd-nodes-in-a-linked-list5035/1?page=1&difficulty[]=1&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+Node* divide(int N, Node *head){
+        // code here
+        if(!head && !head->next) return head;
+        Node* even = NULL,*even_tail=NULL,*temp;
+        Node*p = NULL,*q = head;
+        while(q){
+            if(q->data%2==0){
+                temp = q;
+                if(!p){
+                    q = q->next;
+                    temp->next = NULL;
+                    head = q;
+                }
+                else{
+                    p->next = q->next;
+                    q = q->next;
+                    temp->next = NULL;
+                }
+                if(!even) even = even_tail = temp;
+                else{
+                    even_tail->next = temp;
+                    even_tail = temp;
+                }
+            }
+            else{
+                p = q;
+                q = q->next;
+            }
+        }
+        if(even){
+            even_tail->next = head;
+            head = even;
+        }
+        return head;
+    }
+    
+-------------OR--------------
+Node* divide(int N, Node *head){
+
+        // code here
+
+        if(!head && !head->next) return head;
+
+        Node*t = head->next,*p,*q = head;
+
+        if(q->data%2==0) p = q;
+
+        else p = NULL;
+
+        while(t){
+
+            if(t->data%2!=0 || q->data%2==0){
+
+                if(q->data%2==0) p = q;
+
+                q = t;
+
+                t = t->next;
+
+            }
+
+            else{
+
+                if(!p){
+
+                    q->next = t->next;
+
+                    t->next = head;
+
+                    head = t;
+
+                    p = head;
+
+                }
+
+                else{
+
+                        q->next = t->next;
+
+                        t->next = p->next;
+
+                        p->next = t;
+
+                        p = t;
+
+                }
+
+                t = q->next;
+
+            }
+
+        }
+
+        return head;
+
+    }
