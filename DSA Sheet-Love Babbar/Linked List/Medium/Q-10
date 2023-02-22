@@ -1,0 +1,55 @@
+//GFG: Merge K sorted linked lists
+//https://practice.geeksforgeeks.org/problems/merge-k-sorted-linked-lists/1?page=1&difficulty[]=1&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+  //Function to merge two sorted linked list.
+Node* sortedMerge(Node* head1, Node* head2)  
+{  
+    // code here
+    if(!head1) return head2;
+    else if(!head2) return head1;
+    Node* temp1 = head1;
+    Node* temp2 = head2;
+    Node* temp=NULL;
+    while(temp1 && temp2){
+        if(temp1->data < temp2->data){
+            temp = temp1;
+            temp1 = temp1->next;
+        }
+        else{
+            if(temp1==head1){
+                head2 = head2->next;
+                temp2->next = temp1;
+                head1 = temp2;
+                temp = head1;
+                temp2 = head2;
+            }
+            else{
+                head2 = head2->next;
+                temp2->next = temp1;
+                temp->next = temp2;
+                temp = temp2;
+                temp2 = head2;
+            }
+        }
+    }
+    while(temp2){
+        head2 = head2->next;
+        temp2->next = temp->next;
+        temp->next = temp2;
+        temp2 = head2;
+        temp = temp->next; 
+    }
+    return head1;
+}
+    //Function to merge K sorted linked list.
+    Node * mergeKLists(Node *arr[], int K)
+    {
+           // Your code here
+           Node* head = arr[0];
+           for(int i = 1;i < K; i++){
+               Node*first = head;
+               Node*second = arr[i];
+               head = sortedMerge(first,second);
+           }
+           return head;
+    }
