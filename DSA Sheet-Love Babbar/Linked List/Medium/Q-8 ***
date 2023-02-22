@@ -1,0 +1,62 @@
+//GFG: Merge Sort for Linked List
+//https://practice.geeksforgeeks.org/problems/sort-a-linked-list/1?page=1&difficulty[]=1&category[]=Linked%20List&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+//Function to merge two sorted linked list.
+Node* sortedMerge(Node* head1, Node* head2)  
+{  
+    // code here
+    if(!head1) return head2;
+    else if(!head2) return head1;
+    Node* temp1 = head1;
+    Node* temp2 = head2;
+    Node* temp=NULL;
+    while(temp1 && temp2){
+        if(temp1->data < temp2->data){
+            temp = temp1;
+            temp1 = temp1->next;
+        }
+        else{
+            if(temp1==head1){
+                head2 = head2->next;
+                temp2->next = temp1;
+                head1 = temp2;
+                temp = head1;
+                temp2 = head2;
+            }
+            else{
+                head2 = head2->next;
+                temp2->next = temp1;
+                temp->next = temp2;
+                temp = temp2;
+                temp2 = head2;
+            }
+        }
+    }
+    while(temp2){
+        head2 = head2->next;
+        temp2->next = temp->next;
+        temp->next = temp2;
+        temp2 = head2;
+        temp = temp->next; 
+    }
+    return head1;
+}
+Node* findMid(Node* head){
+    Node*slow = head,*fast = head->next;
+    while(fast && fast->next){
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+    //Function to sort the given linked list using Merge Sort.
+    Node* mergeSort(Node* head) {
+        // your code here
+        if(!head || !head->next) return head;
+        Node* mid = findMid(head);
+        Node*t = mid->next;
+        mid->next = NULL;
+        Node*first = mergeSort(head);
+        Node*second = mergeSort(t);
+        return sortedMerge(first,second);
+    }
