@@ -1,0 +1,103 @@
+//Evaluating an expression
+
+//Stacks using arrays
+#include<iostream>
+#include<cstring>
+using namespace std;
+template<class T>
+class stack{
+    int size;
+    int top;
+    T*arr;
+public:
+    stack(int size){
+        this->size = size;
+        top = -1;
+        arr = new T[size];
+    }
+    void push(T x){
+        if(top==size-1) cout<<"List is FULL!!"<<endl;
+        else arr[++top]= x;
+    }
+    T pop(){
+        T x = -1;
+        if(top==-1) cout<<"List is Empty!!"<<endl;
+        else x = arr[top--];
+        return x;
+    }
+    int peek(int index){
+        int x = top-index+1;
+        T num = -1;
+        if(x>size-1 || x<0) cout<<"Invalid Index!!"<<endl;
+        else num = arr[x];
+        return num;
+    }
+    T stackTop(){
+        if(top==-1) return -1;
+        return arr[top];
+    }
+    bool isEmpty(){
+        return top==-1;
+    }
+    bool isFull(){
+        return top==size-1;
+    }
+    void print(){
+        for(int i=0;i<=top;i++) cout<<arr[i]<<" ";
+        cout<<endl;
+    }
+};
+//Find precedence
+int pre(char i){
+    if(i=='*'||i=='/') return 2;
+    else if(i=='+'||i=='-') return 1;
+    return 3;
+}
+//Convert infix to postfix
+char* convert(char*exp){
+    stack<char> st(100);
+    char*post = new char[strlen(exp)+1]; //The strlen doesn't include null character
+    int i=0,j=0;
+    while(exp[i]!='\0'){
+        if(st.isEmpty()) st.push(exp[i++]);
+        else if(pre(exp[i])>pre(st.stackTop())) st.push(exp[i++]);
+        else post[j++] = st.pop();
+    }
+    while(!st.isEmpty()) post[j++] = st.pop();
+    post[j] = '\0';
+    return post;
+}
+//Find is operand
+bool isOperand(char i){
+    if(i=='+' || i=='-' || i=='/' || i=='*') return false;
+    return true;
+}
+
+//Evaluate expression
+float evaluate(char*exp){
+    char* post = convert(exp);
+    stack<float> st(10);
+    for(int i=0;post[i]!='\0';i++){
+        if(!isOperand(post[i])){
+            float x = st.pop(),y = st.pop();
+            switch(post[i]){
+                case '+': st.push(y+x);
+                break;
+                case '-': st.push(y-x);
+                break;
+                case '/': st.push(y/x);
+                break;
+                case '*': st.push(y*x);
+                break;
+            }
+        }
+        else st.push(post[i]-'0');
+    }
+    return st.pop();
+}
+
+int main(){
+    char* ch = "3*5+4/3-4";
+    cout<<evaluate(ch);
+    return 0;
+}
