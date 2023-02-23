@@ -1,35 +1,33 @@
-//Stacks using arrays
-#include<iostream>
-using namespace std;
-
+//Stacks using Arrays
+template<class T>
 class stack{
     int size;
     int top;
-    int*arr;
+    T*arr;
 public:
     stack(int size){
         this->size = size;
         top = -1;
-        arr = new int[size];
+        arr = new T[size];
     }
-    void push(int x){
+    void push(T x){
         if(top==size-1) cout<<"List is FULL!!"<<endl;
         else arr[++top]= x;
     }
-    int pop(){
-        int x = -1;
+    T pop(){
+        T x = -1;
         if(top==-1) cout<<"List is Empty!!"<<endl;
         else x = arr[top--];
         return x;
     }
     int peek(int index){
         int x = top-index+1;
-        int num = -1;
+        T num = -1;
         if(x>size-1 || x<0) cout<<"Invalid Index!!"<<endl;
         else num = arr[x];
         return num;
     }
-    int stackTop(){
+    T stackTop(){
         if(top==-1) return -1;
         return arr[top];
     }
