@@ -1,1 +1,68 @@
+//Stacks using arrays
+#include<iostream>
+using namespace std;
 
+class node{
+public:
+    int data;
+    node*next;
+    node(int data){
+        this->data = data;
+        next = NULL;
+    }
+};
+class stack{
+    node*top;
+    public:
+    stack(){top = NULL;}
+    void push(int x){
+        node*t = new node(x);
+        if(t==NULL) cout<<"List is Full!!"<<endl;
+        else{
+            t->next = top;
+            top = t;
+        }
+    }
+    int pop(){
+        int x = -1;
+        if(!top) cout<<"List is Empty!!"<<endl;
+        else{
+            node*t = top;
+            top = top->next;
+            x = t->data;
+            delete t;
+        }
+        return x;
+    }
+    int peek(int index){
+        int x = -1;
+        node*t = top;
+        for(int i=1;i<index && t;i++) t = t->next;
+        if(t) x = t->data;
+        return x; 
+    }
+    bool isEmpty(){
+        return top==NULL;
+    }
+    bool isFull(){
+        node*t = new node(-1);
+        if(t==NULL){
+            delete t;
+            return true;
+        }
+        return false;
+    }
+    int stackTop(){
+        int x = -1;
+        if(top) x = top->data;
+        return x;
+    }
+    void print(){
+        node*t = top;
+        while(t){
+            cout<<t->data<<" ";
+            t = t->next;
+        }
+        cout<<endl;
+    }
+};
