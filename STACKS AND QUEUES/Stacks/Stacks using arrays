@@ -34,12 +34,10 @@ public:
         return arr[top];
     }
     bool isEmpty(){
-        if(top==-1) return true;
-        return false;
+        return top==-1;
     }
     bool isFull(){
-        if(top==size-1) return true;
-        return false;
+        return top==size-1;
     }
     void print(){
         for(int i=0;i<=top;i++) cout<<arr[i]<<" ";
