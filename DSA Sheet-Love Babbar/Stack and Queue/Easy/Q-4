@@ -1,0 +1,29 @@
+//GFG: Reverse a string using Stack
+//https://practice.geeksforgeeks.org/problems/reverse-a-string-using-stack/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Stack&category[]=Queue&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+//return the address of the string
+char* reverse(char *S, int len)
+{
+    //code here
+    char* p = new char[len+1];
+    int i=0,j=len-1;
+    while(S[i]!='\0') p[j--] = S[i++];
+    p[len] = '\0';
+    return p;
+}
+
+--------OR----------
+//USING STACK
+//return the address of the string
+char* reverse(char *S, int len)
+{
+    //code here
+    stack<char> st;
+    int i;
+    for(i=0;S[i]!='\0';i++) st.push(S[i]);
+    for(i=0;i<len;i++){
+        S[i] = st.top();
+        st.pop();
+    }
+    return S;
+}
