@@ -1,0 +1,68 @@
+#include<iostream>
+using namespace std;
+template<class T>
+class node{
+public:
+    T data;
+    node*next;
+    node(T data){
+        this->data = data;
+        next = NULL;
+    }
+};
+template<class T>
+class queue{
+    node<T>*front,*rear;
+public:
+    queue(){
+        front = rear = NULL;
+    }
+    void enqueue(T x){
+        node<T>*t = new node<T>(x);
+        if(!t) cout<<"Can't Add, List is FULL!!";
+        else{
+            if(!front) front = rear = t;
+            else{
+                rear->next = t;
+                rear = t;
+            }
+        }
+    }
+    T dequeue(){
+        T x = -1;
+        if(!front) cout<<"Can't delete, List is Empty!!"<<endl;
+        else{
+            node<T>*t = front;
+            if(front==rear) front = rear = NULL;
+            else front = front->next;
+            x = t->data;
+            delete t;
+        }
+        return x;
+    }
+    void print(){
+        node<T>*t = front;
+        while(t){
+            cout<<t->data<<" ";
+            t = t->next;
+        }
+        cout<<endl;
+    }
+};
+
+int main(){
+    queue<int> q;
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+    q.enqueue(6);
+    q.print();
+    cout<<q.dequeue()<<endl;
+    q.enqueue(7);
+    cout<<q.dequeue()<<endl;
+    cout<<q.dequeue()<<endl;
+    q.print();
+    return 0;
+}
