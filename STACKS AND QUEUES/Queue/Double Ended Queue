@@ -1,0 +1,51 @@
+#include<iostream>
+using namespace std;
+
+template<class T>
+class queue{
+    int size;
+    int front,rear;
+    T*arr;
+public:
+    queue(int size){
+        this->size = size;
+        front = rear = -1;
+        arr = new T[size];
+    }
+    void insert_at_front(T x){
+        if(front == -1) cout<<"Can't Add at front"<<endl;
+        else arr[front--] = x;
+    }
+    void insert_at_rear(T x){
+        if(rear == size-1) cout<<"Can't Add at rear"<<endl;
+        else arr[++rear] = x;
+    }
+    T delete_at_front(){
+        T x = -1;
+        if(front == rear) cout<<"Can't delete, List is Empty!!"<<endl;
+        else x = arr[++front];
+        return x;
+    }
+    T delete_at_rear(){
+        T x = -1;
+        if(front == rear) cout<<"Can't delete, List is Empty!!"<<endl;
+        else x = arr[rear--];
+        return x;
+    }
+    void print(){
+        for(int i = front+1;i<=rear;i++) cout<<arr[i]<<" ";
+        cout<<endl;
+    }
+};
+
+int main(){
+    queue<int> q(6);
+    q.insert_at_rear(4);
+    q.insert_at_rear(3);
+    q.insert_at_rear(2);
+    q.delete_at_front();
+    q.insert_at_front(5);
+    q.delete_at_rear();
+    q.print();
+    return 0;
+}
