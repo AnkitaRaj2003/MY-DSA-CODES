@@ -2,25 +2,25 @@
 
 #include<iostream>
 using namespace std;
-
+template<class T>
 class queue{
     int size;
     int front,rear;
-    int*arr;
+    T*arr;
 public:
     queue(int size){
         this->size = size;
         front = rear = -1;
-        arr = new int[size];
+        arr = new T[size];
     }
     bool isFull(){return rear == size-1;}
     bool isEmpty(){return rear==front;}
-    void enqueue(int x){
+    void enqueue(T x){
         if(isFull()) cout<<"List is Full!!"<<endl;
         else arr[++rear] = x; 
     }
-    int dequeue(){
-        int x = -1;
+    T dequeue(){
+        T x = -1;
         if(isEmpty()) cout<<"List is Empty!!"<<endl;
         else x = arr[++front];
         return x; 
@@ -32,7 +32,7 @@ public:
 };
 
 int main(){
-    queue q(5);
+    queue<int> q(5);
     q.enqueue(1);
     q.enqueue(2);
     q.enqueue(3);
