@@ -1,0 +1,58 @@
+//Best way to implement queue using array
+
+#include<iostream>
+using namespace std;
+template<class T>
+class queue{
+    int size;
+    int front,rear;
+    T*arr;
+public:
+    queue(int size){
+        this->size = size;
+        front = rear = 0;
+        arr = new T[size];
+    }
+    void enqueue(T x){
+        int i = (rear+1)%size;
+        if(i==front) cout<<"Cant Add, List is FULL!!"<<endl;
+        else{
+            rear = i;
+            arr[rear] = x;
+        }
+    }
+    T dequeue(){
+        T x = -1;
+        if(front==rear) cout<<"Cant delete, List is Empty!!"<<endl;
+        else{
+            front = (front+1)%size;
+            x = arr[front];
+        }
+        return x;
+    }
+    void print(){
+        if(front==rear) return;
+        int i = (front+1)%size;
+        while(i!=rear){
+            cout<<arr[i]<<" ";
+            i = (i+1)%size;
+        }
+        if(i==rear) cout<<arr[rear]<<" ";
+        cout<<endl;
+    }
+};
+
+int main(){
+    queue<int> q(6);
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    cout<<q.dequeue()<<endl;
+    q.enqueue(4);
+    q.enqueue(5);
+    q.enqueue(6);
+    cout<<q.dequeue()<<endl;
+    q.enqueue(7);
+    q.print();
+    return 0;
+}
