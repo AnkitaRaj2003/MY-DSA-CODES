@@ -1,1 +1,32 @@
+//GFG: Implement stack using array
+//https://practice.geeksforgeeks.org/problems/implement-stack-using-array/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Stack&category[]=Queue&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
 
+//Function to push an integer into the stack.
+
+/*
+class MyStack
+{
+private:
+    int arr[1000];
+    int top;
+public:
+    MyStack(){top=-1;}
+    int pop();
+    void push(int);
+};
+*/
+
+void MyStack :: push(int x)
+{
+    // Your Code
+    if(top<999) arr[++top] = x; 
+}
+
+//Function to remove an item from top of the stack.
+int MyStack :: pop()
+{
+    // Your Code
+    int x = -1;
+    if(top==-1) return x;
+    return arr[top--];
+}
