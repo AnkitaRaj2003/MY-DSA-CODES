@@ -1,0 +1,88 @@
+#include<iostream>
+using namespace std;
+
+//Code for Stack
+template<class T>
+class stack{
+    int size;
+    int top;
+    T*arr;
+public:
+    stack(){
+        this->size = 10;
+        top = -1;
+        arr = new T[size];
+    }
+    stack(int size){
+        this->size = size;
+        top = -1;
+        arr = new T[size];
+    }
+    void push(T x){
+        if(top==size-1) cout<<"List is FULL!!"<<endl;
+        else arr[++top]= x;
+    }
+    T pop(){
+        T x = -1;
+        if(top==-1) cout<<"List is Empty!!"<<endl;
+        else x = arr[top--];
+        return x;
+    }
+    int peek(int index){
+        int x = top-index+1;
+        T num = -1;
+        if(x>size-1 || x<0) cout<<"Invalid Index!!"<<endl;
+        else num = arr[x];
+        return num;
+    }
+    T stackTop(){
+        if(top==-1) return -1;
+        return arr[top];
+    }
+    bool isEmpty(){
+        return top==-1;
+    }
+    bool isFull(){
+        return top==size-1;
+    }
+    void print(){
+        for(int i=0;i<=top;i++) cout<<arr[i]<<" ";
+        cout<<endl;
+    }
+};
+
+//Code for Queue
+template<class T>
+class Queue{
+    stack<T> s1,s2;
+    public:
+    void enqueue(T x){
+        s1.push(x);
+    }
+    T dequeue(){
+        T x = -1;
+        if(s2.isEmpty()){
+            if(s1.isEmpty()){
+                cout<<"Queue is Empty!!"<<endl;
+                return x;
+            }
+            while(!s1.isEmpty()) s2.push(s1.pop());
+        }
+        return s2.pop();
+    }
+};
+
+int main(){
+    Queue<int> q;
+    q.dequeue();
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    cout<<q.dequeue()<<endl;
+    cout<<q.dequeue()<<endl;
+    cout<<q.dequeue()<<endl;
+    cout<<q.dequeue()<<endl;
+    cout<<q.dequeue()<<endl;
+    return 0;
+}
