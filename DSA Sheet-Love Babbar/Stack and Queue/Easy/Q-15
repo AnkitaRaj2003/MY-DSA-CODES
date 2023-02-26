@@ -1,0 +1,23 @@
+//GFG: Queue using stack
+//https://practice.geeksforgeeks.org/problems/queue-using-stack/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Stack&category[]=Queue&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+class Queue {
+    stack<int> input, output;
+public:
+
+    void enqueue(int x) {
+        input.push(x);
+    }
+
+    int dequeue() {
+        if(output.empty()){
+            if(input.empty()) return -1;
+            while(!input.empty()){
+                output.push(input.top());
+                input.pop();
+            }
+        }
+        int x = output.top();
+        output.pop();
+        return x;
+    }
