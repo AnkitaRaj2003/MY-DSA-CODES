@@ -1,0 +1,40 @@
+//GFG: Special Stack
+//https://practice.geeksforgeeks.org/problems/special-stack/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Stack&category[]=Queue&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+
+void push(stack<int>& s, int a){
+	// Your code goes here
+	s.push(a);
+}
+
+bool isFull(stack<int>& s,int n){
+	// Your code goes here
+	return s.size() == n;
+}
+
+bool isEmpty(stack<int>& s){
+	// Your code goes here
+	return s.size() == 0;
+}
+
+int pop(stack<int>& s){
+	// Your code goes here
+	if(isEmpty(s)) return -1;
+	int x = s.top();
+	s.pop();
+	return x;
+}
+
+int getMin(stack<int>& s){
+	// Your code goes here
+	int min=-1;
+	stack<int> temp;
+	while(!isEmpty(s)){
+	    int x = s.top();
+	    if(min == -1) min = x;
+	    else if(x<min) min = x;
+	    push(temp,x);
+	    pop(s);
+	}
+	return min;
+}
