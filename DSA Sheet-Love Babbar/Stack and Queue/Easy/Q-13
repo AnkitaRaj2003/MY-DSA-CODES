@@ -1,0 +1,48 @@
+//GFG: Evaluation of Postfix Expression
+//https://practice.geeksforgeeks.org/problems/evaluation-of-postfix-expression1735/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Stack&category[]=Queue&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+    bool isOperand(char c){
+        return !(c=='*'||c=='/'||c=='+'||c=='-');
+    }
+    //Function to evaluate a postfix expression.
+    int evaluatePostfix(string S)
+    {
+        // Your code here
+        stack<int> st;
+        int eval=0;
+        for(int i=0;S[i]!='\0';i++){
+            if(isOperand(S[i])) st.push(S[i]-'0');
+            else{
+                int x,y;
+                x = st.top();
+                st.pop();
+                y = st.top();
+                st.pop();
+                switch(S[i]){
+                    case '+':
+                    eval = x+y;
+                    st.push(eval);
+                    break;
+                    
+                    case '-':
+                    eval = y-x;
+                    st.push(eval);
+                    break;
+                    
+                    case '*':
+                    eval = x*y;
+                    st.push(eval);
+                    break;
+                    
+                    case '/':
+                    eval = y/x;
+                    st.push(eval);
+                    break;
+                }
+            }
+        }
+        if(st.empty()) return -1;
+        int x = st.top();
+        st.pop();
+        return x;
+    }
