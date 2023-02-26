@@ -1,0 +1,55 @@
+//GFG: 
+//
+
+---------NON RECURSIVE SOLUTION---------
+/*The structure of the class is
+class SortedStack{
+public:
+	stack<int> s;
+	void sort();
+};
+*/
+
+/* The below method sorts the stack s 
+you are required to complete the below method */
+void SortedStack :: sort()
+{
+    int arr[s.size()],count=0;
+    for(int i=0;!s.empty();i++){
+        arr[i] = s.top();
+        s.pop();
+        count++;
+    }
+    for(int i=0;i<count;i++){
+        int j=i-1;
+        int x = arr[i];
+        while(j>=0 && arr[j]>x){
+            arr[j+1] = arr[j];
+            j--;
+        }
+        arr[j+1] = x;
+    }
+    for(int i=0;i<count;i++) s.push(arr[i]);
+}
+
+---------RECURSIVE SOLUTION----------
+void inserta(stack<int>&s,int x)
+{
+    if(s.empty()|| s.top()<=x )
+    {
+        s.push(x);
+        return;
+    }
+    int top=s.top();
+    s.pop();
+    inserta(s,x);
+    s.push(top);
+}
+void SortedStack :: sort()
+{
+    if(s.empty())return;
+    int x=s.top();
+    s.pop();
+    sort();
+    inserta(s,x);
+}
