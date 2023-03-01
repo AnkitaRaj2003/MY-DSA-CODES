@@ -1,5 +1,5 @@
 //GFG: The Celebrity Problem
-//
+//https://practice.geeksforgeeks.org/problems/the-celebrity-problem/1?page=1&difficulty[]=1&category[]=Stack&category[]=Queue&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
 
 //Simple iterative solution - O(N2)
 //Function to find if there is a celebrity in the party or not.
