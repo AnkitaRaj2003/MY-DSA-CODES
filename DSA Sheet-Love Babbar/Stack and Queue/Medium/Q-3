@@ -1,0 +1,17 @@
+//GFG: 
+//
+
+vector <int> calculateSpan(int price[], int n)
+    {
+       // Your code here
+       vector<int> span;
+       for(int i=0;i<n;i++){
+           int v = 1,j=i-1;
+           while(j>=0 && price[j]<=price[i]){
+               v++;
+               j--;
+           }
+           span.push_back(v);
+       }
+       return span;
+    }
