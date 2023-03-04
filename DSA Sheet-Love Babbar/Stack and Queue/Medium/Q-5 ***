@@ -1,0 +1,37 @@
+//GFG: Get minimum element from stack 
+//https://practice.geeksforgeeks.org/problems/get-minimum-element-from-stack/1?page=1&difficulty[]=1&category[]=Stack&category[]=Queue&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+class Solution{
+    int minEle;
+    stack<int> s;
+    stack<int> min;
+    public:
+    
+       /*returns min element from stack*/
+       int getMin(){
+           
+           //Write your code here
+           if(min.empty()) return -1;
+           return min.top();
+       }
+       
+       /*returns poped element from stack*/
+       int pop(){
+           
+           //Write your code here
+           if(s.empty()) return -1;
+           int x = s.top();
+           if(min.top()==s.top()) min.pop();
+           s.pop();
+           return x;
+       }
+       
+       /*push element x into the stack*/
+       void push(int x){
+           
+           //Write your code here
+           if(min.empty()) min.push(x);
+           else if(min.top()>=x) min.push(x);
+           s.push(x);
+       }
+};
