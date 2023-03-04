@@ -1,0 +1,35 @@
+//GFG: Reverse a Stack
+//https://practice.geeksforgeeks.org/problems/reverse-a-stack/1?page=1&difficulty[]=1&category[]=Stack&category[]=Queue&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+//With using recursion
+void reverse(stack<int>&st,queue<int>&s){
+        if(st.empty()) return;
+        int x = st.top();
+        s.push(x);
+        st.pop();
+        reverse(st,s);
+    }
+    void Reverse(stack<int> &st){
+       queue<int> s;
+       reverse(st,s);
+       while(!s.empty()){
+           int x = s.front();
+           s.pop();
+           st.push(x);
+       }
+    }
+    
+//Without Using recursion
+void Reverse(stack<int> &st){
+        queue<int> q;
+        while(!st.empty()){
+            int x = st.top();
+            st.pop();
+            q.push(x);
+        }
+        while(!q.empty()){
+            int x = q.front();
+            q.pop();
+            st.push(x);
+        }
+    }
