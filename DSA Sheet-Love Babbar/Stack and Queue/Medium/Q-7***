@@ -48,3 +48,35 @@ f(s.size()%2!=0) return -1;
     }
     
     return close+open/2;
+
+--------------OR---------------
+    int countRev (string s)
+{
+    if(s.size()%2!=0) return -1;
+    int c=0;
+    int res=0;
+    
+    for(auto ss:s)
+    {
+        if(ss=='{')
+        {
+            c++;
+        }
+        else
+        {
+            if(c==0)
+            {
+                res++;
+                c++;
+            }
+            else
+            {
+                c--;
+            }
+        }
+    }
+    if(c%2) return -1;
+    res+=c/2;
+    return res;
+    
+}
