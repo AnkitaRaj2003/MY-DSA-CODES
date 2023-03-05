@@ -1,0 +1,17 @@
+//GFG: First non-repeating character in a stream
+//https://practice.geeksforgeeks.org/problems/first-non-repeating-character-in-a-stream1216/1?page=1&difficulty[]=1&category[]=Stack&category[]=Queue&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+string FirstNonRepeating(string A){
+		    // Code here
+		  queue<char> q;
+		    int arr[26] = {0};//abcabc
+		    for(int i=0;A[i]!='\0';i++){
+		        arr[A[i]-'a']++;
+		        if(arr[A[i]-'a']==1) q.push(A[i]);
+		        while(!q.empty() && arr[q.front()-'a']>1) q.pop();
+		        if(!q.empty()) A[i] = q.front();
+		        if(q.empty()) A[i] = '#';
+                else A[i] = q.front();
+		    }
+		    return A;
+		}
