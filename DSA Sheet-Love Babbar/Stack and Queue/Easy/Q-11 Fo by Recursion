@@ -9,32 +9,32 @@ void push(stack<int>& s, int a){
 
 bool isFull(stack<int>& s,int n){
 	// Your code goes here
-	return s.size() == n;
+	return s.size()==n;
 }
 
 bool isEmpty(stack<int>& s){
 	// Your code goes here
-	return s.size() == 0;
+	return s.size()==0;
 }
 
 int pop(stack<int>& s){
 	// Your code goes here
-	if(isEmpty(s)) return -1;
-	int x = s.top();
 	s.pop();
-	return x;
 }
 
 int getMin(stack<int>& s){
 	// Your code goes here
-	int min=-1;
-	stack<int> temp;
-	while(!isEmpty(s)){
-	    int x = s.top();
-	    if(min == -1) min = x;
-	    else if(x<min) min = x;
-	    push(temp,x);
-	    pop(s);
+	if(s.empty()) return -1;
+	stack<int> st;
+	int min=s.top();
+	while(!s.empty()){
+	    if(s.top()<min) min = s.top();
+	    st.push(s.top());
+	    s.pop();
+	}
+	while(!st.empty()){
+	    s.push(st.top());
+	    st.pop();
 	}
 	return min;
 }
