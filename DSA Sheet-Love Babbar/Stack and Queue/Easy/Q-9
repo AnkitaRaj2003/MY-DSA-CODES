@@ -16,3 +16,21 @@ queue<int> rev(queue<int> q)
     }
     return q;
 }
+
+----------OR----------
+//Using Recursion
+//function Template for C++
+void help(queue<int>&q){
+    if(q.empty()) return;
+    int x = q.front();
+    q.pop();
+    help(q);
+    q.push(x);
+}
+//Function to reverse the queue.
+queue<int> rev(queue<int> q)
+{
+    // Add code here.
+    help(q);
+    return q;
+}
