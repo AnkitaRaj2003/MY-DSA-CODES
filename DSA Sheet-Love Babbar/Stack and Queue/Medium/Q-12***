@@ -1,0 +1,31 @@
+//GFG: Valid Substring
+//https://practice.geeksforgeeks.org/problems/valid-substring0624/1?page=1&difficulty[]=1&category[]=Stack&category[]=Queue&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+//Invalid paranthesis ki jgh * daldo
+int findMaxLen(string s) {
+        // code here
+        stack<int>st;
+        int count=0,max=0,i;
+        for(i=0;s[i]!='\0';i++){
+            if(s[i]=='(') st.push(i);
+            else{
+                if(st.empty() || s[st.top()]==')') st.push(i);
+                else st.pop();
+            }
+        }
+        while(!st.empty()){
+            s[st.top()] = '*';
+            st.pop();
+        }
+        int k=-1;
+        for(i=0;s[i]!='\0';i++){
+            if(s[i]=='*'){
+                max = i-k-1;
+                if(max>count) count = max;
+                k = i;
+            }
+        }
+        max = i-k-1;
+        if(max>count) count = max;
+        return count;
+    }
