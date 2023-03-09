@@ -1,0 +1,35 @@
+//Check Anagram
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+bool checkAnagram(char c[],char b[]){
+    int arr[26] = {0};
+    int i=0,j=0;
+    for(;c[i]!='\0';i++);
+    for(;b[j]!='\0';j++);
+    if(i!=j) return false;
+    for(i=0;c[i]!='\0';i++){
+        if(c[i]>=65 && c[i]<=90) arr[c[i]-65]++;
+        else if(c[i]>=97 && c[i]<=122) arr[c[i]-97]++;
+    }
+    for(i=0;c[i]!='\0';i++){
+        if(b[i]>=65 && b[i]<=90){
+            arr[b[i]-65]--;
+            if(arr[b[i]-65]<0) return false;
+        }
+        else if(b[i]>=97 && b[i]<=122){
+            arr[b[i]-97]--;
+            if(arr[b[i]-97]<0) return false;
+        }
+    }
+    return true;
+}
+int main(){
+    char c[] = "ankita";
+    char b[]= "ainkat";
+    if(checkAnagram(c,b)) cout<<"yes";
+    else cout<<"No";
+    return 0;
+}
