@@ -1,0 +1,22 @@
+//Comparing Two strings
+
+#include<iostream>
+#include<string>
+#include<stack>
+using namespace std;
+
+int main(){
+    char c[] = "Apple";
+    char s[] = "ApPle";
+    int i;
+    int flag = 0;
+    for(i=0;c[i]!='\0'&&s[i]!='\0';i++){
+        if(c[i]==s[i]) continue;
+        flag = 1;
+        break;
+    }
+    if(flag == 0 && c[i] == '\0' && s[i] == '\0') cout<<"Equal"<<endl;
+    else if(s[i]=='\0' || c[i]>s[i]) cout<<c<<" is greater than "<<s;
+    else cout<<s<<" is greater than "<<c;
+    return 0;
+}
