@@ -38,3 +38,42 @@ int getMin(stack<int>& s){
 	}
 	return min;
 }
+
+//By Recursion
+void push(stack<int>& s, int a){
+	// Your code goes here
+	s.push(a);
+}
+
+bool isFull(stack<int>& s,int n){
+	// Your code goes here
+	return s.size()==n;
+}
+
+bool isEmpty(stack<int>& s){
+	// Your code goes here
+	return s.size()==0;
+}
+
+int pop(stack<int>& s){
+	// Your code goes here
+	s.pop();
+}
+void minimum(stack<int>&s,int min){
+    if(s.empty()){
+        s.push(min);
+        return;
+    }
+    int x = s.top();
+    if(x<min) min = x;
+    s.pop();
+    minimum(s,min);
+}
+int getMin(stack<int>& s){
+	// Your code goes here
+	if(s.empty()) return -1;
+	minimum(s,s.top());
+	int x = s.top();
+	s.pop();
+	return x;
+}
