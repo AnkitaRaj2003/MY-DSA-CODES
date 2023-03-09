@@ -1,0 +1,19 @@
+//Check if a string is palindrome or not
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+bool isPalindrome(char c[]){
+    int i = 0,j=0;
+    for(;c[i]!='\0';i++);
+    i--;
+    for(;i>j;i--,j++) if(c[i]!=c[j]) return false;
+    return true;
+}
+int main(){
+    char c[] = "abca";
+    if(isPalindrome(c)) cout<<"Yes";
+    else cout<<"No";
+    return 0;
+}
