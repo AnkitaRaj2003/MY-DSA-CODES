@@ -1,0 +1,23 @@
+//Counting number of words
+
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main(){
+    char c[] = "         Hey    there     here i am       ";
+    int flag = 0;
+    int words = 1;
+    for(int i=0;c[i]!='\0';i++){
+        if(c[i]!=' ') flag = 1;
+        else if(c[i]==' '){
+            if(flag==0) continue;
+            if(c[i+1]!='\0'){
+                if(c[i+1]==' ') continue;
+                words++;
+            }
+        }
+    }
+    cout<<words;
+    return 0;
+}
