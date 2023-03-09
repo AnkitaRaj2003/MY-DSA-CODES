@@ -21,3 +21,23 @@ int main(){
 }
 
 //If we want to find different count of lower and upper cases then the array size will be 52 and substract 32 from lowercase and substract 71 from uppercase.
+
+//Using Masking
+#include<iostream>
+#include<string>
+using namespace std;
+
+void duplicate(char c[]){
+    long int x=1,h=0;
+    for(int i=0;c[i]!='\0';i++){
+        x = (x << (c[i]-65));
+        if((h & x)>0) cout<<c[i]<<" is Duplicate"<<endl;
+        else h = h | x;
+        x = 1;
+    }
+}
+int main(){
+    char c[] = "ankitameena";
+    duplicate(c);
+    return 0;
+}
