@@ -1,0 +1,25 @@
+//Reversing a string
+
+//Modifing same array
+char c[] = "Shreya Raj";
+    int i = 0,j=0;
+    for(;c[i]!='\0';i++);
+    i--;
+    for(;i>j;i--,j++){
+        char x = c[i];
+        c[i] = c[j];
+        c[j] = x;
+    }
+    cout<<c;
+    
+    //Using stack or two arrays
+    //Here instead of using stack we can also use an array
+    char c[] = "Shreya Raj";
+    stack<char>st;
+    for(int i=0;c[i]!='\0';i++) st.push(c[i]);
+    for(int i=0;!st.empty();i++){
+        c[i] = st.top();
+        st.pop();
+    }
+    cout<<c;
+    return 0;
