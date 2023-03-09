@@ -1,0 +1,22 @@
+//Validate a string
+
+#include<iostream>
+#include<string>
+#include<stack>
+using namespace std;
+
+bool validateString(char c[]){
+    for(int i=0;c[i]!='\0';i++){
+        if(!((c[i]>=65 && c[i]<=90) || (c[i]>=97 && c[i]<=122) || (c[i]>=48 && c[i]<=57) || c[i]=='@')) return false;
+    }
+    return true;
+}
+int main(){
+    char c[] = "ankita@123";
+    char s[] = "ankita 123";
+    if(validateString(c)) cout<<c<<" is a Valid String"<<endl;
+    else cout<<c<<" is not a Valid String"<<endl;
+    if(validateString(s)) cout<<s<<" is a Valid String"<<endl;
+    else cout<<s<<" is not a Valid String"<<endl;
+    return 0;
+}
