@@ -1,0 +1,27 @@
+//GFG: Remove all duplicates from a given string
+//https://practice.geeksforgeeks.org/problems/remove-all-duplicates-from-a-given-string4321/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Strings&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+	string removeDuplicates(string str) {
+	    // code here
+	    int x[52] = {0};
+	    int i=0,j=0;
+	    for(int i=0;str[i]!='\0';){
+	        if(str[i]>=65 && str[i]<=90){
+	            x[str[i]-65]++;
+	            if(x[str[i]-65]==1){
+	               str[j] = str[i];
+	               j++;
+	            }
+	            i++;
+	        }
+	        else if(str[i]>=97 && str[i]<=122){
+	            x[str[i]-71]++;
+	            if(x[str[i]-71]==1){
+	               str[j] = str[i];
+	               j++;
+	            }
+	            i++;
+	        }
+	    }
+	    return str.substr(0,j);
+	}
