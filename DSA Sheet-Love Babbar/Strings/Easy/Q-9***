@@ -16,3 +16,15 @@ string removeConsecutiveCharacter(string S)
         }
         return s;
     }
+
+----------------OR----------------
+string removeConsecutiveCharacter(string S)
+    {
+        // code here.
+        int i=0,j=1;
+        while(S[j]!='\0'){
+            if(S[i]!=S[j]) S[++i] = S[j];
+            j++;
+        }
+        return S.substr(0,i+1);
+    }
