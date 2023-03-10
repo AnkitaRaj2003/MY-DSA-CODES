@@ -1,0 +1,17 @@
+//GFG: Find first repeated character
+//https://practice.geeksforgeeks.org/problems/find-first-repeated-character4108/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Strings&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+string firstRepChar(string s)
+{
+    //code here.
+    int arr[26] = {0};
+    string r = "";
+    for(int i=0;s[i]!='\0';i++){
+        int x = ++arr[s[i]-97];
+        if(x>1){
+            r+=s[i];
+            return r;
+        }
+    }
+    return "-1";
+}
