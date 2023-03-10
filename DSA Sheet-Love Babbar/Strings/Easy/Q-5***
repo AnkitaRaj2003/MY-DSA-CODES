@@ -1,0 +1,24 @@
+//GFG: Second most repeated string in a sequence
+//https://practice.geeksforgeeks.org/problems/second-most-repeated-string-in-a-sequence0534/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Strings&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+
+string secFrequent (string arr[], int n)
+    {
+        //code here.
+        map<string,int> m;
+        for(int i=0;i<n;i++) m[arr[i]]++;
+        int max = 0,max2;
+        for(auto pr:m){
+            if(pr.second>max2 && pr.second<max) max2 = pr.second;
+            if(pr.second>max){
+                max2 = max;
+                max = pr.second;
+            }
+        }
+        string key;
+        for (auto i : m){
+            if (i.second == max2) 
+                return i.first;
+        }
+        return "";
+    }
