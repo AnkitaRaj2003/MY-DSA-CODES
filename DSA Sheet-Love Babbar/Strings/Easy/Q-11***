@@ -1,0 +1,12 @@
+//GFG: Palindrome String
+//https://practice.geeksforgeeks.org/problems/palindrome-string0817/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Strings&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+int isPalindrome(string S)
+	{
+	    // Your code goes here
+	    int i,j;
+	    for(i=0;S[i]!='\0';i++);
+	    for(i=i-1,j=0;i>=j;i--,j++)
+	        if(S[i]!=S[j]) return 0;
+	    return 1;
+	}
