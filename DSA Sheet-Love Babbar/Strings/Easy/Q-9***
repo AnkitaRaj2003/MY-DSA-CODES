@@ -1,0 +1,18 @@
+//GFG: Remove Consecutive Characters
+//https://practice.geeksforgeeks.org/problems/consecutive-elements2306/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Strings&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+string removeConsecutiveCharacter(string S)
+    {
+        // code here.
+        int i=0,j=1;
+        string s="";
+        s+=S[i];
+        while(S[j]!='\0'){
+            if(S[i]!=S[j]){
+                s+=S[j];
+                i=j;
+            }
+            j++;
+        }
+        return s;
+    }
