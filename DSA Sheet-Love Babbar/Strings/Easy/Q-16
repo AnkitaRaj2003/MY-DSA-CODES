@@ -1,0 +1,30 @@
+//GFG: Pattern Searching
+//https://practice.geeksforgeeks.org/problems/pattern-searching4145/1?page=2&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Strings&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+int search(string text, string pat)
+	{
+	    // Your code goes here
+	    return (text.find(pat)!=string::npos);
+	}
+
+-------------OR---------------
+int search(string text, string pat)
+	{
+	    // Your code goes here
+	    int i=0,j=0;
+	    while(text[i]!='\0'){
+	        if(text[i]==pat[0]){
+	            j=i+1;
+	            int flag = 0,k=1;
+	            while(pat[k]!='\0'){
+	                if(text[j]=='\0') return false;
+	                else if(pat[k++]==text[j++]) continue;
+	                flag = 1;
+	                break;
+	            }
+	            if(flag == 0) return true;
+	        }
+	        i++;
+	    }
+	    return false;
+	}
