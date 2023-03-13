@@ -1,0 +1,23 @@
+//GFG: Game with String
+//https://practice.geeksforgeeks.org/problems/game-with-string4100/1?page=2&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Strings&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+//Find the value with max count and decrease it
+char findMaxValue(unordered_map<char,int> m){
+        pair<char,int> max =  make_pair(' ',0);
+        for(auto x:m){
+            if(x.second > max.second){
+                max.first = x.first;
+                max.second = x.second;
+            }
+        }
+        return max.first;
+    }
+    int minValue(string s, int k){
+        // code here
+        int value = 0;
+        unordered_map<char,int> m;
+        for(int i=0;s[i]!='\0';i++) m[s[i]]++;
+        for(int i=0;i<k;i++) m[findMaxValue(m)]--;
+        for(auto x:m) value+=(x.second*x.second);
+        return value;
+    }
