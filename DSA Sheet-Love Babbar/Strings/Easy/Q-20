@@ -1,0 +1,15 @@
+//GFG: Maximum difference of zeros and ones in binary string
+//https://practice.geeksforgeeks.org/problems/maximum-difference-of-zeros-and-ones-in-binary-string4111/1?page=2&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Strings&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+{
+	    // Your code goes her
+	    int ans = -1;
+	    int temp=0;
+	    for(int i=0;S[i]!='\0';i++){
+	        if(S[i]=='0') temp++;
+	        else temp--;
+	        ans = max(temp,ans);
+	        if(temp<0) temp = 0;
+	    }
+	    return ans;
+	}
