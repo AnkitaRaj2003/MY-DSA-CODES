@@ -1,0 +1,20 @@
+//GFG: Roman Number to Integer
+//https://practice.geeksforgeeks.org/problems/roman-number-to-integer3201/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Strings&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+int romanToDecimal(string &str) {
+        // code here
+        unordered_map<char,int>m;
+        m['I'] = 1;
+        m['V'] = 5;
+        m['X'] = 10;
+        m['L'] = 50;
+        m['C'] = 100;
+        m['D'] = 500;
+        m['M'] = 1000;
+        int ans=m[str[str.length()-1]];
+        for(int i=str.length()-1;i>0;i--){
+            if(m[str[i-1]]<m[str[i]]) ans-=m[str[i-1]];
+            else ans+=m[str[i-1]];
+        }
+        return ans;
+    }
