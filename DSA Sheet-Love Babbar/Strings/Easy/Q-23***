@@ -1,0 +1,22 @@
+//GFG: Longest distinct characters in a string
+//https://practice.geeksforgeeks.org/problems/longest-distinct-characters-in-string5848/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Strings&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+int max=-1;
+    int j=0,count=0;
+    string s = "";
+    for(int i=0;S[i]!='\0';i++){
+        if(s.find(S[i]) == string::npos){
+            s+=S[i];
+            count++;
+        }
+        else{
+            i = S.find(S[i],j);
+            s = "";
+            j = i+1;
+            if(count>max) max = count;
+            count = 0;
+        }
+    }
+    if(count>max) max = count;
+    return max;
+}
