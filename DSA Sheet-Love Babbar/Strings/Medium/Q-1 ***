@@ -1,0 +1,15 @@
+//GFG: Print Anagrams Together
+//https://practice.geeksforgeeks.org/problems/print-anagrams-together/1?page=1&difficulty[]=1&category[]=Strings&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+vector<vector<string> > Anagrams(vector<string>& S) {
+        //code here
+        vector<vector<string>> ans;
+        unordered_map<string,vector<string>> m;
+        for(int i=0;i<S.size();i++){
+            string w = S[i];
+            sort(w.begin(),w.end());
+            m[w].push_back(S[i]);
+        }
+        for(auto i:m) ans.push_back(i.second);
+        return ans;
+    }
