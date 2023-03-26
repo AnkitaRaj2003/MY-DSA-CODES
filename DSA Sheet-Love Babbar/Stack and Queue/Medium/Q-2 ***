@@ -60,3 +60,41 @@
         if(flag == 0) return i;
         return -1;
     }
+
+//O(N) TC Approach:-
+int start=0,end=n-1;
+        while(start < end){
+            if(M[start][end]==1) start++;
+            else end--;
+        }
+        for(int i=0;i<n;i++){
+            if(i!=start){
+                 if(M[i][start]==0 || M[start][i]==1) return -1;
+            }
+        }
+        return start;
+        
+//Using unordered maps
+unordered_map<int,int> m;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++)
+                if(M[i][j]==1) m[j]++;
+        }
+        int y=-1,flag=0;
+        for(auto x:m){
+            if(x.second == n-1){
+                flag = 1;
+                y = x.first;
+                break;
+            }
+        }
+        if(flag == 1){
+            for(int i=0;i<n;i++){
+                if(M[i][y]==0){
+                    y = i;
+                    break;
+                }
+            }
+            for(int i=0;i<n;i++) if(M[y][i]==1) return -1;
+        }
+        return y;
