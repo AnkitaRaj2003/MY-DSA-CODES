@@ -1,0 +1,51 @@
+//GFG: First and last occurrences of x
+//https://practice.geeksforgeeks.org/problems/first-and-last-occurrences-of-x3116/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+vector<int> find(int arr[], int n , int x )
+{
+    vector<int> vec;
+  int low = 0, high = n - 1;
+   
+  while(low <= high)
+  {
+      if(arr[low] != x) low++;
+      if(arr[high] != x) high--;
+      if(arr[low] == x && arr[high] == x) 
+      {
+          vec.push_back(low);
+          vec.push_back(high);
+          break;
+      }
+  }
+  if(low > high){
+      vec.push_back(-1),
+      vec.push_back(-1);
+  }
+       
+  return vec;
+    
+}
+
+--------------OR------------
+TIME COMPLEXITY: O(N)
+
+vector<int> find(int a[], int n , int x )
+{
+    vector<int> v;
+    int temp = -1,flag=0;
+    for(int i=0;i<n;i++){
+        if(a[i]==x){
+            if(flag==0){
+                v.push_back(i);
+                flag = 1;
+            }
+            temp = i;
+        }
+    }
+    if(temp==-1){
+        v.push_back(-1);
+        v.push_back(-1);
+    }
+    else v.push_back(temp);
+    return v;
+}
