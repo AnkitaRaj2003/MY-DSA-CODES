@@ -1,0 +1,12 @@
+//GFG: Find minimum and maximum element in an array
+//https://practice.geeksforgeeks.org/problems/find-minimum-and-maximum-element-in-an-array4428/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+pair<long long, long long> getMinMax(long long a[], int n) {
+    long long max=a[0],min=a[0];
+    for(int i=1;i<n;i++){
+        if(a[i]>max) max = a[i];
+        if(a[i]<min) min = a[i];
+    }
+    pair<long long,long long> p(min,max);
+    return p;
+}
