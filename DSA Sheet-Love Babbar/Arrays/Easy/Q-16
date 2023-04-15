@@ -1,0 +1,16 @@
+//GFG: Alternate positive and negative numbers
+//https://practice.geeksforgeeks.org/problems/array-of-alternate-ve-and-ve-nos1401/1?page=2&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+oid rearrange(int arr[], int n) {
+	    // code here
+	    vector<int>pos,neg;
+	    for(int i=0;i<n;i++){
+	        if(arr[i]>=0) pos.push_back(arr[i]);
+	        else neg.push_back(arr[i]);
+	    }
+	    int vpos = 0,vneg = 0;
+	    for(int i=0;i<n;){
+	        if(vpos<pos.size()) arr[i++] = pos[vpos++];
+	        if(vneg<neg.size()) arr[i++] = neg[vneg++];
+	    }
+	}
