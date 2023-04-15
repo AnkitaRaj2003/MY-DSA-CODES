@@ -1,0 +1,10 @@
+//GFG: Missing number in array
+//https://practice.geeksforgeeks.org/problems/missing-number-in-array1416/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+int MissingNumber(vector<int>& array, int n) {
+        // Your code goes here
+        long long int sum = n*(n+1)/2;
+        long long int arr_sum = 0;
+        for(int i=0;i<array.size();i++) arr_sum+=array[i];
+        return sum-arr_sum;
+    }
