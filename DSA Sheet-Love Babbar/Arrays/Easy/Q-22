@@ -1,0 +1,16 @@
+//GFG: Searching in an array where adjacent differ by at most k
+//https://practice.geeksforgeeks.org/problems/searching-in-an-array-where-adjacent-differ-by-at-most-k0456/1?page=3&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+// x is the element to be searched in arr[0..n-1]
+// such that all elements differ by at-most k.
+int search(int arr[], int n, int x, int k)
+{
+    // Complete the function
+    int i=0;
+    while(i<n){
+        if(arr[i]==x) return i;
+        int b = max(1,abs((x-arr[i])/k));
+        i+=b;
+    }
+    return -1;
+}
