@@ -1,0 +1,12 @@
+//GFG: Count More than n/k Occurences
+//https://practice.geeksforgeeks.org/problems/count-element-occurences/1?page=2&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+int countOccurence(int arr[], int n, int k) {
+        // Your code here
+        int t = n/k;
+        int count=0;
+        unordered_map<int,int> m;
+        for(int i=0;i<n;i++) m[arr[i]]++;
+        for(auto x:m) if(x.second>t) count++;
+        return count;
+    }
