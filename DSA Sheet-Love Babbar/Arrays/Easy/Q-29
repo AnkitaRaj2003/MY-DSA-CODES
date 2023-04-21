@@ -1,0 +1,24 @@
+//GFG: Maximize sum after K negations
+//https://practice.geeksforgeeks.org/problems/maximize-sum-after-k-negations1149/1?page=2&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+long long int maximizeSum(long long int a[], int n, int k)
+    {
+        // Your code goes here
+        sort(a,a+n);
+        int j=0,x=-1,temp;
+        long long int sum=0;
+        for(int i=0;i<k;i++){
+            if(j==n){
+                sort(a,a+n);
+                j=0;
+                x=-1;
+            }
+            if(x==-1) temp = a[j];
+            else temp = 1;
+            a[j] *= (-1);
+            if(temp<0) j++;
+            else x=i;
+        }
+        for(int i=0;i<n;i++) sum+=a[i];
+        return sum;
+    }
