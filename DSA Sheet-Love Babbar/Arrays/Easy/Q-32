@@ -1,6 +1,20 @@
 //Peak element
 //GFG: https://practice.geeksforgeeks.org/problems/peak-element/1?page=2&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&curated[]=2&sortBy=submissions
 
+*********Good approach
+int left = 0;
+      int right = n - 1;
+      while(left < right){
+          int mid = left + (right - left)/2;               
+          if(arr[mid] < arr[mid + 1]){
+              left = mid + 1;
+          }else{
+              right = mid;
+          }
+      }
+      return right;
+    }
+------------OR--------------
 int peakElement(int arr[], int n)
     {
        // Your code here
