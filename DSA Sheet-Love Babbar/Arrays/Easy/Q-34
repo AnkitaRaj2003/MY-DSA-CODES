@@ -1,0 +1,13 @@
+//Pairs with certain difference
+//GFG: https://practice.geeksforgeeks.org/problems/pairs-with-specific-difference1533/1?page=3&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&curated[]=2&sortBy=submissions
+
+int maxSumPairWithDifferenceLessThanK(int arr[], int n, int k)
+    {
+        sort(arr, arr+n);
+        int maxsum=0;
+        for(int i=n-1;i>0; i--)
+            if(arr[i]-arr[i-1]<k){
+                maxsum+=arr[i]+arr[i-1]; i--;
+            }
+        return maxsum;
+    }
