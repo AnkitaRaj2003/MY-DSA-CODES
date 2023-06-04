@@ -1,0 +1,21 @@
+//Sum Pair closest to X
+//GFG: https://practice.geeksforgeeks.org/problems/pair-in-array-whose-sum-is-closest-to-x1124/1?page=3&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&curated[]=2&sortBy=submissions
+
+vector<int> sumClosest(vector<int>arr, int x)
+    {
+        // code here
+        vector<int>v;
+        int i=0,j=arr.size()-1, first = arr[i],second = arr[j];
+        while(i<j){
+            int sum = arr[i]+arr[j];
+            if(abs(sum-x)<abs((second+first)-x)){
+                first = arr[i];
+                second = arr[j];
+            }
+            if(sum<x) i++;
+            else j--;
+        }
+        v.push_back(first);
+        v.push_back(second);
+        return v;
+    }
