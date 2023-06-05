@@ -1,0 +1,16 @@
+//GFG: https://practice.geeksforgeeks.org/problems/max-sum-subarray-of-size-k5313/1
+
+long maximumSumSubarray(int k, vector<int> &arr , int n){
+        // code here 
+        int i=1,j=k;
+        long sum=0,max;
+        for(int a=0;a<k;a++) sum+=arr[a];
+        max = sum;
+        while(j<n){
+            sum = sum-arr[i-1]+arr[j];
+            if(sum>max) max = sum;
+            i++;
+            j++;
+        }
+        return max;
+    }
