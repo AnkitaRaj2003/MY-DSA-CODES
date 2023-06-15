@@ -1,14 +1,14 @@
 //GFG: Smallest subarray with sum greater than x
 //https://practice.geeksforgeeks.org/problems/smallest-subarray-with-sum-greater-than-x5651/1?page=2&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&curated[]=2&sortBy=submissions
 
-    void segregateElements(int arr[],int n)
+void segregateElements(int arr[],int n)
     {
         // Your code goes here
-        int a[n],j=0;
-        for(int i=0;i<n;i++)
-            if(arr[i]>0) a[j++] = arr[i];
+        int j=0;
+        vector<int> v;
         for(int i=0;i<n;i++){
-            if(arr[i]<0) a[j++] = arr[i];
-            arr[i] = a[i];
+            if(arr[i]>0) arr[j++] = arr[i];
+            else v.push_back(arr[i]);
         }
+        for(x:v) arr[j++] = x;
     }
