@@ -1,0 +1,12 @@
+//GFG: Non-Repeating Element
+//https://practice.geeksforgeeks.org/problems/non-repeating-element3958/1?page=2&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&curated[]=2&sortBy=submissions
+
+    int firstNonRepeating(int arr[], int n) 
+    { 
+        // Complete the function
+        unordered_map<int,int> m;
+        for(int i=0;i<n;i++) m[arr[i]]++;
+        for(int i=0;i<n;i++)
+            if(m[arr[i]]==1) return arr[i];
+        return 0;
+    } 
