@@ -1,0 +1,9 @@
+//GFG: Non-Repeating Element
+//https://practice.geeksforgeeks.org/problems/non-repeating-element3958/1?page=2&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&curated[]=2&sortBy=submissions
+
+	int findMaximum(int arr[], int n) {
+	    // code here
+	    for(int i=0;i<n-1;i++)
+	        if(arr[i]>arr[i+1]) return arr[i];
+	    return arr[n-1];
+	}
