@@ -1,0 +1,22 @@
+//GFG: Max sum path in two arrays
+//https://practice.geeksforgeeks.org/problems/max-sum-path-in-two-arrays/1?page=3&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&curated[]=2&sortBy=submissions
+
+     int max_path_sum(int a[], int b[], int l1, int l2)
+    {
+        //Your code here
+        int s1=0,s2=0,i=0,j=0,result=0;
+        while(i<l1 && j<l2){
+            if(a[i]>b[j]) s2+=b[j++];
+            else if(a[i]<b[j]) s1+=a[i++];
+            else{
+                result+=max(s1+a[i],s2+b[j]);
+                i++;
+                j++;
+                s1=0;
+                s2=0;
+            }
+        }
+        while(i<l1) s1+=a[i++];
+        while(j<l2) s2+=b[j++];
+        return result+=max(s1,s2);
+    }
