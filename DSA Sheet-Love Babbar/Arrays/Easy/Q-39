@@ -1,0 +1,16 @@
+//GFG: Smallest Subset with Greater Sum
+//https://practice.geeksforgeeks.org/problems/smallest-subset-with-greater-sum/1?page=3&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&curated[]=2&sortBy=submissions
+
+    int minSubset(vector<int> &arr,int n){
+        sort(arr.begin(),arr.end());
+        long long int sum=0,temp=0;
+        int count=0;
+        for(int i=0;i<n;i++) sum+=arr[i];
+        for(int i=n-1;i>=0;i--){
+            temp+=arr[i];
+            sum-=arr[i];
+            count++;
+            if(temp>sum) break;
+        }
+        return count;
+    }
