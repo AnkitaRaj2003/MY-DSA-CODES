@@ -1,0 +1,28 @@
+//GFG: Kadane's Algorithm
+//https://practice.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1?page=1&difficulty[]=1&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&curated[]=2&sortBy=submissions
+
+long long maxSubarraySum(int arr[], int n){
+        
+        // Your code here
+        // brute force
+        // int max_sum=arr[0];
+        // for(int i=0;i<n;i++){
+        //     int sum=arr[i];
+        //     for(int j=i+1;j<n;j++){
+        //         max_sum = max(sum,max_sum);
+        //         sum+=arr[j];
+        //         max_sum = max(sum,max_sum);
+        //     }
+        // }
+        // max_sum = max(arr[n-1],max_sum);
+        // return max_sum;
+
+//Optimized approach
+        long long int maxi=arr[0],sum=0;
+        for(int i=0;i<n;i++){
+            sum+=arr[i];
+            maxi = max(maxi,sum);
+            if(sum<0) sum=0;
+        }
+        return maxi;
+    }
