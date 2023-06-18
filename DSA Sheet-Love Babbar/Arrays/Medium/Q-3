@@ -1,0 +1,12 @@
+//GFG: Kth Smallest element
+//https://practice.geeksforgeeks.org/problems/kth-smallest-element5635/1?page=1&difficulty[]=1&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&curated[]=2&sortBy=submissions
+
+    int kthSmallest(int arr[], int l, int r, int k) {
+        //code here
+        priority_queue<int> p;
+        for(int i=0;i<r+1;i++){
+            p.push(arr[i]);
+            if(p.size()>k) p.pop();
+        }
+        return p.top();
+    }
