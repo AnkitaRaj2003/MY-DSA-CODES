@@ -1,0 +1,17 @@
+//GFG: Smallest Positive missing number
+//https://practice.geeksforgeeks.org/problems/smallest-positive-missing-number-1587115621/1?page=1&difficulty[]=1&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&curated[]=2&sortBy=submissions
+
+    int missingNumber(int a[], int n) 
+    { 
+        // Your code here
+        for(int i=0;i<n;i++){
+            int CI = a[i]-1;
+            while(a[i]>0 && a[i]<=n && a[i]!=a[CI]){
+                swap(a[i],a[CI]);
+                CI = a[i]-1;
+            }
+        }
+        for(int i=0;i<n;i++)
+            if(a[i]>i+1 || a[i]<=0) return i+1;
+        return n;
+    } 
