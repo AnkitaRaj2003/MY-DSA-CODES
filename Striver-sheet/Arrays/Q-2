@@ -1,0 +1,17 @@
+//Find element by row and column number in pascals triangle
+***FORMULA: row-1
+                  C
+                    column-1
+
+int ele(int n,int r){
+  long long int ans=1;
+  for(int i=1;i<=r;i++)
+    ans*=(n--)/i;
+  return ans;
+}
+
+int main(){
+  int row=5,column=3;
+  cout<<ele(r-1,c-1);
+}
+
