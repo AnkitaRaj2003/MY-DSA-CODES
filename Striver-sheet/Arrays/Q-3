@@ -1,0 +1,43 @@
+//GFG: Sort 0's,1's and 2's
+//https://practice.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
+
+    void sort012(int a[], int n)
+    {
+        // code here
+        int num=0,num1=0;
+        for(int i=0;i<n;i++){
+            if(a[i]==0) num++;
+            else if(a[i]==1) num1++;
+        }
+        for(int i=0;i<n;i++){
+            if(num>0){
+                a[i] = 0;
+                num--;
+            }
+            else if(num1>0){
+                a[i] = 1;
+                num1--;
+            }
+            else a[i] = 2;
+        }
+    }
+
+-------------OR---------------
+Dutch National flag algorithm
+0 to low-1 => 0
+low to mid-1 => 1
+mid to high => 0,1,2 unsorted
+high+1 to n-1 => 2
+
+    void sort012(int a[], int n)
+    {
+        // code here
+        int l=0,m=0,h=n-1;
+        while(m<=h){
+            if(a[m] == 0) swap(a[l++],a[m++]);
+            else if(a[m] == 1) m++;
+            else swap(a[h--],a[m]);
+        }
+    }
+TC: O(N)
+SP: O(1)
