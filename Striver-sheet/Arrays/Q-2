@@ -37,3 +37,15 @@ int main() {
 TIME COMPLEXITY: O(N)
 SPACE COMPLEXITY: O(1)
 
+OR
+
+long long int mod = pow(10,9);
+    vector<ll> nthRowOfPascalTriangle(int n) {
+        // code here
+        if(n==1) return {1};
+        vector<ll> v = nthRowOfPascalTriangle(n-1),ans;
+        ans.push_back(1);
+        for(int i=1;i<n-1;i++) ans.push_back((v[i-1]+v[i])%mod);
+        ans.push_back(1);
+        return ans;
+    }
