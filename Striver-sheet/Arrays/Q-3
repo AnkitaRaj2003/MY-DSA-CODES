@@ -1,6 +1,9 @@
 //GFG: Sort 0's,1's and 2's
 //https://practice.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1?page=1&difficulty[]=-2&difficulty[]=-1&difficulty[]=0&category[]=Arrays&curated[]=1&curated[]=8&curated[]=7&sortBy=submissions
 
+***BRUTE FORCE: USE SORT WHICH TAKES O(logN) TIME
+
+****BETTER SOLUTION:
     void sort012(int a[], int n)
     {
         // code here
@@ -22,7 +25,7 @@
         }
     }
 
--------------OR---------------
+****OPTIMIZED:
 Dutch National flag algorithm
 0 to low-1 => 0
 low to mid-1 => 1
