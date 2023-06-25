@@ -11,10 +11,13 @@ int ele(int n,int r){
 }
 
 int main(){
-  int row=5,column=3;
+  int r=5,c=3;
   cout<<ele(r-1,c-1);
 }
+TIME COMPLEXITY: O(C)
+SPACE COMPLEXITY: O(1)
 
+*************************
 //Find all elements of a row 
 int cal(int r){
     int ans=1;
@@ -31,3 +34,6 @@ int main() {
     cout<<1<<" ";
     return 0;
 }
+TIME COMPLEXITY: O(N)
+SPACE COMPLEXITY: O(1)
+
