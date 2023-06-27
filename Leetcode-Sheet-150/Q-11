@@ -1,0 +1,8 @@
+//GFG: Move all zeroes ot the end of array
+//https://practice.geeksforgeeks.org/problems/move-all-zeroes-to-end-of-array0751/1
+
+	    int idx = 0;
+	    for(int i=0;i<n;i++){
+	        if(a[idx]!=0) idx++;
+	        else if(a[i]!=0) swap(a[i],a[idx++]);
+	    }
