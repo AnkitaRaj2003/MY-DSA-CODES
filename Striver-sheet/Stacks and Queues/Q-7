@@ -1,0 +1,37 @@
+//GFG: Sort a stack
+//
+
+//GFG: Sort a stack
+//
+
+****Non-Recursive code
+void SortedStack :: sort()
+{
+   //Your code here
+   stack<int> s1;
+   int n = s.size();
+   for(int i=0;i<n;i++){
+       s1.push(s.top());
+       s.pop();
+   }
+   for(int i=0;i<n;i++){
+       if(s.empty()){
+           s.push(s1.top());
+           s1.pop();
+       }
+       else{
+            int count = 0,x = s1.top();
+            s1.pop();
+            while(!s.empty() && x<s.top()){
+                s1.push(s.top());
+                s.pop();
+                count++;
+            }
+            s.push(x);
+            while(count--){
+                s.push(s1.top());
+                s1.pop();
+            }
+       }
+   }
+}
