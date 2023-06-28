@@ -1,0 +1,55 @@
+//GFG:  4 sum
+//https://practice.geeksforgeeks.org/problems/find-all-four-sum-numbers1732/1
+
+****BRUTE FORCE
+    vector<vector<int>> fourSum(vector<int> &a, int sum) {
+        // Your code goes here
+        // vector<vector<int>> ans;
+        set<vector<int>> s; 
+        int n = a.size();
+        for(int i=0;i<n-3;i++)
+            for(int j=i+1;j<n-2;j++)
+                for(int k=j+1;k<n-1;k++)
+                    for(int l=k+1;l<n;l++)
+                        if(a[i]+a[j]+a[k]+a[l]==sum){
+                            vector<int> v;
+                            v.push_back(a[i]);
+                            v.push_back(a[j]);
+                            v.push_back(a[k]);
+                            v.push_back(a[l]);
+                            sort(v.begin(),v.end());
+                            s.insert(v);
+                        }
+        return {s.begin(),s.end()};
+    }
+
+****BETTER APPROACH
+    vector<vector<int>> fourSum(vector<int> &a, int sum) {
+        // Your code goes here
+        unordered_map<int,int>m;
+        set<vector<int>>s;
+        int n = a.size();
+        for(int i=0;i<n;i++){
+            m[a[i]]=-1;
+            for(int j=i+1;j<n;j++){
+                m[a[j]]=-1;
+                for(int k=j+1;k<n;k++){
+                    m[a[k]] = -1;
+                    if(m[sum-(a[i]+a[j]+a[k])]>0){
+                        // cout<<a[i]<<" "<<a[j]<<" "<<a[k]<<" "<<sum-(a[i]+a[j]+a[k])<<endl;
+                        vector<int> v;
+                        v.push_back(a[i]);
+                        v.push_back(a[j]);
+                        v.push_back(a[k]);
+                        v.push_back(sum-(a[i]+a[j]+a[k]));
+                        sort(v.begin(),v.end());
+                        s.insert(v);
+                    }
+                    m[a[k]] = 1;
+                }
+                m[a[j]] = 1;
+            }
+            m[a[i]]=1;
+        }
+        return {s.begin(),s.end()};
+    }
