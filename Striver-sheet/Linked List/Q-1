@@ -1,1 +1,18 @@
+//GFG: Reverse a linkedlist
+//https://practice.geeksforgeeks.org/problems/reverse-a-linked-list/1
 
+    struct Node* reverseList(struct Node *head)
+    {
+        // code here
+        // return head of reversed list
+        if(!head || !head->next) return head;
+        Node* p = NULL,*q = head,*r = head->next;
+        while(q){
+           q->next = p;
+           p = q;
+           q = r;
+           if(r) r = r->next;
+        }
+        head = p;
+        return head;
+    }
