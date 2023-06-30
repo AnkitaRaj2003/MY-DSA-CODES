@@ -1,0 +1,37 @@
+//GFG: 
+//
+
+***BRUTE FORCE: Taking external space
+Node* sortedMerge(Node* h1, Node* h2)  
+{  
+    // code here
+    struct Node* temp=NULL,*t=NULL,*head=NULL,*t1 = h1,*t2 = h2;
+    while(t1 && t2){
+        if((t1->data)>(t2->data)){
+            temp = new Node(t2->data);
+            t2 = t2->next;
+        }
+        else{
+            temp = new Node(t1->data);
+            t1 = t1->next;
+        }
+        if(!t) head = t = temp;
+        else{
+            t->next = temp;
+            t = temp;
+        }
+    }
+    while(t1){
+        temp = new Node(t1->data);
+        t1 = t1->next;
+        t->next = temp;
+        t = temp;
+    }
+    while(t2){
+        temp = new Node(t2->data);
+        t2 = t2->next;
+        t->next = temp;
+        t = temp;
+    }
+    return head;
+}  
