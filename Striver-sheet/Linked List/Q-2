@@ -1,6 +1,7 @@
 //Leetcode: Remove nth node from the end of linkedlist 
 //https://leetcode.com/problems/remove-nth-node-from-end-of-list/submissions/982917407/
-
+  For traversal   For reaching node
+TC: O(N)       +      O(N)
 ListNode* removeNthFromEnd(ListNode* head, int n) {
         ListNode* temp = head;
         int count=0;
