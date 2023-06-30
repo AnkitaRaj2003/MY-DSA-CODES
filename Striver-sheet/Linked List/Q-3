@@ -17,3 +17,17 @@ TC: O(N)
         for(int i=0;i<count;i++) temp = temp->next;
         return temp->data;
     }
+
+
+*** BETTER APPROACH
+
+    int getMiddle(Node *head)
+    {
+        // Your code here
+        Node* s=head,*f = head;
+        while(f && f->next){
+            s = s->next;
+            f = f->next->next;
+        }
+        return s->data;
+    }
