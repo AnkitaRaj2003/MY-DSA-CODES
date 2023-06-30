@@ -10,11 +10,16 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
         }
         if(n>count) return head;
         else if(n==count){
+            temp = head;
             head = head->next;
+            delete temp;
             return head;
         }
         temp = head;
         for(int i=1;i<count-n;i++) temp=temp->next;
         temp->next = temp->next->next;
+        ListNode* b = temp->next;
+        delete b;
+        b = NULL;
         return head;
     }
