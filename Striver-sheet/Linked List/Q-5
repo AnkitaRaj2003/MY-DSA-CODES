@@ -7,3 +7,15 @@
        del->data = del->next->data;
        del->next = del->next->next;
     }
+
+***IF WE WANT TO FREE UP SOME SPACE
+    void deleteNode(Node *del)
+    {
+       // Your code here
+       Node*temp = del->next;
+       del->data = temp->data;
+       del->next = temp->next;
+       delete temp;
+       temp = NULL;
+    }
+
