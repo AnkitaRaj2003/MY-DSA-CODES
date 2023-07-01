@@ -2,6 +2,11 @@
 //https://practice.geeksforgeeks.org/problems/intersection-point-in-y-shapped-linked-lists/1
 
 ****BRUTE FORCE: Start from a linked list and stand on a node then traverse the second array fully and check if we get equal node if no then move to another node in first linked list
+TC: O(M*N)
+
+****BETTER APPROACH: Traverse a linked list and hash the node addresses then traverse another linked list and check if we get any node whose address is present in the hash table
+TC: O(M+N)    SC: O(N)
+
 
 int intersectPoint(Node* head1, Node* head2)
 {
