@@ -1,6 +1,8 @@
 //GFG: Intersection point in Y shaped Linkedlist
 //https://practice.geeksforgeeks.org/problems/intersection-point-in-y-shapped-linked-lists/1
 
+****BRUTE FORCE: Start from a linked list and stand on a node then traverse the second array fully and check if we get equal node if no then move to another node in first linked list
+
 int intersectPoint(Node* head1, Node* head2)
 {
     // Your Code Here
