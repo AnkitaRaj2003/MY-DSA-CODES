@@ -1,0 +1,13 @@
+//GFG: Check if Linked List is Palindrome
+//https://practice.geeksforgeeks.org/problems/check-if-linked-list-is-pallindrome/1
+
+***WILL NOT WORK IN ALL CASES
+        int sum=0,rsum=0,i=1;
+        while(head){
+            sum=sum*10+head->data;
+            rsum=rsum+(head->data)*i;
+            i*=10;
+            head = head->next;
+        }
+        if(sum==rsum) return true;
+        return false;
