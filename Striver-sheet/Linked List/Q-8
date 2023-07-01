@@ -1,0 +1,15 @@
+//Leetcode: Detect cycle in a linked list 
+//https://leetcode.com/problems/linked-list-cycle/submissions/983678012/
+
+****BRUTE FORCE: A node pointing on head, traverse another node through whole ll and check if they become equal but if another pointer becomes NULL then increment the first pointer.
+  
+***BETTER APPRAOCH
+    bool hasCycle(ListNode *head) {
+        ListNode* slow = head,*fast = head;
+        while(fast && fast->next){
+            slow = slow->next;
+            fast = fast->next->next;
+            if(slow==fast) return true;
+        }
+        return false;
+    }
