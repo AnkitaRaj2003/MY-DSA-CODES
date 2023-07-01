@@ -7,7 +7,8 @@ TC: O(M*N)
 ****BETTER APPROACH: Traverse a linked list and hash the node addresses then traverse another linked list and check if we get any node whose address is present in the hash table
 TC: O(M+N)    SC: O(N)
 
-
+***BETTER APPROACHES:
+(1)
 int intersectPoint(Node* head1, Node* head2)
 {
     // Your Code Here
@@ -38,6 +39,27 @@ int intersectPoint(Node* head1, Node* head2)
         if(t1 == t2) return t1->data;
         t1 = t1->next;
         t2 = t2->next;
+    }
+    return -1;
+}
+(2)
+int intersectPoint(Node* head1, Node* head2)
+{
+    // Your Code Here
+    int flag=0;
+    Node* t1 = head1,*t2 = head2;
+    while(flag<3){
+        if(t1==t2) return t1->data;
+        t1 = t1->next;
+        t2 = t2->next;
+        if(!t1){
+            t1 = head2;
+            flag++;
+        }
+        else if(!t2){
+            t2 = head1;
+            flag++;
+        }
     }
     return -1;
 }
