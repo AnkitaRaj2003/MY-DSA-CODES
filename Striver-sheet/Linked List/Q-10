@@ -1,0 +1,28 @@
+//GFG: Reverse a Linked List in groups of given size.
+//https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
+
+struct node *reverse (struct node *head, int k)
+    { 
+        // Complete this method
+        if(!head || !head->next) return head;
+        node* temp=NULL, *h=NULL,*p=NULL,*q=head,*r=head->next;
+        int flag=0;
+        while(q){
+            node* t=temp;
+            temp=q;
+            for(int i=0;i<k && q;i++){
+                q->next=p;
+                p=q;
+                q=r;
+                if(r) r = r->next;;
+            }
+            if(t) t->next = p;
+            if(flag==0){
+                h = p;
+                flag = 1;
+            }
+            temp->next = q;
+            // cout<<h->data<<" "<<h->next->data<<endl;
+        }
+        return h;
+    }
