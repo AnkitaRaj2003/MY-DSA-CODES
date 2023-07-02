@@ -1,0 +1,20 @@
+//GFG: Find the first node of loop in linked list
+//https://practice.geeksforgeeks.org/problems/44bb5287b98797782162ffe3d2201621f6343a4b/1
+
+    int findFirstNode(Node* head)
+    {
+        // your code here
+        Node*s = head,*f = head;
+        while(f){
+            s=s->next;
+            f=f->next->next;
+            if(s==f) break;
+        }
+        if(!f) return -1;
+        s = head;
+        while(s!=f){
+            s = s->next;
+            f = f->next;
+        }
+        return s->data;
+    }
