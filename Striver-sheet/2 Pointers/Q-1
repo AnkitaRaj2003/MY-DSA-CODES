@@ -1,5 +1,13 @@
-//GFG: 3 SUM
-//https://practice.geeksforgeeks.org/problems/triplet-sum-in-array-1587115621/1
+//3 SUM
+
+3 Approach:
+
+Brute force: run three loops TC: O(N3)  SC: O(1)
+Better Approach: Insert all elements in a hashmap and run two loops. TC: O(N2) SC: O(N)
+Best Approach: discussed below
+
+
+//GFG: https://practice.geeksforgeeks.org/problems/triplet-sum-in-array-1587115621/1
 
 bool find3Numbers(int a[], int n, int x)
     {
