@@ -1,0 +1,14 @@
+//GFG: Consecutive array elements
+//https://practice.geeksforgeeks.org/problems/consecutive-array-elements2711/1
+
+	bool areConsecutives(long long arr[], int n) 
+	{ 
+	    // Your code goes here
+	    long long min = arr[0],sum=0;
+	    for(int i=0;i<n;i++){
+	        if(arr[i]<min) min = arr[i];
+	        sum+=arr[i];
+	    }
+	    if(sum!=(n*(2*min+(n-1))/2)) return false;
+	    return true;
+	}
