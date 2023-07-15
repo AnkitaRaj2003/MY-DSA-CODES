@@ -1,0 +1,14 @@
+//GFG: Find Maximum Sum Strictly Increasing Subarray
+//https://practice.geeksforgeeks.org/problems/find-maximum-sum-strictly-increasing-subarray4443/1
+
+    int maxsum_SIS(int arr[] , int n)
+    {
+        // Your code goes here  
+        int maxi=arr[0],sum=arr[0];
+        for(int i=1;i<n;i++){
+            if(arr[i]>arr[i-1]) sum+=arr[i];
+            else sum = arr[i];
+            maxi = max(maxi,sum);
+        }
+        return maxi;
+    }
