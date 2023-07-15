@@ -1,0 +1,26 @@
+//GFG: 4 SUM
+//https://practice.geeksforgeeks.org/problems/find-all-four-sum-numbers1732/1
+
+//BEST AND BETTER CASE ARE SAME AS 3 SUM 
+
+//OPTIMIZED APPROACH
+   // arr[] : int input array of integers
+    // k : the quadruple sum required
+    vector<vector<int> > fourSum(vector<int> &arr, int k) {
+        // Your code goes here
+        set<vector<int>> ans;
+        int n=arr.size();
+        sort(arr.begin(),arr.end());
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                int l=j+1,h=n-1;
+                while(l<h){
+                    int sum = arr[i]+arr[j]+arr[l]+arr[h];
+                    if(sum==k) ans.insert({arr[i],arr[j],arr[l++],arr[h--]});
+                    else if(sum<k) l++;
+                    else h--;
+                }
+            }
+        }
+        return {ans.begin(),ans.end()};
+    }
