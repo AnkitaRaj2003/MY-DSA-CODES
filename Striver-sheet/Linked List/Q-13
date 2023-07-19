@@ -1,0 +1,28 @@
+//GFG: Delete a node from a singly linked list
+//https://github.com/AnkitaRaj2003/MY-DSA-CODES/new/main/Striver-sheet/Linked%20List
+
+/* Link list Node 
+struct Node
+{
+    int data;
+    struct Node* next;
+    
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+};
+*/
+
+/*You are required to complete below method*/
+Node* deleteNode(Node *head,int x)
+{
+    //Your code here
+    if(x==1) head = head->next;
+    else{
+        Node* temp = head;
+        for(int i=1;i<x-1 && temp!=NULL;i++) temp = temp->next;
+        if(temp!=NULL || temp->next!=NULL) temp->next = temp->next->next;
+        return head;
+    }
+}
