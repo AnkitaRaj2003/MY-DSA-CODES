@@ -1,0 +1,19 @@
+//Leetcode: Backspace String Compare
+//https://leetcode.com/problems/backspace-string-compare/description/
+
+    string f(string s){
+        int j=-1;
+        string ans = s;
+       for(int i=0;i<s.length();i++){
+            if(s[i]=='#'){
+                if(j>=0) j--;
+            }
+            else ans[++j] = s[i];
+        }
+        return ans.substr(0,j+1);
+    }
+    bool backspaceCompare(string s, string t) {
+        s = f(s);
+        t = f(t);
+        return s==t;
+    }
