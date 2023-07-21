@@ -1,0 +1,30 @@
+//Leetcode: Long Pressed Name
+//https://leetcode.com/problems/long-pressed-name/solutions/183994/c-java-python-two-pointers/
+
+    bool isLongPressedName(string name, string typed) {
+        if(name.length()>typed.length()) return false;
+        int i=0,j=0;
+        while(i<name.length() && j<typed.length()){
+            if(name[i]==typed[j]){
+                int a = i;
+                int b = j;
+                while(i<name.length() && name[i]==name[a]) i++;
+                while(j<typed.length() && typed[j]==typed[b]) j++;
+                if((i-a)>(j-b)) return false;
+            }
+            else return false;
+        }
+        if(i<name.length() || j<typed.length()) return false;
+        return true;
+    }
+
+--BEST APPROACH--
+bool isLongPressedName(string name, string typed) {
+    int i = 0, m = name.length(), n = typed.length();
+    for (int j = 0; j < n; ++j)
+        if (i < m && name[i] == typed[j])
+            ++i;
+        else if (!j || typed[j] != typed[j - 1])
+            return false;
+    return i == m;
+}
