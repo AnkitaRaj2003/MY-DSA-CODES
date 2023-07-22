@@ -1,0 +1,31 @@
+//GFG: Fruit Into Baskets
+//https://practice.geeksforgeeks.org/problems/fruit-into-baskets-1663137462/1
+
+    int totalFruits(int N, vector<int> &f) {
+        int a = f[0],maxi=0,b=-1,count_a=1,count_b=0,last=0;
+        for(int i=1;i<N;i++){
+            if(f[i]==a){
+                if(f[last]==b) last = i;
+                count_a++;
+            }
+            else if(b==-1){
+                if(f[last]==a) last = i;
+                b = f[i];
+                count_b++;
+            }
+            else if(f[i]==b){
+                if(f[last]==a) last = i;
+                count_b++;
+            }
+            else{
+                maxi = max(maxi,count_a+count_b);
+                if(f[last]!=a) a = b;
+                count_a = i-last;
+                b = f[i];
+                count_b = 1;
+                last = i;
+            }
+        }
+        maxi = max(maxi,count_a+count_b);
+        return maxi;
+    }
