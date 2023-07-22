@@ -1,0 +1,21 @@
+//GFG: Length of the longest substring
+//https://practice.geeksforgeeks.org/problems/length-of-the-longest-substring3036/1
+
+    int longestUniqueSubsttr(string S){
+        //code
+        int a[26] = {0};
+        int maxi=0,j=0,i=0;
+        while(S[i]!='\0'){
+            if(a[S[i]-97]>0){
+                maxi = max(maxi,i-j);
+                a[S[j]-97] = 0;
+                j++;
+            }
+            else{
+                a[S[i]-97]++;
+                i++;
+            }
+        }
+        maxi = max(maxi,i-j);
+        return maxi;
+    }
