@@ -20,3 +20,26 @@
         if(ans=="") return S.substr(0,1);
         return ans;
     }
+
+-----------------BETTER APPROACH------------
+    string longestPalin (string S) {
+        // code here
+        int x=0,y=0;
+        string ans = "";
+        for(int i=0;i<S.length();i++){
+            x = y = i;
+            while(x>=0 && y<S.length() && S[x]==S[y]){
+                if(ans.length()<(y-x+1)) ans = S.substr(x,y-x+1);
+                x--;
+                y++;
+            }
+            x = i;
+            y = i+1;
+            while(x>=0 && y<S.length() && S[x]==S[y]){
+                if(ans.length()<(y-x+1)) ans = S.substr(x,y-x+1);
+                x--;
+                y++;
+            }
+        }
+        return ans;
+    }
