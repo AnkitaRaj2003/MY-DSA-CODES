@@ -1,0 +1,17 @@
+//GFG: Implemenet atoi 
+//https://practice.geeksforgeeks.org/problems/implement-atoi/1
+
+    int atoi(string str) {
+        //Your code here
+        int a = 1,i=0,ans=0,sign=1;
+        if(str[0]=='-'){
+            sign = -1;
+            i=1;
+        }
+        while(i<str.length()){
+            if(str[i]>'9' || str[i]<'0') return -1;
+            ans = ans*a+(str[i++]-'0');
+            a=10;
+        }
+        return sign*ans;
+    }
