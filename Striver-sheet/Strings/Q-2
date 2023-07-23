@@ -1,0 +1,22 @@
+//GFG: Longest Palindrome in a String
+//https://practice.geeksforgeeks.org/problems/longest-palindrome-in-a-string3411/1
+
+
+-------------BRUTE FORCE---------------
+  bool checkPalindrome(string S){
+      for(int i=0,j=S.length()-1;i<j;i++,j--)
+          if(S[i]!=S[j]) return false;
+      return true;
+  }
+    string longestPalin (string S) {
+        // code here
+        string ans;
+        for(int i=0;i<S.length();i++){
+            for(int j=i+1;j<S.length();j++){
+                if(checkPalindrome(S.substr(i,j-i+1)))
+                    if(ans.length()<j-i+1) ans = S.substr(i,j-i+1);
+            }
+        }
+        if(ans=="") return S.substr(0,1);
+        return ans;
+    }
