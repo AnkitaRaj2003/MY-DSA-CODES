@@ -1,0 +1,15 @@
+//GFG: Longest Common Prefix in an Array
+//https://practice.geeksforgeeks.org/problems/longest-common-prefix-in-an-array5129/1
+
+    string longestCommonPrefix (string arr[], int N)
+    {
+        // your code here
+        string ans = arr[0];
+        for(int i=0;i<N;i++){
+            int j=0;
+            while(j<ans.length() && j<arr[i].length() && arr[i][j]==ans[j]) j++;
+            ans = arr[i].substr(0,j);
+        }
+        if(ans == "") return "-1";
+        return ans;
+    }
