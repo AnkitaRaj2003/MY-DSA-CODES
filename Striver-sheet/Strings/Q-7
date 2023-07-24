@@ -1,0 +1,14 @@
+//GFG: Anagram
+//https://practice.geeksforgeeks.org/problems/anagram-1587115620/1
+
+    bool isAnagram(string a, string b){
+        
+        // Your code here
+        if(a.length()!=b.length()) return false;
+        int arr[26] = {0};
+        for(int i=0;a[i]!='\0';i++) arr[a[i]-97]++;
+        for(int j=0;b[j]!='\0';j++){
+            if(--arr[b[j]-97]<0) return false;
+        }
+        return true;
+    }
