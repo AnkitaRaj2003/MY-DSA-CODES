@@ -45,3 +45,25 @@ TC: O(N)
         }
         return ans;
     }
+ *******OR********
+    string longestPalin (string S) {
+        // code here
+        int x=0,y=0;
+        string ans = "";
+        for(int i=0;i<S.length();i++){
+            x = y = i;
+            while(x>=0 && y<S.length() && S[x]==S[y]){
+                x--;
+                y++;
+            }
+            if(ans.length()<(y-x-1)) ans = S.substr(x+1,y-x-1);
+            x = i-1;
+            y = i;
+            while(x>=0 && y<S.length() && S[x]==S[y]){
+                x--;
+                y++;
+            }
+            if(ans.length()<(y-x-1)) ans = S.substr(x+1,y-x-1);
+        }
+        return ans;
+    }
