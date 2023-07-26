@@ -1,0 +1,18 @@
+//GFG: Rotate a Linked List
+
+//https://practice.geeksforgeeks.org/problems/rotate-a-linked-list/1
+
+    Node* rotate(Node* head, int k)
+    {
+        // Your code here
+        Node* last = head;
+        while(last->next) last = last->next;
+        while(k--){
+            Node*temp = head;
+            head = head->next;
+            last->next = temp;
+            temp->next = NULL;
+            last = temp;
+        }
+        return head;
+    }
