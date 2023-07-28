@@ -1,0 +1,19 @@
+//GFG: Stock span problem
+//https://practice.geeksforgeeks.org/problems/stock-span-problem-1587115621/1
+
+    vector <int> calculateSpan(int price[], int n)
+    {
+       // Your code here
+       int count=1;
+       vector<int>v;
+       for(int i=0;i<n;i++){
+           int j = i-1;
+           while(j>=0 && price[i]>=price[j]){
+               count++;
+               j--;
+           }
+           v.push_back(count);
+           count = 1;
+       }
+       return v;
+    }
