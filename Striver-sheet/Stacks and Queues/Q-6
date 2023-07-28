@@ -1,5 +1,5 @@
-//GFG: 
-//
+//GFG: Next Larger Element
+//https://practice.geeksforgeeks.org/problems/next-larger-element-1587115620/1
 
 ****8BRUTE FORCE
     vector<long long> nextLargerElement(vector<long long> arr, int n){
