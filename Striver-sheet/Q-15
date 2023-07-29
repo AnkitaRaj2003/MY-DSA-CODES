@@ -1,0 +1,16 @@
+//leetcode: Minimum Add to Make Parentheses Valid
+//https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/submissions/
+
+    int minAddToMakeValid(string s) {
+        stack<char>st;
+        int count=0;
+        for(int i=0;s[i]!='\0';i++){
+            if(s[i]=='(') st.push('(');
+            else if(s[i]==')'){
+                if(st.empty()) count++;
+                else st.pop();
+            }
+        }
+        count+=st.size();
+        return count;
+    }
