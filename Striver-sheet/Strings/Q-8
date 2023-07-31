@@ -1,0 +1,20 @@
+//GFG: Look and Say
+//https://practice.geeksforgeeks.org/problems/decode-the-pattern1138/1
+
+    string lookandsay(int n) {
+        // code here
+        string num = "1";
+        for(int i=1;i<n;i++){
+            string t = "";
+            for(int j=0;j<num.length();j++){
+                int count=1;
+                while(j<num.length()-1 && num[j]==num[j+1]){
+                    j++;
+                    count++;
+                }
+                t+=(to_string(count)+num[j]);
+            }
+            num = t;
+        }
+        return num;
+    } 
