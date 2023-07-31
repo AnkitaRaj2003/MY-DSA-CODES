@@ -1,0 +1,18 @@
+//GFG: Minimum characters to be added at front to make string palindrome
+//https://practice.geeksforgeeks.org/problems/minimum-characters-to-be-added-at-front-to-make-string-palindrome/1
+
+    int minChar(string str){
+        //Write your code here
+        int i=0,j=str.length()-1,right=j;
+        while(i<j){
+            if(str[i]==str[j]){
+                i++;
+                j--;
+            }
+            else{
+                i = 0;
+                j = --right;
+            }
+        }
+        return str.length()-right-1;
+    }
