@@ -1,0 +1,22 @@
+//GFG: Count Occurences of Anagrams
+//https://practice.geeksforgeeks.org/problems/count-occurences-of-anagrams5839/1
+
+	int search(string pat, string txt) {
+	    // code here
+	    if(pat.size()>txt.size()) return 0;
+	    int count=0;
+	    vector<int> p(26,0);
+	    vector<int> t(26,0);
+	    for(int i=0;i<pat.size();i++){
+	        p[pat[i]-'a']++;
+	        t[txt[i]-'a']++;
+	    }
+	    if(p == t) count++;
+	    for(int i=pat.size();i<txt.size();i++){
+	        t[txt[i-pat.size()]-'a']--;
+	        t[txt[i]-'a']++;
+	        
+	        if(p == t) count++;
+	    }
+        return count;
+	}
