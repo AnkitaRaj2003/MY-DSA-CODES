@@ -1,0 +1,24 @@
+//GFG: Merge two sorted array without extra space
+//https://practice.geeksforgeeks.org/problems/merge-two-sorted-arrays-1587115620/1
+
+-----------With Extra Space-----------
+        void merge(long long arr1[], long long arr2[], int n, int m) 
+        { 
+            // code here 
+            long long arr[n+m] = {0};
+            int j=0,i=0,k=0;
+            while(k<m+n){
+                if(i>=n){
+                    while(j<m) arr[k++] = arr2[j++];
+                    break;
+                }
+                else if(j>=m){
+                    while(i<n) arr[k++] = arr1[i++];
+                    break;
+                }
+                if(arr1[i]>=arr2[j]) arr[k++] = arr2[j++];
+                else arr[k++] = arr1[i++];
+            }
+            for(i=0;i<n;i++) arr1[i] = arr[i];
+            for(i=0;i<m;i++) arr2[i] = arr[i+n];
+        } 
