@@ -1,0 +1,10 @@
+//GFG: Transpose of a matrix
+//https://practice.geeksforgeeks.org/problems/transpose-of-matrix-1587115621/1
+
+    void transpose(vector<vector<int> >& a, int n)
+    { 
+        // code here 
+        for(int i=0;i<n;i++)
+            for(int j=i+1;j<n;j++)
+                swap(a[i][j],a[j][i]);
+    }
