@@ -1,0 +1,22 @@
+//GFG: Overlapping sub intervals
+//https://practice.geeksforgeeks.org/problems/8a644e94faaa94968d8665ba9e0a80d1ae3e0a2d/1
+
+    vector<vector<int>> overlappedInterval(vector<vector<int>>& a) {
+         // Code here
+        sort(a.begin(),a.end());
+        int n = a.size();
+        vector<vector<int>>ans;
+        vector<int>t;
+        t.push_back(a[0][0]);
+        t.push_back(a[0][1]);
+        for(int i=1;i<n;i++){
+            if(a[i][0]<=t[1]) t[1] = max(t[1],a[i][1]);
+            else{
+                ans.push_back(t);
+                t[0] = a[i][0];
+                t[1] = a[i][1];
+            }
+        }
+        ans.push_back(t);
+        return ans;
+    }
