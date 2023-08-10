@@ -1,6 +1,10 @@
 //GFG: Majority ELement
 //https://practice.geeksforgeeks.org/problems/majority-element-1587115620/1
 
+---------BRUTE FORCE: We can use hashmaps
+
+--------------BETTER----------------
+
     int majorityElement(int arr[], int size)
     {
         // your code here
