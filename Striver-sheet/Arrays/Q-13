@@ -1,0 +1,19 @@
+//GFG: Repeating and Missing character
+//https://practice.geeksforgeeks.org/problems/find-missing-and-repeating2512/1
+
+--------BRUTE FORCE will be to create a hashmap 
+
+------------BETTER------------
+
+    vector<int> findTwoElement(vector<int> arr, int n) {
+        // code here
+        int r=-1,m=-1;
+        for(int i=0;i<n;i++){
+            int t = arr[i];
+            if(t<0) t*=(-1);
+            if(arr[t-1]<0) r = t;
+            else arr[t-1]*=(-1);
+        }
+        for(int i=0;i<n;i++) if(arr[i]>0) m = i+1;
+        return {r,m};
+    }
