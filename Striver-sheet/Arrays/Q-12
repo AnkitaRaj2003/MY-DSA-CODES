@@ -1,0 +1,27 @@
+//Leetcode: Find the Duplicats number
+//https://leetcode.com/problems/find-the-duplicate-number/submissions/
+
+--------BRUTE FORCE-------
+    int findDuplicate(vector<int>& nums) {
+        unordered_map<int,int>m;
+        for(int i=0;i<nums.size();i++){
+            if(m[nums[i]]==-1) return nums[i];
+            m[nums[i]] = -1;
+        }
+        return -1;
+    }
+
+---------BETTER--------
+    int findDuplicate(vector<int>& num) {
+        int slow=num[0],fast=num[0];
+        do{
+            slow = num[slow];
+            fast = num[num[fast]];
+        }while(fast != slow);
+        fast=num[0];
+        while(slow != fast){
+            slow = num[slow];
+            fast = num[fast];
+        }
+        return slow;
+    }
