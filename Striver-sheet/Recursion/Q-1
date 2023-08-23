@@ -1,0 +1,26 @@
+//GFG: Combination Sum
+//https://practice.geeksforgeeks.org/problems/combination-sum-1587115620/1
+
+    //Function to return a list of indexes denoting the required 
+    //combinations whose sum is equal to given number.
+    void comSum(vector<int> arr,int ind,int target,vector<int>temp,vector<vector<int>>&ans){
+        if(ind == arr.size()){
+            if(target == 0) ans.push_back(temp);
+            return;
+        }
+        if(arr[ind] <= target){
+            temp.push_back(arr[ind]);
+            comSum(arr,ind,target-arr[ind],temp,ans);
+            temp.pop_back();
+        }
+        comSum(arr,ind+1,target,temp,ans);
+    }
+    vector<vector<int>> combinationSum(vector<int> &vec, int target) {
+        // Your code here
+        vector<vector<int>>ans;
+        sort( vec.begin(), vec.end() );
+        vec.erase( unique( vec.begin(), vec.end() ), vec.end() );
+        vector<int>temp;
+        comSum(vec,0,target,temp,ans);
+        return ans;
+    }
