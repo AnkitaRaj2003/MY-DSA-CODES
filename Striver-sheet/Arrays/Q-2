@@ -49,3 +49,33 @@ long long int mod = pow(10,9);
         ans.push_back(1);
         return ans;
     }
+
+//Create a pascal triangle of given rows
+
+long long int mod = pow(10,9);
+    vector<int> getRow(int n) {
+        if(n==1) return {1};
+        vector<int> v = getRow(n-1);
+        vector<int> ans;
+        ans.push_back(1);
+        for(int i=1;i<n-1;i++) ans.push_back((v[i-1]+v[i])%mod);
+        ans.push_back(1);
+        return ans;
+    }
+};
+
+*****BETTER
+    vector<vector<int> > generate(int numRows) {
+        vector<vector<int>> r(numRows);
+
+        for (int i = 0; i < numRows; i++) {
+            r[i].resize(i + 1);
+            r[i][0] = r[i][i] = 1;
+  
+            for (int j = 1; j < i; j++)
+                r[i][j] = r[i - 1][j - 1] + r[i - 1][j];
+        }
+        
+        return r;
+    }
+
