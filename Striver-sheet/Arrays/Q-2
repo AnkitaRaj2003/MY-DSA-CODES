@@ -50,6 +50,23 @@ long long int mod = pow(10,9);
         return ans;
     }
 
+OR
+
+    vector<ll> nthRowOfPascalTriangle(int n) {
+        // code here
+        long long int mod = 1e9+7;
+        vector<long long>ans;
+        ans.push_back(1);
+        long long num=1;
+        for(int i=1;i<n-1;i++){
+            num = (num * (n - i)) / i;
+            num = num%mod;
+            ans.push_back(num);
+        }
+        if(n>1) ans.push_back(1);
+        return ans;
+    }
+
 //Create a pascal triangle of given rows
 
 long long int mod = pow(10,9);
