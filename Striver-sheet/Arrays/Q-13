@@ -1,7 +1,20 @@
 //GFG: Repeating and Missing character
 //https://practice.geeksforgeeks.org/problems/find-missing-and-repeating2512/1
 
---------BRUTE FORCE will be to create a hashmap 
+--------BRUTE FORCE will be to create a hashmap
+--------BRUTE FORCE: TC=O(NlogN) SC=O(1) -> sort the array 
+    vector<int> findTwoElement(vector<int> arr, int n) {
+        // code here
+        sort(arr.begin(),arr.end());
+        int m=0,t=0;
+        if(arr[0]!=1) m = 1;
+        for(int i=0;i<n-1;i++){
+            if(arr[i]==arr[i+1]) t=arr[i];
+            else if(arr[i]+1!=arr[i+1]) m=arr[i]+1;
+        }
+        if(t!=0 && m==0) m = n;
+        return {t,m};
+    }
 
 ------------BETTER------------
 
