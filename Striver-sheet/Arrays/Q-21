@@ -1,0 +1,19 @@
+//GFG: Buy and sell Stock
+//https://practice.geeksforgeeks.org/problems/stock-buy-and-sell-1587115621/1
+
+-----Buy and Sell such that the profit is maximum. TC: O(N) and SC: O(N) for storing answer
+    //Function to find the days of buying and selling stock for max profit.
+    vector<vector<int> > stockBuySell(vector<int> arr, int n){
+        // code here
+        int buy = 0,sell = 0;
+        vector<vector<int>>ans;
+        for(int i=1;i<n;i++){
+            if(arr[i]>arr[i-1]) sell++;
+            else{
+                if(sell>buy) ans.push_back({buy,sell});
+                buy = sell = i;
+            }
+        }
+        if(buy<sell) ans.push_back({buy,sell});
+        return ans;
+    }
