@@ -1,0 +1,21 @@
+//GFG: mth mode from the end
+//https://practice.geeksforgeeks.org/problems/nth-node-from-end-of-linked-list/1
+
+    int getNthFromLast(Node *head, int n)
+    {
+           // Your code here
+           if(n<1) return -1;
+           Node*curr=head,*prev=head;
+           while(curr){
+               if(n){
+                   curr = curr->next;
+                   n--;
+               }
+               else{
+                   curr = curr->next;
+                   prev = prev->next;
+               }
+           }
+           if(n) return -1;
+           return prev->data;
+    }
