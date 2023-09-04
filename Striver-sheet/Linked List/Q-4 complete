@@ -1,5 +1,5 @@
-//GFG: 
-//
+//GFG: Merge two sorted linked list
+//https://practice.geeksforgeeks.org/problems/merge-two-sorted-linked-lists/1
 
 ***BRUTE FORCE: Taking external space
 Node* sortedMerge(Node* h1, Node* h2)  
@@ -35,3 +35,28 @@ Node* sortedMerge(Node* h1, Node* h2)
     }
     return head;
 }  
+
+----------OR---------
+***NO EXTRA SPACE
+Node* sortedMerge(Node* head1, Node* head2)  
+{  
+    // code here
+    Node*p = head1,*q = head2,*a = NULL,*b = NULL;
+    while(p && q){
+        if(p->data>q->data){
+            while(q && p->data>q->data){
+                b = q;
+                q = q->next;
+            }
+            if(a) a->next = head2;
+            else head1 = head2;
+            b->next = p;
+            head2 = q;
+            b = NULL;
+        }
+        a = p;
+        p = p->next;
+    }
+    if(head2) a->next = head2;
+    return head1;
+} 
