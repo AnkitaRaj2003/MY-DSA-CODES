@@ -1,0 +1,21 @@
+//GFG: Remove every k'th node
+//https://practice.geeksforgeeks.org/problems/remove-every-kth-node/1
+
+Node* deleteK(Node *head,int K)
+{
+  //Your code here
+  if(K==0) return head;
+  else if(K==1) return NULL;
+  Node*q = NULL,*p = head;
+  for(int i=1;p;i++){
+      if(i%K==0){
+          q->next = p->next;
+          delete p;
+          p = q->next;
+      }else{
+          q = p;
+          p = p->next;
+      }
+  }
+  return head;
+}
