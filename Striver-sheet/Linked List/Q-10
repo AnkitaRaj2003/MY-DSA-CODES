@@ -26,3 +26,36 @@ struct node *reverse (struct node *head, int k)
         }
         return h;
     }
+
+
+----------OR-------------
+    struct node* reverseLL(node* head){
+        node*p=NULL,*q=head,*r=head->next;
+        while(q){
+            q->next = p;
+            p = q;
+            q = r;
+            if(r) r = r->next;
+        }
+        return p;
+    }
+    struct node *reverse (struct node *head, int k)
+    { 
+        // Complete this method
+        node*t = NULL,*a=head,*b=head,*r=head;
+        while(r){
+            for(int i=0;r && i<k;i++){
+                b = r;
+                r = r->next;
+            }
+            b->next = NULL;
+            a = reverseLL(a);
+            if(t) t->next = a;
+            else head = a;
+            while(a->next) a = a->next;
+            a->next = r;
+            t = a;
+            a = b = r;
+        }
+        return head;
+    }
