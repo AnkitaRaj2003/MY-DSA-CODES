@@ -1,0 +1,18 @@
+//GFG: Check if there exists a subsequence with sum K
+//https://practice.geeksforgeeks.org/problems/check-if-there-exists-a-subsequence-with-sum-k/1?page=1&sortBy=newest&query=page1sortBynewest
+
+void f(int n,int i,bool& ans,vector<int>arr,int sum,int k){
+        if(i==n){
+            if(sum==k) ans=true;
+            return;
+        }
+        f(n,i+1,ans,arr,sum,k);
+        sum+=arr[i];
+        f(n,i+1,ans,arr,sum,k);
+    }
+    bool checkSubsequenceSum(int n, vector<int>& arr, int k) {
+        // Code here
+        bool ans = false;
+        f(n,0,ans,arr,0,k);
+        return ans;
+    }
