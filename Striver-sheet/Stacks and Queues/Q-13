@@ -1,6 +1,35 @@
 //GFG: The Celebrity Problem
 //https://practice.geeksforgeeks.org/problems/the-celebrity-problem/1
 
+BRUTE FORCE: Find a row with all 0's then check if all know that person
+    int celebrity(vector<vector<int> >& M, int n) 
+    {
+        // code here 
+        int c=-1,flag1=0;
+        for(int i=0;i<n;i++){
+            int flag = 0;
+            for(int j=0;j<n;j++){
+                if(M[i][j]==0) c = i;
+                else{
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag==0){
+                flag1 = 1;
+                break;
+            }
+        }
+        if(flag1==1){
+            for(int i=0;i<n;i++)
+                if(M[i][c]==0 && i!=c) return -1;
+            return c;
+        }
+        return -1;
+    }
+
+--------------------------------
+
 TC: O(N2) SC: O(1)
     int celebrity(vector<vector<int> >& M, int n) 
     {
