@@ -1,0 +1,17 @@
+//GFG: Check for Balanced Tree
+//https://practice.geeksforgeeks.org/problems/check-for-balanced-tree/1
+
+    int solve(Node* root){
+        if(!root) return 0;
+        int l = solve(root->left);
+        int r = solve(root->right);
+        if(l==-1 || r==-1) return -1;
+        if(abs(l-r)>1) return -1;
+        return 1+max(l,r);
+    } 
+    bool isBalanced(Node *root)
+    {
+        //  Your Code here
+        int ans = solve(root);
+        return ans!=-1;
+    }
