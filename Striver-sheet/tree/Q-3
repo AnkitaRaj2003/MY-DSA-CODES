@@ -1,0 +1,16 @@
+//GFG: Diameter of a Binary Tree
+//https://practice.geeksforgeeks.org/problems/diameter-of-binary-tree/1
+
+    int solve(Node* root,int &ans){
+        if(!root) return 0;
+        int l = solve(root->left,ans);
+        int r = solve(root->right,ans);
+        ans = max(ans,l+r+1);
+        return 1+max(l,r);
+    }
+    int diameter(Node* root) {
+        // Your code here
+        int ans;
+        solve(root,ans);
+        return ans;
+    }
