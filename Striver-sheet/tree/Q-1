@@ -1,0 +1,10 @@
+//GFG: Maximum Depth Of Binary Tree
+//https://practice.geeksforgeeks.org/problems/maximum-depth-of-binary-tree/1
+
+    int maxDepth(Node *root) {
+        // Your code here
+        if(!root) return 0;
+        int l = maxDepth(root->left);
+        int r = maxDepth(root->right);
+        return 1+max(l,r);
+    }
