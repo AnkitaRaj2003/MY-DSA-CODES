@@ -1,0 +1,25 @@
+//GFG: Left View Of Binary Tree
+//https://practice.geeksforgeeks.org/problems/left-view-of-binary-tree/1
+
+ vector<int> leftView(Node *root)
+    {
+        // Your code here
+        vector<int> ans;
+        if(!root) return ans;
+        queue<pair<Node*,int>> q;
+        map<int,int>m;
+        q.push({root,0});
+        while(!q.empty()){
+            auto a = q.front();
+            q.pop();
+            Node* t = a.first;
+            int x = a.second;
+            if(m[x]==0) m[x] = t->data;
+            if(t->left) q.push({t->left,x+1});
+            if(t->right) q.push({t->right,x+1});
+        }
+        for(auto x:m){
+            ans.push_back(x.second);
+        }
+        return ans;
+    }
