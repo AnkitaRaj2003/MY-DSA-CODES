@@ -1,0 +1,46 @@
+//GFG: Root To Leaf Path Sum
+//https://practice.geeksforgeeks.org/problems/root-to-leaf-path-sum/1
+
+    bool isLeaf(Node* root){
+        return (!root->left) && (!root->right);
+    }
+    void f(Node* root,int sum,int s,bool &ans){
+        if(!root) return;
+        if(isLeaf(root)){
+            sum+=root->data;
+            if(s == sum) ans = true;
+            sum-=root->data;
+            return;
+        }
+        sum+=root->data;
+        f(root->left,sum,s,ans);
+        f(root->right,sum,s,ans);
+    }
+    bool hasPathSum(Node *root, int S) {
+    // Your code here
+        bool ans=false;
+        f(root,0,S,ans);
+        return ans;
+    }
+
+-----------------OR------------------
+
+    bool isLeaf(Node* root){
+        return (!root->left) && (!root->right);
+    }
+    bool f(Node* root,int sum,int s){
+        if(!root) return false;
+        sum+=root->data;
+        if(isLeaf(root)){
+            int x = sum;
+            sum-=root->data;
+            if(s==x) return true;
+            else return false;
+        }
+        if(f(root->left,sum,s) || f(root->right,sum,s)) return true;
+        return false;
+    }
+    bool hasPathSum(Node *root, int S) {
+    // Your code here
+        return f(root,0,S);
+    }
