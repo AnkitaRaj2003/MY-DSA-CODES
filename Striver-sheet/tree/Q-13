@@ -1,0 +1,26 @@
+//GFG: Root To Leaf Path
+//https://practice.geeksforgeeks.org/problems/root-to-leaf-paths/1
+
+bool isLeaf(Node* root){
+    return (!root->left) && (!root->right);
+}
+void f(Node* root,vector<vector<int>> &ans,vector<int> v){
+    if(!root) return;
+    if(isLeaf(root)){
+        v.push_back(root->data);
+        ans.push_back(v);
+        v.pop_back();
+        return;
+    }
+    v.push_back(root->data);
+    f(root->left,ans,v);
+    f(root->right,ans,v);
+}
+vector<vector<int>> Paths(Node* root)
+{
+    // Code here
+    vector<vector<int>> ans;
+    vector<int> v;
+    f(root,ans,v);
+    return ans;
+}
