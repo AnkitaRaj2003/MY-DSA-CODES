@@ -1,0 +1,25 @@
+//GFG: Vertical Order Traversal
+//https://practice.geeksforgeeks.org/problems/print-a-binary-tree-in-vertical-order/1
+
+    vector<int> verticalOrder(Node *root)
+    {
+        //Your code here
+        vector<int> ans;
+        queue<pair<Node*,int>> q;
+        map<int,vector<int>>m;
+        q.push({root,0});
+        while(!q.empty()){
+            auto a = q.front();
+            q.pop();
+            Node* t = a.first;
+            int x = a.second;
+            m[x].push_back(t->data);
+            if(t->left) q.push({t->left,x-1});
+            if(t->right) q.push({t->right,x+1});
+        }
+        for(auto x:m){
+            vector<int> v = x.second;
+            for(auto y: v) ans.push_back(y);
+        }
+        return ans;
+    }
