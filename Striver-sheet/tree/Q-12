@@ -1,0 +1,14 @@
+//GFG: Symmetric Tree
+//https://practice.geeksforgeeks.org/problems/symmetric-tree/1
+
+    bool f(Node* l,Node* r){
+        if(!l || !r) return (l==r);
+        if(l->data != r->data) return false;
+        return f(l->left,r->right) && f(l->right,r->left);
+    }
+    bool isSymmetric(struct Node* root)
+    {
+	    // Code here
+	    if(!root) return true;
+	    return f(root->left,root->right);
+    }
