@@ -1,0 +1,22 @@
+//GFG: K distance from root
+//https://practice.geeksforgeeks.org/problems/k-distance-from-root/1
+
+void func(struct Node* root,vector<int>& v,int k){
+    if(root==NULL)
+    return;
+    if(k==0){
+       v.push_back(root->data);
+       return;
+    }
+    else{
+       func(root->left,v,k-1);
+       func(root->right,v,k-1);
+    }
+}
+
+vector<int> Kdistance(struct Node *root, int k)
+{ 
+   vector<int> v;
+   func(root,v,k);
+   return v;
+}
