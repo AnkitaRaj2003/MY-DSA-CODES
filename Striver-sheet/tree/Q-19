@@ -1,0 +1,56 @@
+//GFG: https://practice.geeksforgeeks.org/problems/burning-tree/1?category=
+//Burning Tree
+
+  void p(Node* root,unordered_map<Node*,Node*>&m,int x,Node*&temp){
+    if(root->data == x) temp = root;
+    if(root->left){
+        m[root->left] = root;
+        p(root->left,m,x,temp);
+    }
+    if(root->right){
+        m[root->right] = root;
+        p(root->right,m,x,temp);
+    }
+  }
+  int f(Node*root,unordered_map<Node*,Node*>m){
+      queue<Node*>q;
+      int maxi = 0;
+      q.push(root);
+      map<Node*,bool>visited;
+      visited[root] = true;
+      while(!q.empty()){
+          int size = q.size();
+          int x = 0;
+          for(int i=0;i<size;i++){
+              Node* t = q.front();
+              q.pop();
+              if(t->left && !visited[t->left]){
+                  visited[t->left] = true;
+                  x = 1;
+                  q.push(t->left);
+              }
+              if(t->right && !visited[t->right]){
+                  visited[t->right] = true;
+                  x = 1;
+                  q.push(t->right);
+              }
+              if(m[t] && !visited[m[t]]){
+                  visited[m[t]] = true;
+                  x = 1;
+                  q.push(m[t]);
+              }
+          }
+          if(x==1) maxi++;
+      }
+      return maxi;
+  }
+    int minTime(Node* root, int target) 
+    {
+        // Your code goes here
+        if(!root) return 0;
+        Node* temp=NULL;
+        unordered_map<Node*,Node*>m;
+        m[root] = NULL;
+        p(root,m,target,temp);
+        return f(temp,m);
+    }
