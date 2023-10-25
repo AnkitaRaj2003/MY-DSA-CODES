@@ -14,3 +14,25 @@
         }
         return ans;
     }
+
+
+----------RECURSIVE-------
+    void findFloor(Node* root,int x,int &ans){
+        if(root){
+            if(root->data == x){
+                ans = root->data;
+                return;
+            }
+            else if(x > root->data){
+                ans = root->data;
+                findFloor(root->right,x,ans);
+            }
+            else findFloor(root->left,x,ans);
+        }
+    }
+    int floor(Node* root, int x) {
+        // Code here
+        int ans = -1;
+        findFloor(root,x,ans);
+        return ans;
+    }
