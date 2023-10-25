@@ -23,3 +23,29 @@
         }
         return root;
     }
+
+
+---------------RECURSIVE----------------
+    void insertRoot(Node* &node,int data){
+        if(node->data == data) return;
+        else if(data > node->data){
+            if(!node->right){
+                node->right = new Node(data);
+                return;
+            }
+            insertRoot(node->right,data);
+        }
+        else{
+            if(!node->left){
+                node->left = new Node(data);
+                return;
+            }
+            insertRoot(node->left,data);
+        }
+    }
+    Node* insert(Node* node, int data) {
+        // Your code goes here
+        Node* root = node;
+        insertRoot(node,data);
+        return root;
+    }
