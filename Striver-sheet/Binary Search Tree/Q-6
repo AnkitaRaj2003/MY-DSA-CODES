@@ -1,0 +1,13 @@
+//GFG: Check For BST
+//https://practice.geeksforgeeks.org/problems/check-for-bst/1
+
+    bool isValid(Node* root,int max,int min){
+        if(!root) return true;
+        if(root->data>=max || root->data<=min) return false;
+        return f(root->left,root->data,min) && f(root->right,max,root->data);
+    }
+    bool isBST(Node* root) 
+    {
+        // Your code here
+        return isValid(root,INT_MAX,INT_MIN);
+    }
