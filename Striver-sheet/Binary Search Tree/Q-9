@@ -1,0 +1,23 @@
+//GFG: Fixing Two Nodes Of A BST
+//https://practice.geeksforgeeks.org/problems/fixed-two-nodes-of-a-bst/1
+
+  Node* first,*prev,*last;
+  public:
+  void swapNode(Node* root){
+      if(!root) return;
+      swapNode(root->left);
+      if(prev && root->data<prev->data){
+          if(!first) first = prev;
+          last = root;
+      }
+      prev = root;
+      swapNode(root->right);
+  }
+    void correctBST( struct Node* root )
+    {
+        // add code here
+        first=last=NULL;
+        prev = new Node(INT_MIN);
+        swapNode(root);
+        swap(first->data,last->data);
+    }
