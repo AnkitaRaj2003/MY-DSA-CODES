@@ -1,0 +1,56 @@
+//GFG: 2 Sum in BST
+//https://practice.geeksforgeeks.org/problems/find-a-pair-with-given-target-in-bst/1
+
+BRUTE FORCE: store inorder and then apply 2 sum approach that we do in an simple sorted array. TC: O(N) and SC: O(N)
+
+BETTER APPRAOCH: TC: O(N) and SC: O(H) + O(H) - for storing elements in stack for both
+
+class BSTiterator{
+    stack<Node*> s;
+    bool isReverse;
+    void pushAll(Node*root){
+        while(root){
+            s.push(root);
+            if(isReverse) root = root->right;
+            else root = root->left;
+        }
+    }
+    public: 
+    BSTiterator(Node* root,bool isReverse){
+        this->isReverse = isReverse;
+        pushAll(root);
+    }
+    int next(){
+        if(hasNext()){
+            Node* t = s.top();
+            s.pop();
+            if(isReverse) pushAll(t->left);
+            else pushAll(t->right);
+            return t->data;
+        }
+        return -1;
+    }
+    bool hasNext(){
+        return !s.empty();
+    }
+};
+class Solution{
+  public:
+    // root : the root Node of the given BST
+    // target : the target sum
+    int isPairPresent(struct Node *root, int target)
+    {
+        //add code here.
+        if(!root) return 0;
+        BSTiterator r(root,true);
+        BSTiterator l(root,false);
+        
+        int i = r.next();
+        int j = l.next();
+        while(i!=j){
+            if(i+j == target) return 1;
+            else if(i+j < target) j = l.next();
+            else i = r.next();
+        }
+        return 0;
+    }
