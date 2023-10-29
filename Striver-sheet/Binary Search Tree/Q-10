@@ -1,0 +1,28 @@
+//GFG: Largest BST
+//https://practice.geeksforgeeks.org/problems/largest-bst/1
+
+class NodeValue{
+    public: 
+    int maxValue,minValue,size;
+    NodeValue(int a,int b,int c){
+        size = a;
+        maxValue = b;
+        minValue = c;
+    }
+};
+class Solution{
+    public:
+    NodeValue f(Node* root){
+        if(!root) return NodeValue(0,INT_MIN,INT_MAX);
+        auto l = f(root->left);
+        auto r = f(root->right);
+        
+        if(root->data > l.maxValue && root->data < r.minValue) return NodeValue(l.size+r.size+1, max(root->data,r.maxValue), min(root->data,l.minValue));
+        return NodeValue(max(l.size,r.size),INT_MAX,INT_MIN) ;
+    }
+    int largestBst(Node*root)
+    {
+    	//Your code here
+    	auto ans = f(root);
+    	return ans.size;
+    }
