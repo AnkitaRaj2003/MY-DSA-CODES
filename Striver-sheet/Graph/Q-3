@@ -1,0 +1,30 @@
+//GFG: Number Of Provinces
+//https://practice.geeksforgeeks.org/problems/number-of-provinces/1
+
+      void dfs(int node,vector<int>adj[],int vis[]){
+        vis[node] = 1;
+        for(auto x:adj[node]){
+            if(vis[x]==0) dfs(x,adj,vis);
+        }
+      }
+    int numProvinces(vector<vector<int>> adj, int V) {
+        // code here
+        vector<int> v[V];
+        for(int i=0;i<V;i++){
+            for(int j=0;j<V;j++){
+                if(adj[i][j]==1 && i!=j){
+                    v[i].push_back(j);
+                    v[j].push_back(i);
+                }
+            }
+        }
+        int vis[V]={0};
+        int ans=0;
+        for(int i=0;i<V;i++){
+            if(vis[i]==0){
+                dfs(i,v,vis);
+                ans++;
+            }
+        }
+        return ans;
+    }
