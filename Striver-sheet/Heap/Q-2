@@ -1,0 +1,45 @@
+//GFG: K Largest Element
+//
+
+APPROACH 1: Sort the elements and then insert k elements into ans from the end of the array. TC: O(Nlog(N))
+
+APPROACH 2: Create max heap using priority queue and pop the elements k times and retuen last popped element
+TC: O(n + k log n)
+CODE:
+    vector<int> kLargest(int arr[], int n, int k)
+    {
+        // code here
+        priority_queue<int>p(arr,arr+n);
+        
+        vector<int> ans;c
+        while(k--){
+            ans.push_back(p.top());
+            p.pop();
+        }
+        
+        return ans;
+    }
+
+APPROACH 3: Create a min heapand maintain a size k
+
+    vector<int> kLargest(int arr[], int n, int k)
+    {
+        // code here
+        priority_queue<int,vector<int>,greater<int>>p(arr,arr+k);
+        
+        vector<int> ans;
+        for(int i=k;i<n;i++){
+           if(p.top()<=arr[i]){
+               p.pop();
+               p.push(arr[i]);
+           }
+        }
+        while(!p.empty()){ 
+            ans.push_back(p.top());
+            p.pop();
+        }
+        
+        reverse(ans.begin(),ans.end());
+        
+        return ans;
+    }
