@@ -1,0 +1,22 @@
+//GFG: Kth Smallest Element 
+//https://practice.geeksforgeeks.org/problems/kth-smallest-element5635/1
+
+OTHER APPROACHES ARE SIMILAR TO THE PREVIOUS QUESTION
+
+    // arr : given array
+    // l : starting index of the array i.e 0
+    // r : ending index of the array i.e size-1
+    // k : find kth smallest element and return using this function
+    int kthSmallest(int arr[], int l, int r, int k) {
+        // code here
+        priority_queue<int>p(arr+l,arr+l+k);
+        
+        for(int i=k;i<=r;i++){
+           if(p.top()>arr[i]){
+               p.pop();
+               p.push(arr[i]);
+           }
+        }
+        
+        return p.top();
+    }
