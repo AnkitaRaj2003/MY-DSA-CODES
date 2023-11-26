@@ -1,0 +1,23 @@
+//GFG: Count Set Bits
+//https://practice.geeksforgeeks.org/problems/set-bits0143/1
+
+    int setBits(int N) {
+        int count = 0; // initializing count variable to 0
+        while (N) {
+            N &= (N - 1); // with this operation, we remove the rightmost set bit in N and increment the count
+            count++; // incrementing the count variable by 1
+        }
+        return count; // returning the final count of set bits in N
+    }
+
+-------------OR--------------
+
+    int setBits(int N) {
+        // Write Your Code here
+        int count = 0;
+        while(N){
+            if(N&1) count++;
+            N = N>>1;
+        }
+        return count;
+    }
