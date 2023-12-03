@@ -1,0 +1,29 @@
+//GFG: Bit Difference
+//https://practice.geeksforgeeks.org/problems/bit-difference-1587115620/1
+
+    int countBitsFlip(int a, int b){
+        // Your logic here
+        int count=0;
+        int num = a^b;
+        while(num){
+            if(num&1) count++;
+            num = num>>1;
+        }
+        return count;
+    }
+
+
+----------------OR-------------------
+
+    int countBitsFlip(int a, int b){
+        // Your logic here
+        int count=0;
+        while(a || b){
+            if((a & 1) != (b & 1)) {  //The brackets here i.e, (a&1) and (b&1) are important bcz precedence of != is greater than &
+                count++;
+            }
+            a = a >> 1;
+            b = b >> 1;
+        }
+        return count;   
+    }
