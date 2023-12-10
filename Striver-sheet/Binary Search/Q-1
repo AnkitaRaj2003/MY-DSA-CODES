@@ -1,0 +1,62 @@
+//GFG: 
+//
+
+//THIS CAN ALSO BE DONE BY LINEAR SEARCH BUT THEN ITS TIME COMPLEXITY WILL BE O(N) AND BY USING BINARY SEARCH ITS COMPLEXITY WILL BE NEARBY O(LOGN)
+
+//USING BINARY SEARCH - O(LOGN)
+    int firstOcc(int arr[],int n,int x){
+        int s=0,e=n-1,t=-1;
+        while(s<=e){
+            int m = s+(e-s)/2;
+            if(arr[m]==x){
+                t=m;
+                e=m-1;
+            }
+            else if(arr[m]<x) s=m+1;
+            else e=m-1;
+        }
+        return t;
+    }
+    int lastOcc(int arr[],int n,int x){
+        int s=0,e=n-1,t=-1;
+        while(s<=e){
+            int m = s+(e-s)/2;
+            if(arr[m]==x){
+                t=m;
+                s=m+1;
+            }
+            else if(arr[m]<x) s=m+1;
+            else e=m-1;
+        }
+        return t;
+    }
+    vector<int> find(int arr[], int n , int x )
+    {
+        // code here
+        int f = firstOcc(arr,n,x);
+        int l = lastOcc(arr,n,x);
+        return {f,l};
+    }
+
+
+//USING LINEAR SEARCH - O(N)
+vector<int> find(int a[], int n , int x )
+{
+    vector<int> v;
+    int temp = -1,flag=0;
+    for(int i=0;i<n;i++){
+        if(a[i]==x){
+            if(flag==0){
+                v.push_back(i);
+                flag = 1;
+            }
+            temp = i;
+        }
+    }
+    if(temp==-1){
+        v.push_back(-1);
+        v.push_back(-1);
+    }
+    else v.push_back(temp);
+    return v;
+}
