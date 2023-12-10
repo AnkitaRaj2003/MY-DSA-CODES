@@ -1,5 +1,5 @@
-//GFG: 
-//
+//GFG: First and last occurrences of x
+//https://www.geeksforgeeks.org/problems/first-and-last-occurrences-of-x3116/1
 
 //THIS CAN ALSO BE DONE BY LINEAR SEARCH BUT THEN ITS TIME COMPLEXITY WILL BE O(N) AND BY USING BINARY SEARCH ITS COMPLEXITY WILL BE NEARBY O(LOGN)
 
