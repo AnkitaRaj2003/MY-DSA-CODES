@@ -1,0 +1,34 @@
+//GFG: Painter's Partition Problem
+//https://www.geeksforgeeks.org/problems/the-painters-partition-problem1535/1
+
+bool isPossible(int a[],int n,int m,long long mid){
+        long long std=1,sum=0;
+        for(int i=0;i<n;i++){
+            if(sum+a[i]<=mid){
+                sum+=a[i];
+            }
+            else{
+                std++;
+                if(std>m || a[i]>mid) return false;
+                sum=a[i];
+            }
+        }
+        return true;
+    }
+    long long minTime(int a[], int n, int m)
+    {
+        // code here
+        // return minimum time
+        long long sum=0;
+        for(int i=0;i<n;i++) sum+=a[i];
+        long long l=0,h=sum,ans=-1;
+        while(l<=h){
+            long long mid=l+(h-l)/2;
+            if(isPossible(a,n,m,mid)){
+                ans = mid;
+                h = mid-1;
+            }
+            else l = mid+1;
+        }
+        return ans;
+    }
