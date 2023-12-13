@@ -1,0 +1,48 @@
+//GFG: Trie Implementation
+//https://www.geeksforgeeks.org/problems/trie-insert-and-search0651/1
+
+// trie node
+/*
+struct TrieNode {
+    struct TrieNode *children[ALPHABET_SIZE];
+
+    // isLeaf is true if the node represents
+    // end of a word
+    bool isLeaf;
+};
+*/
+bool isContain(TrieNode* root,char ch){
+    return root->children[ch-'a']!=NULL;
+}
+void put(TrieNode* root,char ch){
+    root->children[ch-'a'] = new TrieNode();
+}
+TrieNode* get(TrieNode*root,char ch){
+    return root->children[ch-'a'];
+}
+
+//Function to insert string into TRIE.
+void insert(struct TrieNode *root, string key)
+{
+    // code here
+    TrieNode* node = root;
+    for(int i=0;i<key.length();i++){
+        if(!isContain(node,key[i])){
+            put(node,key[i]);
+        }
+        node = get(node,key[i]);
+    }
+    node->isLeaf = true;
+}
+
+//Function to use TRIE data structure and search the given string.
+bool search(struct TrieNode *root, string key) 
+{
+    // code here
+    TrieNode* node = root;
+    for(int i=0;i<key.length();i++){
+        if(!isContain(node,key[i])) return false;
+        node = get(node,key[i]);
+    }
+    return node->isLeaf;
+}
