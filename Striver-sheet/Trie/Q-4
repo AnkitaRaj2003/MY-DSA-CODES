@@ -1,0 +1,32 @@
+//GFG: Count of distinct substrings
+//https://www.geeksforgeeks.org/problems/count-of-distinct-substrings/1
+
+struct node{
+    unordered_map<char,node*>list;
+    bool containKey(char ch){
+        return list[ch]!=NULL;
+    }
+    void put(char ch){
+        list[ch] = new node();
+    }
+    node* get(char ch){
+        return list[ch];
+    }
+};
+int countDistinctSubstring(string s)
+{
+    //Your code here
+    int count=1;
+    node* root = new node();
+    for(int i=0;i<s.length();i++){
+        node* node = root;
+        for(int j=i;j<s.length();j++){
+            if(!node->containKey(s[j])){
+                count++;
+                node->put(s[j]);
+            }
+            node = node->get(s[j]);
+        }
+    }
+    return count;
+}
