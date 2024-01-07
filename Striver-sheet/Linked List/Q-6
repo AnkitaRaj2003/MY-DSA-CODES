@@ -1,38 +1,43 @@
 //Leetcode: Add two numbers
 //https://leetcode.com/problems/add-two-numbers/description/
 
-ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int carry = 0;
-        ListNode* t1 = l1,*t2 = l2,*b = l1;
-        while(t1 && t2){
-            t1->val = t1->val+t2->val+carry;
-            if(t1->val>9){
-                carry = t1->val/10;
-                t1->val = t1->val%10;
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode*p = l1,*q = l2;
+        int carry = 0,a,b;
+        ListNode*head = NULL,*t = NULL;
+        while(p || q){
+            if(!p) a = 0;
+            else a = p->val;
+            if(!q) b = 0;
+            else b = q->val;
+            int x = a+b+carry;
+            if(x<=9) carry = 0;
+            else{
+                carry = 1;
+                x = x%10;
             }
-            else carry = 0;
-            b = t1;
-            t1 = t1->next;
-            t2 = t2->next;
+            ListNode* temp = new ListNode(x);
+            if(!head) head = temp;
+            else t->next = temp;
+            t = temp;
+            if(p) p = p->next;
+            if(q) q = q->next;
         }
-        if(t2){
-            t1 = b;
-            t1->next = t2;
-            t1 = t2;
+        if(carry == 1){
+            ListNode* temp = new ListNode(1);
+            t->next = temp;
         }
-        while(t1){
-            t1->val = t1->val+carry;
-            if(t1->val>9){
-                carry = t1->val/10;
-                t1->val = t1->val%10;
-            }
-            else carry = 0;
-            b = t1;
-            t1 = t1->next;           
-        }
-        if(carry>0){
-            ListNode* l = new ListNode(carry);
-            b->next = l;
-        }
-        return l1;
+        return head;
     }
