@@ -23,3 +23,15 @@
         }
         return head;
     }
+
+----------OR-----------
+    ListNode* removeElements(ListNode* head, int val) {
+        while(head && head->val == val) head = head->next;
+        ListNode* t = head;
+        while(t){
+            if(!t->next) return head;
+            if(t->next->val == val) t->next = t->next->next;
+            else t = t->next;
+        }
+        return head;
+    }
