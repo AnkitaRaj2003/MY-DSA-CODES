@@ -18,11 +18,11 @@ struct Node
 Node* deleteNode(Node *head,int x)
 {
     //Your code here
-    if(x==1) head = head->next;
+    if(x == 1) head = head->next;
     else{
-        Node* temp = head;
-        for(int i=1;i<x-1 && temp!=NULL;i++) temp = temp->next;
-        if(temp!=NULL || temp->next!=NULL) temp->next = temp->next->next;
-        return head;
+        Node* t = head;
+        for(int i=2;i<x && t;i++) t = t->next;
+        if(t && t->next) t->next = t->next->next;
     }
+    return head;
 }
