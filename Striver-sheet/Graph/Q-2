@@ -1,5 +1,6 @@
 //GFG: DFS Of Graph
 //https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1
+TC: O(2E)        SC: O(N)+O(N)+O(N)=O(N)
 
     // Function to return a list containing the DFS traversal of the graph.
     void f(int node,vector<int>adj[],int vis[],vector<int>&ans){
