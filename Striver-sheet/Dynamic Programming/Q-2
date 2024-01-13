@@ -1,0 +1,77 @@
+//Coding Ninja: Frog Jump
+//
+
+----------------BRUTE FORCE----------------
+int f(int n,vector<int>&h){
+    if(n<=1) return 0;
+    int l = f(n-1,h)+abs(h[n-1]-h[n-2]);
+    int r = INT_MAX;
+    if(n>2) r = f(n-2,h)+abs(h[n-3]-h[n-1]);
+    return min(l,r);
+} 
+int frogJump(int n, vector<int> &heights)
+{
+    // Write your code here.
+    return f(n,heights);
+}
+
+           OR
+int f(int i,int n,vector<int>&h){
+    if(i>=n) return 0;
+    int l = f(i+1,n,h)+abs(h[i]-h[i-1]);
+    int r = INT_MAX;
+    if(i<n-1) r = f(i+2,n,h)+abs(h[i+1]-h[i-1]);
+    return min(l,r);
+} 
+int frogJump(int n, vector<int> &heights)
+{
+    // Write your code here.
+    return f(1,n,heights);
+}
+
+---------------MEMOIZATION-----------------
+int f(int i,int n,vector<int>&h,vector<int>&dp){
+    if(i>=n) return 0;
+    if(dp[i-1]!=-1) return dp[i-1];
+    int l = f(i+1,n,h,dp)+abs(h[i]-h[i-1]);
+    int r = INT_MAX;
+    if(i<n-1) r = f(i+2,n,h,dp)+abs(h[i+1]-h[i-1]);
+    return dp[i-1]=min(l,r);
+} 
+int frogJump(int n, vector<int> &heights)
+{
+    // Write your code here.
+    vector<int> dp(n,-1);
+    return f(1,n,heights,dp);
+}
+
+         OR
+int f(int n,vector<int>&h,vector<int>&dp){
+    if(n<=1) return 0;
+    if(dp[n-1]!=-1) return dp[n-1];
+    int l = f(n-1,h,dp)+abs(h[n-1]-h[n-2]);
+    int r = INT_MAX;
+    if(n>2) r = f(n-2,h,dp)+abs(h[n-3]-h[n-1]);
+    return dp[n-1]=min(l,r);
+} 
+int frogJump(int n, vector<int> &heights)
+{
+    // Write your code here.
+    vector<int> dp(n,-1);
+    return f(n,heights,dp);
+}
+
+
+----------------TABLULATION----------------
+int frogJump(int n, vector<int> &heights)
+{
+    // Write your code here.
+    vector<int> dp(n+1,0);
+    dp[1] = 0;
+    for(int i=2;i<=n;i++){
+        int l = dp[i-1]+abs(heights[i-1]-heights[i-2]);
+        int r = INT_MAX;
+        if(i>2) r = dp[i-2]+abs(heights[i-1]-heights[i-3]);
+        dp[i] = min(l,r);
+    }
+    return dp[n];
