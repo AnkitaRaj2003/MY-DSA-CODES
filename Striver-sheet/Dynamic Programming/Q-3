@@ -1,0 +1,59 @@
+//Coding Ninja: Frog Jump With K Distance
+//https://www.codingninjas.com/studio/problems/minimal-cost_8180930?leftPanelTabValue=SUBMISSION
+
+---------------------BRUTE FORCE------------------
+int f(int n,vector<int>&height,int k){
+    if(n==0) return 0;
+    int mini = INT_MAX;
+    for(int i=1;i<=k;i++){
+        if(n-i>=0){
+            int x = f(n-i,height,k)+abs(height[n]-height[n-i]);
+            mini = min(x,mini);
+        }
+        else break;
+    }
+    return mini;
+}
+int minimizeCost(int n, int k, vector<int> &height){
+    // Write your code here.
+    return f(n-1,height,k);
+}
+
+---------------------MEMOIZATION------------------------
+int f(int n,vector<int>&height,int k,vector<int>&dp){
+    if(n==0) return 0;
+    if(dp[n]!=-1) return dp[n];
+    int mini = INT_MAX;
+    for(int i=1;i<=k;i++){
+        if(n-i>=0){
+            int x = f(n-i,height,k,dp)+abs(height[n]-height[n-i]);
+            mini = min(x,mini);
+        }
+        else break;
+    }
+    return mini;
+}
+int minimizeCost(int n, int k, vector<int> &height){
+    // Write your code here.
+    vector<int>dp(n,-1);
+    return f(n-1,height,k,dp);
+}
+
+---------------------TABULATION------------------------------
+int minimizeCost(int n, int k, vector<int> &height){
+    // Write your code here.
+    vector<int>dp(n,0);
+    dp[0] = 0;
+    for(int i=1;i<n;i++){
+        int mini = INT_MAX;
+        for(int j=1;j<=k;j++){
+            if(i-j>=0){
+                int x = dp[i-j]+abs(height[i]-height[i-j]);
+                mini = min(x,mini);
+            }
+            else break;
+        }
+        dp[i] = mini;
+    }
+    return dp[n-1];
+}
