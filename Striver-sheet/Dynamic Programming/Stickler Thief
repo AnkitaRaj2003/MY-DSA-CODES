@@ -1,0 +1,19 @@
+//GFG: Stickler Theif
+//https://www.geeksforgeeks.org/problems/stickler-theif-1587115621/1
+
+
+------------------SAME AS FIND MAX SUM------------------
+
+   int FindMaxSum(int arr[], int n)
+    {
+        // Your code here
+        int prev_i=0,prev=0;
+	    for(int i=0;i<n;i++){
+	        int take=arr[i]+prev_i;
+	        int not_take = prev;
+	        
+	        prev_i = prev;
+	        prev = max(take,not_take);
+	    }
+	    return prev;
+    }
