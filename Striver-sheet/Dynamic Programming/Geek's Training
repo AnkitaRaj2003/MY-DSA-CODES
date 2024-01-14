@@ -1,0 +1,64 @@
+//GFG: Geek's Training
+//https://www.geeksforgeeks.org/problems/geeks-training/1
+
+---------------------MEMOIZATION---------------------
+TC: O(3*N)*4    SC: O(N)+O(3*N)
+  int f(int n,int l,vector<vector<int>>& points,vector<vector<int>>&dp){
+      if(n<0) return 0;
+      int maxi = 0;
+      if(l==-1){
+          for(int i=0;i<3;i++){
+              dp[n][i] = points[n][i]+f(n-1,i,points,dp);
+              maxi = max(maxi,dp[n][i]);
+          }
+      }
+      else{
+          for(int i=0;i<3;i++){
+              if(i==l) continue;
+              if(dp[n][i]==-1) dp[n][i] = points[n][i]+f(n-1,i,points,dp);
+              maxi = max(dp[n][i],maxi);
+          }
+      }
+      return maxi;
+  }
+    int maximumPoints(vector<vector<int>>& points, int n) {
+        // Code here
+        vector<vector<int>>dp(n,vector<int>(3,-1));
+        return f(n-1,-1,points,dp);
+    }
+
+------------------BOTTOM UP: TABULATION--------------------
+TC: o(N*3)*3    SC: O(N*3)
+    int maximumPoints(vector<vector<int>>& points, int n) {
+        vector<vector<int>>dp(n+1,vector<int>(3,-1));
+        dp[0][0]=dp[0][1]=dp[0][2]=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<3;j++){
+                int maxi=0;
+                for(int k=0;k<3;k++){
+                    if(k==j) continue;
+                    maxi = max(maxi,dp[i][k]);
+                }
+                dp[i+1][j] = maxi+points[i][j];
+            }
+        }
+        return max(dp[n][0],max(dp[n][1],dp[n][2]));
+    }
+
+---------------------SPACE OPTIMIZED---------------------------
+    int maximumPoints(vector<vector<int>>& points, int n) {
+        int prev,prev1,prev2;
+        prev=prev1=prev2=0;
+        for(int i=0;i<n;i++){
+            int x=0,y=0,z=0;
+            for(int j=0;j<3;j++){
+                if(j==0) x = points[i][j]+max(prev1,prev2);
+                else if(j==1) y = points[i][j]+max(prev,prev2);
+                else z = points[i][j]+max(prev,prev1);
+            }
+            prev=x;
+            prev1=y;
+            prev2=z;
+        }
+        return max(prev,max(prev1,prev2));
+    }
