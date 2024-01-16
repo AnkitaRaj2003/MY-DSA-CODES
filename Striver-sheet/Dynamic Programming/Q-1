@@ -1,7 +1,21 @@
 //GFG: Count ways to reach the n'th stair
 //https://www.geeksforgeeks.org/problems/count-ways-to-reach-the-nth-stair-1587115620/1
 
-1. RC + Memoization (Top Down Dp) :
+1. Brute Force:
+    int mod = 10e9+7;
+    //Function to count number of ways to reach the nth stair.
+    int f(int n){
+        if(n==0) return 1;
+        if(n<0) return 0;
+        return f(n-1)%mod+f(n-2)%mod;
+    }
+    int countWays(int n)
+    {
+        // your code here
+        return f(n);
+    }
+
+2. RC + Memoization (Top Down Dp) :
 class Solution
 {
     public:
@@ -24,9 +38,8 @@ class Solution
 };
  
 
- 
 
-2. Tabulation (Bottom Up DP) :
+3. Tabulation (Bottom Up DP) :
 class Solution
 {
     public:
@@ -47,7 +60,7 @@ class Solution
 };
  
 
-3. Space Optimized (Iterative Approach) : 
+4. Space Optimized (Iterative Approach) : 
 
 class Solution
 {
