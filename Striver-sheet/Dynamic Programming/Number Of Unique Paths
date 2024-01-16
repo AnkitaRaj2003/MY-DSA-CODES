@@ -1,0 +1,61 @@
+//GFG: https://www.geeksforgeeks.org/problems/number-of-unique-paths5339/1
+
+--------------------BRUTE FORCE---------------------
+TC: O(2^(N*M))            SC: O(M+N) - path length
+    int f(int n,int m){
+        if(n<0 || m<0) return 0;
+        if(n==0 && m==0) return 1;
+        return f(n-1,m)+f(n,m-1);
+    }
+    int NumberOfPath(int a, int b)
+    {
+        //code here
+        return f(a-1,b-1);
+    }
+
+------------------MEMOIZATION------------------
+TC: O(M*N)-each state will be called once          SC: O(M*N)+O(M+N)-calls+stack space
+    int f(int n,int m,vector<vector<int>>&dp){
+        if(n<0 || m<0) return 0;
+        if(dp[n][m]!=-1) return dp[n][m];
+        if(n==0 && m==0) return 1;
+        return dp[n][m]=f(n-1,m,dp)+f(n,m-1,dp);
+    }
+    int NumberOfPath(int a, int b)
+    {
+        //code here
+        vector<vector<int>>dp(a,vector<int>(b,-1));
+        return f(a-1,b-1,dp);
+    }
+
+---------------------TABULATION---------------------
+TC: O(M*N)          SC: O(M*N)
+    int NumberOfPath(int n, int m)
+    {
+        //code here
+        vector<vector<int>>dp(n,vector<int>(m,-1));
+        dp[0][0]=1;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(dp[i][j]==-1) dp[i][j] = (i==0?0:dp[i-1][j])+(j==0?0:dp[i][j-1]);
+            }
+        }
+        return dp[n-1][m-1];
+    }
+
+---------------------SPACE OPTIMIZED------------------
+TC: O(M*N)          SC: O(M)
+    int NumberOfPath(int n, int m)
+    {
+        //code here
+        vector<int>v(m,0);
+        for(int i=0;i<n;i++){
+            int prev=0;
+            for(int j=0;j<m;j++){
+                if(i==0 && j==0) prev=1;
+                else prev = prev+v[j];
+                v[j]=prev;
+            }
+        }
+        return v[m-1];
+    }
