@@ -1,1 +1,62 @@
-//
+//GFG: 
+
+-----------------BRUTE FORCE---------------------
+TC: O(N^2)                AC: O(1)  except the vector to store answer
+
+for loop from 0 to n-1
+  for loop from i+1 to n-1
+    if(nums[i]+nums[j]==target) //store in ans and return
+
+return {};
+
+-------------------Another Solution--------------------
+TC: O(NlogN)           SC: O(N)
+    vector<int> twoSum(vector<int>& nums, int target) {
+        int i=0,j=nums.size()-1,n=nums.size();
+        vector<int>ans;
+        int num1,num2,flag=1;
+        vector<int>temp = nums;
+        sort(temp.begin(),temp.end());
+        while(i<j){
+            int x = temp[i]+temp[j];
+            if(x==target){
+                num1 = temp[i];
+                num2 = temp[j];
+                flag = 0;
+                break;
+            }
+            else if(x<target) i++;
+            else j--;
+        }
+        if(flag == 1) return {-1,-1};
+        for(int i=0;i<n;i++){
+            if(ans.size()==2) break;
+            if(num1==nums[i]) ans.push_back(i);
+            else if(num2==nums[i]) ans.push_back(i);
+        }
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
+
+
+-----------------------------OR--------------------------------
+TC: O(N)    SC: O(N)
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<pair<int,int>>v;
+        vector<int>ans;
+        int n = nums.size();
+        for(int i=0;i<n;i++) v.push_back({nums[i],i});
+        sort(v.begin(),v.end());
+        int i=0,j=n-1;
+        while(i<j){
+            int x = v[i].first+v[j].first;
+            if(x==target){
+                ans.push_back(v[i].second);
+                ans.push_back(v[j].second);
+                return ans;
+            }
+            else if(x<target) i++;
+            else j--;
+        }
+        return {-1,-1};
+    }
