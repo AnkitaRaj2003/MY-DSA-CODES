@@ -1,6 +1,13 @@
 //GFG: Reverse a linkedlist
 //https://practice.geeksforgeeks.org/problems/reverse-a-linked-list/1
 
+-------------------BRUTE FORCE---------------------
+-traversing the ll and storing it in a vector
+-again traversing the ll and traversing vector in opposite direction and storing the values in ll
+
+--------------------BETTER-------------------------
+using three pointers p,q,r
+
     struct Node* reverseList(struct Node *head)
     {
         // code here
