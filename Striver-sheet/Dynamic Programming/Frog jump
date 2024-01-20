@@ -1,5 +1,4 @@
-//Coding Ninja: Frog Jump
-//
+//Coding Ninja: https://www.codingninjas.com/studio/problems/frog-jump_3621012
 
 ----------------BRUTE FORCE----------------
 int f(int n,vector<int>&h){
