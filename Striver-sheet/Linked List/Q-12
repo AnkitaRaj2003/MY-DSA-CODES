@@ -24,7 +24,7 @@
         return head;
     }
 
-----------OR-----------
+-------------------OR--------------------
     ListNode* removeElements(ListNode* head, int val) {
         while(head && head->val == val) head = head->next;
         ListNode* t = head;
@@ -32,6 +32,28 @@
             if(!t->next) return head;
             if(t->next->val == val) t->next = t->next->next;
             else t = t->next;
+        }
+        return head;
+    }
+
+-------------------OR-------------------
+    ListNode* removeElements(ListNode* head, int val) {
+        ListNode* p = NULL,*q = head;
+        while(q && q->val==val){
+            head = head->next;
+            delete q;
+            q = head;
+        }
+        while(q){
+            if(q->val == val){
+                p->next = q->next;
+                delete q;
+                q = p->next;
+            }
+            else{
+                p = q;
+                q = q->next;
+            }
         }
         return head;
     }
