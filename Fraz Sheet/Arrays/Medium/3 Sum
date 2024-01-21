@@ -1,0 +1,27 @@
+//Leetcode: https://leetcode.com/problems/3sum/
+
+-------------------------BRUTE FORCE-------------------------
+TC: O(N^3)      SC: O(1)
+iterating three loops and checking if sum==givensum or not.
+
+-------------------------HAHSMAPS---------------------------
+TC: O(N^2)       SC: O(N)
+Taking two loops and using hashmaps for third element
+
+-------------------------Two Pointers---------------------
+TC: O(N^2)       SC:O(1)
+Fix one element and change two elements like we did in 2 Sum
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        set<vector<int>>s;
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<nums.size();i++){
+            int l=i+1,h=nums.size()-1;
+            while(l<h){
+                int y=nums[i]+nums[l]+nums[h];
+                if(y==0) s.insert({nums[i],nums[l++],nums[h--]});
+                else if(y<0) l++;
+                else h--;
+            }
+        }
+        return {s.begin(),s.end()};
+    }
