@@ -1,5 +1,8 @@
 //Leetcode: https://leetcode.com/problems/word-search/submissions/1152717768/
 
+TC: m*n*4k   //loop is running for m*n times and in each iteration search is called, search will take atmax O(4K) bcz each search calls itself 4 times and it will go till index==k
+SC: O(k)    //where k is the size of word
+
     bool checkWordPresent(vector<vector<char>>& board, string word, int n, int m, int row, int col, int index){
         if(index == word.size()){
             return true;
