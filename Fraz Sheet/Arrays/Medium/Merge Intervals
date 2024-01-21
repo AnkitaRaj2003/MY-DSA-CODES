@@ -1,0 +1,29 @@
+//Leetcode: https://leetcode.com/problems/merge-intervals/
+
+    vector<vector<int>> merge(vector<vector<int>>& a) {
+        // a[0][1]>=a[1][1]
+        // a[0][1]>=a[1][1] => a[0][1]
+        // else a[1][1]
+        sort(a.begin(),a.end());
+        vector<vector<int>>ans;
+        int n = a.size();
+        pair<int,int>p={a[0][0],a[0][1]};
+        for(int i=1;i<n;i++){
+            if(p.second>=a[i][0]){
+                if(p.second<=a[i][1]) p.second=a[i][1];
+            }
+            else{
+                vector<int>v;
+                v.push_back(p.first);
+                v.push_back(p.second);
+                ans.push_back(v);
+                p.first=a[i][0];
+                p.second=a[i][1];
+            }
+        }
+        vector<int>v;
+        v.push_back(p.first);
+        v.push_back(p.second);
+        ans.push_back(v);
+        return ans;
+    }
