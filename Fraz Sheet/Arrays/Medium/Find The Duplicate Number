@@ -1,0 +1,32 @@
+//Leetcode: https://leetcode.com/problems/find-the-duplicate-number/description/
+
+------------------------------BRUTE FORCE-------------------------------
+sort the array and run a for loop from 0 to n-2 and check whether num[i]==num[i+1], if yes return it.
+
+                               OR
+
+using a hashmap of size n+1 (array contains elements from 1 to n and size of array is n+1 bcz of an extra repeat number) and store the count when we get h[i]==2 return it.
+
+---------------------------------BY MODIFYING ARRAY------------------------------------
+for(i=0 to n-1)
+  //either we can multiply num[num[i]] with -1 or add n to it
+  //if we multiply by one, then we will check if num[abs[num[i]]]<0 return it else num[abs[num[i]]]*=-1
+  //if add n, then we will add n to num[num[i]] and when num[num[i]]>2*n we will return it, just make sure when num[i]>n make x=num[i] and take num[num[i]]..
+  //adding n intuition works bcz the max element can n and if we add n to it then i become 2n, if sum becomes >2n then there must be occuring two same numbers which leading to adding n two times
+
+-----------------------------WITHOUT MODIFYING---------------------------------
+TC: O(N)      SC: O(1)
+    int findDuplicate(vector<int>& num) {
+        int slow=num[0],fast=num[0];
+        do{
+            slow = num[slow];
+            fast = num[num[fast]];
+        }while(fast != slow);
+        cout<<slow<<endl;
+        fast=num[0];
+        while(slow != fast){
+            slow = num[slow];
+            fast = num[fast];
+        }
+        return slow;
+    }
