@@ -7,7 +7,7 @@ Taking four loops - TC: O(N^4)    SC: O(1)
 Taking three loops and a hashmap - TC: O(N^3)   SC: O(N)
 
 --------------------------------OPTIMIZED------------------------------------
-Taking two loops and two pointers - TC: O(N^3)    SC: O(1)
+Taking two loops and two pointers - TC: O(N^3*logN)    SC: O(1)
 
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
         sort(nums.begin(),nums.end());
