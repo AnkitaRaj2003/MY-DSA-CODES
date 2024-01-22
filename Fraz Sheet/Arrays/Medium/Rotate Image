@@ -1,0 +1,25 @@
+//Leetcode: https://leetcode.com/problems/rotate-image/
+
+-------------------------------USING EXTRA SPACE---------------------------------
+TC: O(M*N)        SC: O(M*N)
+    void rotate(vector<vector<int>>& matrix) {
+        vector<vector<int>>v(matrix.size(),vector<int>(matrix.size(),0));
+        for(int i=0;i<matrix.size();i++){
+            for(int j=0;j<matrix[0].size();j++){
+                v[i][j] = matrix[matrix.size()-1-j][i];
+            }
+        }
+        matrix = v;
+    }
+
+------------------------------WITHOUT USING EXTRA SPACE-------------------------------
+matrix size - N*M
+TC: O(N^2)(for swap loop)+O(M*N)(for reverse loop)      SC: O(1)
+**TC of reverse function is O(n)
+                                 
+    void rotate(vector<vector<int>>& matrix) {
+        for(int i=0;i<matrix.size();i++){
+            for(int j=0;j<i;j++) swap(matrix[i][j],matrix[j][i]);
+        }
+        for(auto &x:matrix) reverse(x.begin(),x.end());
+    }
