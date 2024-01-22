@@ -1,0 +1,37 @@
+//Leetcode: https://leetcode.com/problems/4sum/
+
+--------------------------------BRUTE FORCE---------------------------------
+Taking four loops - TC: O(N^4)    SC: O(1)
+
+--------------------------------BETTER---------------------------------------
+Taking three loops and a hashmap - TC: O(N^3)   SC: O(N)
+
+--------------------------------OPTIMIZED------------------------------------
+Taking two loops and two pointers - TC: O(N^3)    SC: O(1)
+
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        set<vector<int>>ans;
+        int n = nums.size();
+        vector<int>v(4);
+        for(int i=0;i<n;i++){
+            v[0] = nums[i];
+            for(int j=i+1;j<n;j++){
+                v[1] = nums[j];
+                int k=j+1,l=n-1;
+                while(k<l){
+                    // long long sum = nums[i]+nums[j]+nums[k]+nums[l];
+                    if((long long)nums[i] + (long long)nums[j] + (long long)nums[k] + (long long)nums[l] ==target){
+                        v[2] = nums[k++];
+                        v[3] = nums[l--];
+                        ans.insert(v);
+                    }
+                    else if((long long)nums[i] + (long long)nums[j] + (long long)nums[k] + (long long)nums[l]<target) k++;
+                    else l--;
+                }
+            }
+        }
+        vector<vector<int>>vans(ans.size());
+        copy(ans.begin(),ans.end(),vans.begin());
+        return vans;
+    }
