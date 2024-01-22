@@ -1,0 +1,66 @@
+//GFG: 
+
+---------------------------BRUTE FORCE------------------------------
+TC: O(2^n)        SC: O(N)
+
+    int f(int i,int j,int n,vector<vector<int>>t){
+        if(i==n-1) return t[i][j];
+        return t[i][j]+min(f(i+1,j,n,t),f(i+1,j+1,n,t));
+    }
+    int minimizeSum(int n, vector<vector<int>>& triangle) {
+        // Code here
+        return f(0,0,n,triangle);
+    }
+
+-----------------------------MEMOIZATION-----------------------------
+TC: O(N*N) [Not exactly but it will be equal to the number of states as it will visit each element once only]        SC: O(N) [stack space] + O(N*N) [DP vector]
+
+    int f(int i,int j,int n,vector<vector<int>>t,vector<vector<int>>dp){
+        if(i==n-1) return t[i][j];
+        if(dp[i][j]!=-1) return dp[i][j];
+        return dp[i][j] = t[i][j]+min(f(i+1,j,n,t,dp),f(i+1,j+1,n,t,dp));
+    }
+    int minimizeSum(int n, vector<vector<int>>& triangle) {
+        // Code here
+        vector<vector<int>>dp(n,vector<int>(n,-1));
+        return f(0,0,n,triangle,dp);
+    }
+
+---------------------------TABULATION---------------------------------
+TC: O(N*N)        SC: O(N*N)
+
+    int minimizeSum(int n, vector<vector<int>>& triangle) {
+        // Code here
+        if(triangle.size()==1) return triangle[0][0];
+        vector<vector<int>>dp(n,vector<int>(n,INT_MAX));
+        dp[0][0]=triangle[0][0];
+        int mini = INT_MAX;
+        for(int i=1;i<n;i++){
+            for(int j=0;j<=i;j++){
+                dp[i][j]=triangle[i][j]+min(dp[i-1][j],j==0?INT_MAX:dp[i-1][j-1]);
+                if(i==n-1) mini = min(mini,dp[i][j]);
+            }
+        }
+        return mini;
+    }
+
+-------------------------------SAPCE OPTIMIZED-----------------------------------------
+TC: O(N*N)          SC: O(N)
+
+    int minimizeSum(int n, vector<vector<int>>& triangle) {
+        // Code here
+        if(triangle.size()==1) return triangle[0][0];
+        vector<int>dp(n,INT_MAX);
+        dp[0]=triangle[0][0];
+        int mini = INT_MAX;
+        for(int i=1;i<n;i++){
+            int x,y;
+            for(int j=0;j<=i;j++){
+                x = dp[j];
+                dp[j]=triangle[i][j]+min(dp[j],j==0?INT_MAX:y);
+                y = x;
+                if(i==n-1) mini = min(mini,dp[j]);
+            }
+        }
+        return mini;
+    }
