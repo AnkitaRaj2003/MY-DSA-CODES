@@ -1,0 +1,18 @@
+//Leetcode: https://leetcode.com/problems/pairs-of-songs-with-total-durations-divisible-by-60/
+
+------------------------------BRUTE FORCE-----------------------------
+taking two loops - TC: O(N^2)  SC: O(1)
+
+------------------------------BETTER----------------------------------
+TC: O(N)      SC: O(N)
+    int numPairsDivisibleBy60(vector<int>& time) {
+        unordered_map<int,int>m;
+        int count=0;
+        for(auto i:time){
+            int x = i%60;
+            int y = (60-x)%60;
+            count+=m[y];
+            m[x]++;
+        }
+        return count;
+    }
