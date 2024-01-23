@@ -1,5 +1,6 @@
 //Leetcode: https://leetcode.com/problems/combination-sum-ii/submissions/1154337666/
 
+TC: O()    SC: O() - CHECK
     bool f(int i,vector<int>nums,vector<int>dp){
         if(i>=nums.size()) return false;
         if(i==nums.size()-1) return true;
@@ -11,4 +12,13 @@
     bool canJump(vector<int>& nums) {
         vector<int>dp(nums.size(),-1);
         return f(0,nums,dp);
+    }
+
+--------------------------BETTER--------------------------------
+TC: O(N)    SC: O(1)
+
+    bool canJump(vector<int>& nums) {
+        int maxi=0;
+        for(int i=0;i<nums.size()-1 && i<=maxi;i++) maxi = max(maxi,i+nums[i]);
+        return i==n;
     }
