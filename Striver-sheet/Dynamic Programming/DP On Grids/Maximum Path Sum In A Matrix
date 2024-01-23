@@ -1,0 +1,92 @@
+//GFG: https://www.geeksforgeeks.org/problems/path-in-matrix3805/1
+
+-------------------------BRUTE FORCE--------------------------
+TC: O(N*3^(N*N))      SC: O(N+1)
+
+    int f(int i,int j,vector<vector<int>>m,int n){
+        if(j<0 || j>=n) return INT_MIN;
+        if(i==n-1) return m[i][j];
+        
+        int left = f(i+1,j-1,m,n);
+        int bottom = f(i+1,j,m,n);
+        int right = f(i+1,j+1,m,n);
+        
+        return max(left,max(bottom,right))+m[i][j];
+    }
+    int maximumPath(int N, vector<vector<int>> Matrix)
+    {
+        // code here
+        int maxi=0;
+        for(int i=0;i<N;i++) maxi = max(maxi,f(0,i,Matrix,N));
+        return maxi;
+    }
+
+-----------------------------MEMOIZATION--------------------------------------
+TC: O(N^2)      SC: O(N^2)+O(N)
+
+    int f(int i,int j,vector<vector<int>>m,int n,vector<vector<int>>&dp){
+        if(j<0 || j>=n) return INT_MIN;
+        if(i==n-1) return m[i][j];
+        
+        if(dp[i][j]!=-1) return dp[i][j];
+        
+        int left = f(i+1,j-1,m,n,dp);
+        int bottom = f(i+1,j,m,n,dp);
+        int right = f(i+1,j+1,m,n,dp);
+        
+        return dp[i][j] = max(left,max(bottom,right))+m[i][j];
+    }
+    int maximumPath(int N, vector<vector<int>> Matrix)
+    {
+        // code here
+        vector<vector<int>>dp(N,vector<int>(N,-1));
+        int maxi=0;
+        for(int i=0;i<N;i++) maxi = max(maxi,f(0,i,Matrix,N,dp));
+        return maxi;
+    }
+
+--------------------------------TABULATION-------------------------------------
+TC: O(N*N)      SC: O(N*N)
+
+    int maximumPath(int N, vector<vector<int>> Matrix)
+    {
+        // code here
+        if(Matrix.size()==1) return Matrix[0][0];
+        vector<vector<int>>dp(N,vector<int>(N,0));
+        int maxi=0;
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                if(i==0){
+                    dp[i][j] = Matrix[i][j];
+                    continue;
+                }
+                int left = j==0?-1:dp[i-1][j-1];
+                int up = dp[i-1][j];
+                int right = j==N-1?-1:dp[i-1][j+1];
+                dp[i][j] = Matrix[i][j]+max(left,max(up,right));
+                if(i==N-1) maxi = max(maxi,dp[i][j]);
+            }
+        }
+        return maxi;
+    }
+
+-----------------------------SPACE OPTIMIZED---------------------------------
+    int maximumPath(int N, vector<vector<int>> Matrix)
+    {
+        // code here
+        if(Matrix.size()==1) return Matrix[0][0];
+        vector<int>v = Matrix[0];
+        int maxi=0;
+        for(int i=1;i<N;i++){
+            int prev=INT_MIN;
+            for(int j=0;j<N;j++){
+                int left = prev;
+                int up = v[j];
+                int right = j==N-1?INT_MIN:v[j+1];
+                prev = v[j];
+                v[j] = Matrix[i][j]+max(left,max(up,right));
+                if(i==N-1) maxi = max(maxi,v[j]);
+            }
+        }
+        return maxi;
+    }
