@@ -1,0 +1,22 @@
+//Coding Ninjas: https://www.codingninjas.com/studio/problems/ninja-and-the-second-order-elements_6581960?leftPanelTabValue=DISCUSS
+
+vector<int> getSecondOrderElements(int n, vector<int> a) {
+    // Write your code here.
+    int mini = INT_MAX,mini2 = mini,maxi = -1,maxi2 = -1;
+
+    for(int i=0;i<n;i++){
+        // For Maxi
+        if(a[i]>maxi){
+            maxi2=maxi;
+            maxi = a[i];
+        }
+        else if(a[i]<maxi && a[i]>maxi2) maxi2 = a[i];
+        // For Mini
+        if(a[i]<mini){
+            mini2 = mini;
+            mini = a[i];
+        }
+        else if(a[i]>mini && a[i]<mini2) mini2 = a[i];
+    }
+    return {maxi2,mini2};
+}
