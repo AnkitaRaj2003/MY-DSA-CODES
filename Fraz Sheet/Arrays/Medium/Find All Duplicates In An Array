@@ -1,4 +1,4 @@
-//Leetcode: 
+//Leetcode: https://leetcode.com/problems/find-all-duplicates-in-an-array/
 
 -----------------------------------------BRUTE FORCE-----------------------------------------------
 TC: O(N)    SC: O(N)
@@ -8,6 +8,9 @@ taking a map or array of n size and storing the counts... when count==2 store it
 TC: O(NLOGN)    SC: O(1)
 Sorting the array and running loop from 0 to n-2, and checking if a[i]==a[i+1] if yes store it in answer else move forward
 
+---------------------------------------ANOTHER APPROACH--------------------------------------------
+TC: O(N*N)    SC:O(1)
+Running two loops from i = 0 to n-1 and j=i+1 to n-1.
 --------------------------------------------BETTER--------------------------------------------------
 TC: O(N)          SC: O(1)
     vector<int> findDuplicates(vector<int>& nums) {
