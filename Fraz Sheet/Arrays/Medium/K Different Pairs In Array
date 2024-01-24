@@ -1,5 +1,4 @@
-//Leetcode: 
-
+//Leetcode: https://leetcode.com/problems/k-diff-pairs-in-an-array/description/
 
     int findPairs(vector<int>& nums, int k) {
         unordered_map<int, int> m;
