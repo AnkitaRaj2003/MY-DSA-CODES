@@ -1,4 +1,4 @@
-//Leetcode: 
+//Leetcode: https://leetcode.com/problems/game-of-life/
 
 TC: O(M*N)+O(M*N)            SC: O(M*N)
 void gameOfLife(vector<vector<int>>& board) {
