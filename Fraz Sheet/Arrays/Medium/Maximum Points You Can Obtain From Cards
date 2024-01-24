@@ -1,0 +1,28 @@
+//Leetcode: 
+
+-----------------------------------BRUTE FORCE---------------------------------------
+TC: O(2^k)          SC: O(k)
+    int f(int i,int j,vector<int>p,int k){
+        if(k==0) return 0;
+        int l = p[i]+f(i+1,j,p,k-1);
+        int r = p[j]+f(i,j-1,p,k-1);
+        return max(l,r);
+    }
+    int maxScore(vector<int>& cardPoints, int k) {
+        return f(0,cardPoints.size()-1,cardPoints,k);
+    }
+
+
+--------------------------------------BETTER----------------------------------------
+TC: O(k)+O(k)      SC: O(1)
+    int maxScore(vector<int>& cardPoints, int k) {
+        int sum=0,maxi=0,n=cardPoints.size()-1;
+        for(int i=0;i<k;i++) sum+=cardPoints[i];
+        maxi=sum;
+        for(int i=k-1;i>=0;i--){
+            sum-=cardPoints[i];
+            sum+=cardPoints[n--];
+            maxi = max(sum,maxi);
+        }
+        return maxi;
+    }
