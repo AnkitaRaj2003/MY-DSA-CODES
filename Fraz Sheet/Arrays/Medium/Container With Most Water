@@ -1,5 +1,7 @@
 //Leetcode: https://leetcode.com/problems/container-with-most-water/
 
+---------------------------------------BRUTE FORCE-------------------------------------------
+TC: O(N^2)        SC: O(1)
     int maxArea(vector<int>& height) {
         int maxi=0,n=height.size();
         for(int i=0;i<n;i++){
@@ -7,3 +9,29 @@
         }
         return maxi;
     }
+
+---------------------------------------BETTER------------------------------------------------
+TC: O(N)        SC: O(1)
+Taking two pointer on the left and right most ends, moving the smaller height pointer
+    int maxArea(vector<int>& height) {
+        int maxi=0,i=0,j=height.size()-1;
+        while(i<j){
+            maxi = max(maxi,(j-i)*min(height[i],height[j]));
+            if(height[i]<height[j]) i++;
+            else j--;
+        }
+        return maxi;
+    }
+
+----------------------------------------OR--------------------------------------------------
+int maxArea(vector<int>& height) {
+    int water = 0;
+    int i = 0, j = height.size() - 1;
+    while (i < j) {
+        int h = min(height[i], height[j]);
+        water = max(water, (j - i) * h);
+        while (height[i] <= h && i < j) i++;
+        while (height[j] <= h && i < j) j--;
+    }
+    return water;
+}
