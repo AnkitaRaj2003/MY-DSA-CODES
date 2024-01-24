@@ -1,0 +1,27 @@
+//Leetcode: https://www.codingninjas.com/studio/problems/subset-sum-equal-to-k_1550954?leftPanelTab=1%3Fsource%3Dyoutube&campaign=striver_dp_videos&leftPanelTabValue=SUBMISSION
+
+-----------------------------------BRUTE FORCE--------------------------------------
+TC: O(2^N)      SC: O()
+bool f(int k,int n,vector<int>a){
+    if(k==0) return true;
+    if(k<0 || n<0) return false;
+    return f(k-a[n],n-1,a) || f(k,n-1,a);
+} 
+bool subsetSumToK(int n, int k, vector<int> &arr) {
+    // Write your code here.
+    return f(k,n,arr);
+}
+
+---------------------------------MEMOIZATION------------------------------------------
+TC: O(N)      SC: O(N)+O(N*K)
+bool f(int k,int n,vector<int>a,vector<vector<int>>&dp){
+    if(k==0) return true;
+    if(k<0 || n<0) return false;
+    if(dp[n][k-1]!=-1) return dp[n][k-1];
+    return dp[n][k-1]=f(k-a[n],n-1,a,dp) || f(k,n-1,a,dp);
+} 
+bool subsetSumToK(int n, int k, vector<int> &arr) {
+    // Write your code here.
+    vector<vector<int>>dp(n,vector<int>(k,-1));
+    return f(k,n-1,arr,dp);
+}
